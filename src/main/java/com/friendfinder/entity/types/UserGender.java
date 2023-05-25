@@ -1,4 +1,4 @@
-package com.friendfinder.entity.enums;
+package com.friendfinder.entity.types;
 
 public enum UserGender {
     MALE,

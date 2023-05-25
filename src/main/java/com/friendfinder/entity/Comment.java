@@ -5,12 +5,16 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "user_country")
-public class Country {
+@Table(name = "commentary")
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name")
-    private String name;
+    @ManyToOne
+    private User user;
+
+    @ManyToOne
+    private Post post;
+    private String commentaryText;
 }
