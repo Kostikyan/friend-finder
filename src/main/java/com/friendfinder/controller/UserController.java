@@ -2,6 +2,8 @@ package com.friendfinder.controller;
 
 import com.friendfinder.entity.User;
 import com.friendfinder.repository.UserRepository;
+import com.friendfinder.service.impl.UserServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,13 +16,9 @@ import java.util.Date;
 import java.util.Optional;
 
 @Controller
+@RequiredArgsConstructor
 public class UserController {
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private UserRepository userRepository;
-
+    private final UserServiceImpl userService;
     @GetMapping("/register")
     public String registerPage() {
         return "index";
@@ -28,13 +26,7 @@ public class UserController {
 
     @PostMapping("/register")
     public String register(@ModelAttribute User user) {
-        Optional<User> userFromDB = userRepository.findByEmail(user.getEmail());
-        if (userFromDB.isEmpty()) {
-            String password = user.getPassword();
-            String encodedPassword = passwordEncoder.encode(password);
-            user.setPassword(encodedPassword);
-            userRepository.save(user);
-        }
+        userService.userSave(user);
         return "redirect:/";
     }
 }
