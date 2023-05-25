@@ -21,7 +21,7 @@ public class Post {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date postDateline;
 
-    @Column(name = "date_of_birth")
-    private Date dateOfBirth;
+    @ManyToOne
+    private User user;
 
 }
