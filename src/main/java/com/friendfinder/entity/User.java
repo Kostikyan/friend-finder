@@ -3,6 +3,7 @@ package com.friendfinder.entity;
 import com.friendfinder.entity.types.UserGender;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -20,6 +21,7 @@ public class User {
     private String password;
 
     @Column(name = "date_of_birth")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
 
     @Enumerated(value = EnumType.STRING)
