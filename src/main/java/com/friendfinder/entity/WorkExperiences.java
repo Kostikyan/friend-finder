@@ -29,7 +29,7 @@ public class WorkExperiences {
     @Column(name = "we_description")
     private String weDescription;
 
-    @Column(name = "user_interests")
+    @JoinColumn
     @ManyToOne
     private Interest interests;
 

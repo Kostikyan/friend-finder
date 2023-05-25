@@ -5,7 +5,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
-@Table(name = "user_friend")
+@Table(name = "user_friends")
 public class Friend {
 
     @ManyToOne
