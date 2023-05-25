@@ -1,4 +1,4 @@
-drop database friend_finder;
+drop database if exists friend_finder;
 create database friend_finder;
 
 
@@ -347,6 +347,8 @@ create table `friend_finder`.`user_friends`
 (
     `user_id`   int(11) not null,
     `friend_id` int(11) not null,
+           primary key(user_id,friend_id)
 
-    constraint `user_friends__fk` foreign key (`user_id`) references user (`id`)
+    constraint `user__fk` foreign key (`user_id`) references user (`id`)
+    constraint `friends__fk` foreign key (`friend_id`) references user (`id`)
 );
