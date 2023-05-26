@@ -8,13 +8,12 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/pasts")
+@RequestMapping("/posts")
 public class PostController {
 
     private final PostService postService;
@@ -34,10 +33,9 @@ public class PostController {
 
     @PostMapping("/add")
     public String postAdd(@ModelAttribute Post post,
-                          @RequestParam("image") MultipartFile multipartFile,
                           @AuthenticationPrincipal CurrentUser currentUser) {
-        postService.postSave(post, currentUser, multipartFile);
-        return "timeline";
+        postService.postSave(post, currentUser);
+        return "redirect:/posts/add";
     }
 
 

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -19,7 +20,7 @@ public class Post {
     private String musicFileName;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Date postDateline;
+    private Date postDatetime;
 
     @ManyToOne
     private User user;

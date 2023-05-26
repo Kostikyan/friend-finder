@@ -9,7 +9,7 @@ import java.util.List;
 public interface PostService {
     List<Post> postFindAll();
 
-    void postSave(Post post, CurrentUser currentUser, MultipartFile multipartFile);
+    void postSave(Post post, CurrentUser currentUser);
 
     void deletePostId(int id, CurrentUser currentUser);
 }
