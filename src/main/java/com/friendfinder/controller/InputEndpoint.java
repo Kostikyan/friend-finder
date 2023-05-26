@@ -1,6 +1,5 @@
 package com.friendfinder.controller;
 
-import com.friendfinder.entity.User;
 import com.friendfinder.repository.CountryRepository;
 import com.friendfinder.security.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class InputEndpoint {
             modelMap.addAttribute("user", currentUser.getUser());
         }
 
-        return "newsfeed";
+        return "index";
     }
 
     @GetMapping("/login-register")
@@ -34,10 +33,6 @@ public class InputEndpoint {
 
     @GetMapping("/successLogin")
     public String customSuccessLogin(@AuthenticationPrincipal CurrentUser currentUser){
-        if (currentUser != null){
-            User user = currentUser.getUser();
-            return "redirect:/";
-        }
-        return "redirect:/";
+        return "redirect:/posts/add";
     }
 }
