@@ -1,18 +1,23 @@
 package com.friendfinder.controller;
 
-import com.friendfinder.repository.CountryRepository;
 import com.friendfinder.security.CurrentUser;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.friendfinder.service.impl.MainServiceImpl;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.io.IOException;
 
 @Controller
+@RequiredArgsConstructor
 public class InputEndpoint {
 
-    @Autowired
-    private  CountryRepository countryRepository;
+    public final MainServiceImpl mainService;
 
     @GetMapping("/")
     public String mainPage(ModelMap modelMap,
@@ -20,19 +25,27 @@ public class InputEndpoint {
 
         if (currentUser != null) {
             modelMap.addAttribute("user", currentUser.getUser());
+            return "timeline";
         }
 
+        modelMap.addAttribute("countries", mainService.findAllCountries());
         return "index";
     }
 
+    @GetMapping(value = "/getImage",
+            produces = MediaType.IMAGE_JPEG_VALUE)
+    public @ResponseBody byte[] getImage(@RequestParam("imageName") String imageName) throws IOException {
+        return mainService.getImage(imageName);
+    }
+
     @GetMapping("/login-register")
-    public String loginPage(ModelMap modelMap){
-        modelMap.addAttribute("countries", countryRepository.findAll());
+    public String loginPage(ModelMap modelMap) {
+        modelMap.addAttribute("countries", mainService.findAllCountries());
         return "index";
     }
 
     @GetMapping("/successLogin")
-    public String customSuccessLogin(@AuthenticationPrincipal CurrentUser currentUser){
+    public String customSuccessLogin() {
         return "redirect:/posts/add";
     }
 }

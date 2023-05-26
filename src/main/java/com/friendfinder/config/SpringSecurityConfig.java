@@ -1,6 +1,5 @@
 package com.friendfinder.config;
 
-import com.friendfinder.security.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,11 +25,7 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.GET, "/").permitAll()
                 .requestMatchers("/register").permitAll()
-                .requestMatchers("/css/**").permitAll()
-                .requestMatchers("/fonts/**").permitAll()
-                .requestMatchers("/images/**").permitAll()
-                .requestMatchers("/js/**").permitAll()
-                .requestMatchers("/videos/**").permitAll()
+                .requestMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

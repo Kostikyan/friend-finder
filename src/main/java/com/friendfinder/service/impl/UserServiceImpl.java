@@ -1,6 +1,8 @@
 package com.friendfinder.service.impl;
 
+import com.friendfinder.entity.Country;
 import com.friendfinder.entity.User;
+import com.friendfinder.repository.CountryRepository;
 import com.friendfinder.repository.UserRepository;
 import com.friendfinder.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +18,16 @@ public class UserServiceImpl implements UserService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final CountryRepository countryRepository;
 
     @Override
     public List<User> userFindAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public List<Country> findAllCountries() {
+        return countryRepository.findAll();
     }
 
     @Override
