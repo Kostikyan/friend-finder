@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class InputEndpoint {
+
     @Autowired
-    private CountryRepository countryRepository;
+    private  CountryRepository countryRepository;
 
     @GetMapping("/")
     public String mainPage(ModelMap modelMap,
                            @AuthenticationPrincipal CurrentUser currentUser) {
 
-        if(currentUser != null){
+        if (currentUser != null) {
             modelMap.addAttribute("user", currentUser.getUser());
         }
 
@@ -33,7 +34,7 @@ public class InputEndpoint {
 
     @GetMapping("/successLogin")
     public String customSuccessLogin(@AuthenticationPrincipal CurrentUser currentUser){
-        if(currentUser != null){
+        if (currentUser != null){
             User user = currentUser.getUser();
             return "redirect:/";
         }

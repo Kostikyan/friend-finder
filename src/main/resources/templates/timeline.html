@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,8 +47,7 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span><img src="images/down-arrow.png" alt=""></span></a>
                   <ul class="dropdown-menu newsfeed-home">
-                    <li><a href="index.html">Landing Page 1</a></li>
-                    <li><a href="index.html">Landing Page 2</a></li>
+                    <li><a href="/register">Regiser</a></li>
                   </ul>
               </li>
               <li class="dropdown">
@@ -170,25 +169,28 @@
               <!-- Post Create Box
               ================================================= -->
               <div class="create-post">
-                <div class="row">
-                  <div class="col-md-7 col-sm-7">
-                    <div class="form-group">
-                      <img src="/images/users/user-1.jpg" alt="" class="profile-photo-md">
-                      <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
+                <form action="/posts/add" method="post">
+                  <div class="row">
+                    <div class="col-md-7 col-sm-7">
+                      <div class="form-group">
+                        <img src="/images/users/user-1.jpg" alt="" class="profile-photo-md">
+                        <textarea name="description" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-5 col-sm-5">
+                      <div class="tools">
+                        <ul class="publishing-tools list-inline">
+                          <li><input class="ion-images" type="file" name="image"></li>
+                          <li><a href="#"><i class="ion-images" type="file" name="image"></i></a></li>
+                          <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
+                          <li><a href="#"><i class="ion-map"></i></a></li>
+                        </ul>
+                        <button class="btn btn-primary pull-right" type="submit">Publish</button>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-md-5 col-sm-5">
-                    <div class="tools">
-                      <ul class="publishing-tools list-inline">
-                        <li><a href="#"><i class="ion-compose"></i></a></li>
-                        <li><a href="#"><i class="ion-images"></i></a></li>
-                        <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
-                        <li><a href="#"><i class="ion-map"></i></a></li>
-                      </ul>
-                      <button class="btn btn-primary pull-right">Publish</button>
-                    </div>
-                  </div>
-                </div>
+                </form>
+
               </div><!-- Post Create Box End-->
 
               <!-- Post Content
@@ -417,15 +419,6 @@
         <p>Thunder Team © 2016. All rights reserved</p>
       </div>
 		</footer>
-    
-    <!--preloader-->
-    <div id="spinner-wrapper">
-      <div class="spinner"></div>
-    </div>
-    
-    <!--Buy button-->
-    <a href="/../cart/add_items.html?item_ids=18711273&ref=thunder-team" target="_blank" class="btn btn-buy"><span class="italy">Buy with:</span><img src="images/envato_logo.png" alt=""><span class="price">Only $20!</span></a>
-
     <!-- Scripts
     ================================================= -->
     <script src="/js/jquery-3.1.1.min.js"></script>
