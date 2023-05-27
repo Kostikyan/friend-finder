@@ -29,7 +29,6 @@ public class WorkExperiences {
     @Column(name = "we_description")
     private String weDescription;
 
-
     @ManyToOne
     private User user;
 
