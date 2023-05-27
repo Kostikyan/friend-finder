@@ -2,6 +2,7 @@ drop database if exists friend_finder;
 create database friend_finder;
 
 
+
 create table `friend_finder`.`user_country`
 (
     `id`   int(11)                                                       NOT NULL AUTO_INCREMENT,
@@ -264,57 +265,53 @@ VALUES (1, 'Afghanistan'),
        (249, 'Curaçao'),
        (250, 'Sint Maarten (Dutch part)');
 
+create table `friend_finder`.`user`
+(
+       `id`                   int(11)                not null auto_increment primary key,
+       `name`                 varchar(255)           not null, # First Name
+       `surname`              varchar(255)           not null, # Last Name
+       `email`                varchar(255)           not null,
+       `password`             varchar(255)           not null,
+       `date_of_birth`        date                   not null,
+       `gender`               enum ('MALE','FEMALE') not null,
+       `city`                 varchar(255)           not null,
+       `country_id`           int(11)                not null,
+       `profile_pic`          varchar(255),
+       `personal_information` varchar(255),
+       constraint `user_country__fk` foreign key (`country_id`) references `friend_finder`.`user_country` (`id`)
+);
+
 create table `friend_finder`.`interests`
 (
     `id`       int(11) not null auto_increment primary key,
-    `interest` varchar(255)
-);
-INSERT INTO `friend_finder`.`interests`
-VALUES (1, 'BICYCLE'),
-       (2, 'PHOTOGRAPHY'),
-       (3, 'SHOPPING'),
-       (4, 'TRAVELING'),
-       (5, 'EATING');
+    `interest` varchar(255),
+    `user_id`  int,
+    constraint `user_interests__fk` foreign key (`user_id`) references `friend_finder`.`user` (`id`)
 
-create table `friend_finder`.`user`
+);
+
+create table `friend_finder`.`education`
 (
-    `id`                   int(11)                not null auto_increment primary key,
-    `name`                 varchar(255)           not null, # First Name
-    `surname`              varchar(255)           not null, # Last Name
-    `email`                varchar(255)           not null,
-    `password`             varchar(255)           not null,
-    `date_of_birth`        date                   not null,
-    `gender`               enum ('MALE','FEMALE') not null,
-    `city`                 varchar(255)           not null,
-    `country_id`           int(11)                not null,
-    `profile_pic`          varchar(255),
-    `personal_information` varchar(255),
-    constraint `user_country__fk` foreign key (`country_id`) references `friend_finder`.`user_country` (`id`)
-);
-
-
-create table `friend_finder`.`education`(
-    `id`             int  auto_increment primary key not null ,
+    `id`             int auto_increment primary key not null,
     `ed_name`        varchar(255),
     `ed_from_date`   int(11),
     `ed_to_date`     int(11),
     `ed_description` varchar(255),
-    `user_id`        int(11) not null,
-    constraint `education__fk`foreign key (`user_id`) references `friend_finder`.`user` (`id`)
+    `user_id`        int(11)                        not null,
+    constraint `education__fk` foreign key (`user_id`) references `friend_finder`.`user` (`id`)
 );
 
-create table `friend_finder`.`work_experiences`(
-    `id`             int(11)  auto_increment primary key not null ,
+create table `friend_finder`.`work_experiences`
+(
+    `id`             int(11) auto_increment primary key not null,
     `we_name`        varchar(255),
     `we_designation` varchar(255),
     `we_from_date`   int(11),
     `we_to_date`     int(11),
     `we_city`        varchar(255),
     `we_description` varchar(255),
-    `interests_id`   int(11) not null,
-    `user_id`        int(11) not null,
-    constraint `work_experiences__fk` foreign key (`user_id`) references `friend_finder`.`user` (`id`),
-    constraint `interests__fk` foreign key (`interests_id`) references `friend_finder`.`interests` (`id`)
+    `user_id`        int(11)                            not null,
+    constraint `work_experiences__fk` foreign key (`user_id`) references `friend_finder`.`user` (`id`)
 );
 
 
@@ -361,3 +358,5 @@ create table `friend_finder`.`user_friends`
     constraint `user__fk` foreign key (`user_id`) references user (`id`),
     constraint `friends__fk` foreign key (`friend_id`) references user (`id`)
 );
+
+
