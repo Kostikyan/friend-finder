@@ -29,9 +29,6 @@ public class WorkExperiences {
     @Column(name = "we_description")
     private String weDescription;
 
-    @ManyToOne()
-    @JoinColumn(name = "user_interests")
-    private Interest interests;
 
     @ManyToOne
     private User user;

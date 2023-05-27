@@ -12,4 +12,7 @@ public class Interest {
     private int id;
 
     private String interest;
+
+    @ManyToOne
+    private User userId;
 }
