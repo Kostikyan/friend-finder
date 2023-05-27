@@ -1,6 +1,7 @@
 package com.friendfinder.repository;
 
 import com.friendfinder.entity.Interest;
+import com.friendfinder.entity.User;
 import com.friendfinder.entity.WorkExperiences;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

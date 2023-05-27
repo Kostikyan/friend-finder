@@ -10,9 +10,7 @@ public class Interest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String interest;
-
     @ManyToOne
-    private User userId;
+    private User user;
 }
