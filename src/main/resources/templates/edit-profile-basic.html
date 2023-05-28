@@ -56,7 +56,12 @@
           <div class="timeline-nav-bar hidden-sm hidden-xs">
             <div class="row">
               <div class="col-md-3">
-                <div class="profile-info">
+                <div class="profile-info" th:if="${user.profilePicture == null || user.profilePicture.equalsIgnoreCase('null')}">
+                  <img  src="/images/post-images/difault.png" alt="" class="img-responsive profile-photo">
+                  <h3><i th:text="${user.getName()}"></i> <i th:text="${user.getSurname()}"></i></h3>
+                  <p class="text-muted">Creative Director</p>
+                </div>
+                <div class="profile-info" th:if="${user.profilePicture != null}">
                   <img th:src="@{/getImage(imageName=${user.profilePicture})}" alt="" class="img-responsive profile-photo">
                   <h3><i th:text="${user.getName()}"></i> <i th:text="${user.getSurname()}"></i></h3>
                   <p class="text-muted">Creative Director</p>
@@ -150,7 +155,7 @@
                         <input type="radio" name="gender" value="MALE" checked="">Male
                       </label>
                       <label class="radio-inline">
-                        <input type="radio" name="gender" value="FEMALE">Female
+                        <input type="radio" name="gender" value="FEMALE ">Female
                       </label>
                     </div>
                     <div class="row">
