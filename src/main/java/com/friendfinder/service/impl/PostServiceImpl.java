@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -33,12 +32,19 @@ public class PostServiceImpl implements PostService {
 
 
     @Override
-    public void postSave(Post post, CurrentUser currentUser) {
+    public void postSave(Post post, CurrentUser currentUser, MultipartFile image, MultipartFile video) {
+        post.setImgName(ImageUtil.uploadImage(image, postImageUploadPath));
+        post.setMusicFileName(ImageUtil.uploadImage(video, postVideoUploadPath));
         post.setUser(currentUser.getUser());
         post.setPostDatetime(new Date());
         postRepository.save(post);
     }
 
+
+    @Override
+    public List<Post> postUserById(int id) {
+        return postRepository.findPostByUser_id(id);
+    }
 
     @Override
     public void deletePostId(int id, CurrentUser currentUser) {

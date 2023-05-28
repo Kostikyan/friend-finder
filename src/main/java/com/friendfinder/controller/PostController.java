@@ -1,13 +1,17 @@
 package com.friendfinder.controller;
 
 import com.friendfinder.entity.Post;
+import com.friendfinder.entity.User;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,23 +22,29 @@ public class PostController {
 
     private final PostService postService;
 
-
     @GetMapping
-    public String postPage(ModelMap modelMap) {
+    public String postPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
         List<Post> posts = postService.postFindAll();
         modelMap.addAttribute("posts", posts);
+        modelMap.addAttribute("user", currentUser.getUser());
         return "timeline";
     }
 
     @GetMapping("/add")
-    public String postAddPage() {
+    public String postAddPage(ModelMap modelMap,
+                              @AuthenticationPrincipal CurrentUser currentUser) {
+        List<Post> posts = postService.postFindAll();
+        modelMap.addAttribute("posts", posts);
+        modelMap.addAttribute("user", currentUser.getUser());
         return "timeline";
     }
 
     @PostMapping("/add")
     public String postAdd(@ModelAttribute Post post,
-                          @AuthenticationPrincipal CurrentUser currentUser) {
-        postService.postSave(post, currentUser);
+                          @AuthenticationPrincipal CurrentUser currentUser,
+                          @RequestParam("image") MultipartFile image,
+                          @RequestParam("video") MultipartFile video) {
+        postService.postSave(post, currentUser, image, video);
         return "redirect:/posts/add";
     }
 

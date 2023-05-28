@@ -21,6 +21,9 @@ public class MainServiceImpl implements MainService {
     @Value("${post.upload.image.path}")
     private String imageUploadPath;
 
+    @Value("${post.video.upload.image.path}")
+    private String videoUploadPath;
+
     private final CountryRepository countryRepository;
 
     @Override
@@ -30,10 +33,16 @@ public class MainServiceImpl implements MainService {
 
     @Override
     public @ResponseBody byte[] getImage(String imageName) throws IOException {
-        File file = new File(imageUploadPath + imageName);
-        if (file.exists()) {
-            FileInputStream fis = new FileInputStream(file);
+        File fileImageByDownload = new File(imageUploadPath + imageName);
+        if (fileImageByDownload.exists()) {
+            FileInputStream fis = new FileInputStream(fileImageByDownload);
             return IOUtils.toByteArray(fis);
+        } else {
+            File fileVideoByDownload = new File(videoUploadPath + imageName);
+            if (fileVideoByDownload.exists()) {
+                FileInputStream fis = new FileInputStream(fileVideoByDownload);
+                return IOUtils.toByteArray(fis);
+            }
         }
         return null;
     }
