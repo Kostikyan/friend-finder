@@ -42,6 +42,6 @@ public class PostController {
                           @RequestParam("image") MultipartFile image,
                           @RequestParam("video") MultipartFile video) {
         postService.postSave(post, currentUser, image, video);
-        return "redirect:/posts/add";
+        return "redirect:/posts";
     }
 }

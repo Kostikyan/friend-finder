@@ -159,7 +159,10 @@
                   <video class="post-video" controls=""> <source th:src="@{/getImage(imageName=${post.musicFileName})}" type="video/mp4"> </video>
                 </div>
                 <div  class="post-container">
-                  <img th:if="${user.profilePicture != null}" th:src="@{/getImage(imageName=${user.profilePicture})}" alt="user" class="profile-photo-md pull-left">
+                  <img th:if="${user.profilePicture == null || user.profilePicture.equalsIgnoreCase('null')}"
+                       src="/images/post-images/difault.png" alt="user" class="profile-photo-md pull-left">
+                  <img th:if="${user.profilePicture != null}" th:src="@{/getImage(imageName=${user.profilePicture})}"
+                       alt="user" class="profile-photo-md pull-left">
                   <div class="post-detail">
                     <div class="user-info">
                       <h5 th:text="${user.name}"><a href="/posts/add" class="profile-link"></a> <span class="following">following</span></h5>

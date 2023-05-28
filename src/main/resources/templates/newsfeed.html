@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -53,14 +53,14 @@
           <!-- Newsfeed Common Side Bar Left
           ================================================= -->
     			<div class="col-md-3 static">
-                  <form  action="/users" method="get">
+                  <form  action="/posts" method="get">
                     <div class="profile-card" th:if="${user.profilePicture == null || user.profilePicture.equalsIgnoreCase('null')}">
                       <img src="/images/post-images/difault.png"   alt="user" class="profile-photo">
                       <h5><a href="timeline.html" class="text-white"><i th:text="${user.name}"></i>  <i th:text="${user.surname}"></i></a></h5>
                     </div>
                     <div class="profile-card"  th:if="${user.profilePicture != null}">
                       <img th:src="@{/getImage(imageName=${user.profilePicture})}"   alt="user" class="profile-photo">
-                      <h5><a href="timeline.html" class="text-white"><i th:text="${user.name}"></i>  <i th:text="${user.surname}"></i></a></h5>
+                      <h5><a href="/users/profile" class="text-white"><i th:text="${user.name}"></i>  <i th:text="${user.surname}"></i></a></h5>
                     </div>
                   </form>
            <!--profile card ends-->
@@ -92,7 +92,7 @@
             <!-- Post Create Box
             ================================================= -->
                   <div class="create-post">
-                    <form action="/users/add" method="post" enctype="multipart/form-data">
+                    <form action="/posts/add" method="post" enctype="multipart/form-data">
                       <input type="file" name="image" style="display: none" id="upload-image">
                       <input type="file" name="video" style="display: none" id="upload-video">
                       <div class="row">
@@ -128,11 +128,13 @@
                       <video class="post-video" controls=""> <source th:src="@{/getImage(imageName=${post.musicFileName})}" type="video/mp4"> </video>
                     </div>
                     <div  class="post-container">
+                      <img th:if="${user.profilePicture == null || user.profilePicture.equalsIgnoreCase('null')}"
+                       src="/images/post-images/difault.png" alt="user" class="profile-photo-md pull-left">
                       <img th:if="${user.profilePicture != null}" th:src="@{/getImage(imageName=${user.profilePicture})}" alt="user" class="profile-photo-md pull-left">
                       <div class="post-detail">
                         <div class="user-info">
-                          <h5 th:text="${user.name}"><a href="/posts/add" class="profile-link"></a> <span class="following">following</span></h5>
-                          <h6 class="text-muted" th:text="${user.surname}"></h6>
+                          <h5 th:text="${post.user.name}"><a href="/posts/add" class="profile-link"></a> <span class="following">following</span></h5>
+                          <h6 class="text-muted" th:text="${post.user.surname}"></h6>
                         </div>
                         <div class="reaction">
                           <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
