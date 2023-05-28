@@ -19,7 +19,7 @@ public class Post {
     private String imgName;
     private String musicFileName;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date postDatetime;
 
     @ManyToOne
