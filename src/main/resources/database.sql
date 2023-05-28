@@ -289,6 +289,14 @@ create table `friend_finder`.`interests`
     constraint `user_interests__fk` foreign key (`user_id`) references `friend_finder`.`user` (`id`)
 
 );
+create table `friend_finder`.`language`
+(
+    `id`       int(11) not null auto_increment primary key,
+    `language` varchar(255),
+    `user_id`  int,
+    constraint `user_language__fk` foreign key (`user_id`) references `friend_finder`.`user` (`id`)
+
+);
 
 create table `friend_finder`.`education`
 (
