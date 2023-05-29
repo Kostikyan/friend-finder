@@ -4,6 +4,7 @@ import com.friendfinder.entity.Country;
 import com.friendfinder.entity.User;
 import com.friendfinder.repository.CountryRepository;
 import com.friendfinder.repository.UserRepository;
+import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,6 +40,13 @@ public class UserServiceImpl implements UserService {
             user.setPassword(encodedPassword);
             userRepository.save(user);
         }
+    }
+
+
+
+    @Override
+    public void updateUserPasswordById(String password, int id) {
+        userRepository.updateUserPasswordById(password,id);
     }
 
 }
