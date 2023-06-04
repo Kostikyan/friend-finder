@@ -1,12 +1,18 @@
 package com.friendfinder.service.impl;
 
 import com.friendfinder.entity.Post;
+import com.friendfinder.entity.PostLike;
+import com.friendfinder.entity.types.LikeStatus;
 import com.friendfinder.repository.PostRepository;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.PostService;
 import com.friendfinder.util.ImageUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,18 +32,36 @@ public class PostServiceImpl implements PostService {
     private String postVideoUploadPath;
 
     @Override
-    public List<Post> postFindAll() {
-        return postRepository.findAll();
+    public Page<Post> postFindPage(int pageNumber) {
+        Sort sort = Sort.by(Sort.Order.desc("id"));
+        Pageable pageable = PageRequest.of(pageNumber - 1, 5, sort);
+        return postRepository.findAll(pageable);
     }
+
+    @Override
+    public int postLikeCount(int likeCount){
+        Post post = new Post();
+        int length = LikeStatus.values().length;
+        List<PostLike> postLikes = post.getPostLikes();
+        for (PostLike postLike : postLikes) {
+            List<LikeStatus> postLikeCountByLikeStatus = postRepository.findPostLikeCountByLikeStatus(postLike.getLikeStatus());
+            if (post.getId() == postLikeCountByLikeStatus.size()){
+                likeCount++;
+            }
+        }
+        return likeCount;
+        }
+
 
 
     @Override
     public void postSave(Post post, CurrentUser currentUser, MultipartFile image, MultipartFile video) {
-        post.setImgName(ImageUtil.uploadImage(image, postImageUploadPath));
-        post.setMusicFileName(ImageUtil.uploadImage(video, postVideoUploadPath));
-        post.setUser(currentUser.getUser());
-        post.setPostDatetime(new Date());
-        postRepository.save(post);
+        postRepository.save(Post.builder()
+                .imgName(ImageUtil.uploadImage(image, postImageUploadPath))
+                .musicFileName(ImageUtil.uploadImage(video, postVideoUploadPath))
+                .postDatetime(new Date())
+                .user(currentUser.getUser())
+                .build());
     }
 
 

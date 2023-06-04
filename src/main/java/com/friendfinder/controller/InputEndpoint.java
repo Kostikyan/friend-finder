@@ -46,6 +46,6 @@ public class InputEndpoint {
 
     @GetMapping("/successLogin")
     public String customSuccessLogin() {
-        return "redirect:/posts/add";
+        return "redirect:/posts";
     }
 }
