@@ -10,6 +10,8 @@ import com.friendfinder.service.LikeAndDislikeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class LikeAndDislikeServiceImpl implements LikeAndDislikeService {
@@ -19,17 +21,38 @@ public class LikeAndDislikeServiceImpl implements LikeAndDislikeService {
 
     @Override
     public void saveLike(PostLike postLike, CurrentUser currentUser, Post post) {
-        postLike.setUser(currentUser.getUser());
-        postLike.setPostLikes(post);
-        postLike.setLikeStatus(LikeStatus.LIKE);
-        postLikeRepository.save(postLike);
+        Optional<PostLike> byUserIdAndPostId = postLikeRepository.findByUserIdAndPostId(currentUser.getUser().getId(), post.getId());
+        if (byUserIdAndPostId.isEmpty()) {
+            postLike.setUser(currentUser.getUser());
+            postLike.setPost(post);
+            postLike.setLikeStatus(LikeStatus.LIKE);
+            int countLike = 0;
+            countLike(countLike);
+            postLikeRepository.save(postLike);
+        } else {
+            postLikeRepository.deleteById(byUserIdAndPostId.get().getId());
+        }
     }
+
 
     @Override
     public void saveDislike(PostLike postLike, CurrentUser currentUser, Post post) {
-        postLike.setUser(currentUser.getUser());
-        postLike.setPostLikes(post);
-        postLike.setLikeStatus(LikeStatus.DISLIKE);
-        postLikeRepository.save(postLike);
+        Optional<PostLike> byUserIdAndPostId = postLikeRepository.findByUserIdAndPostId(currentUser.getUser().getId(), post.getId());
+        if (byUserIdAndPostId.isEmpty()) {
+            postLike.setUser(currentUser.getUser());
+            postLike.setPost(post);
+            postLike.setLikeStatus(LikeStatus.DISLIKE);
+            postLikeRepository.save(postLike);
+        } else {
+            postLikeRepository.deleteById(byUserIdAndPostId.get().getId());
+        }
+    }
+
+    public void countLike(int countLike){
+        Optional<PostLike> postLikeByLikeStatus = postLikeRepository.findPostLikeByLikeStatus(LikeStatus.LIKE);
+        if (postLikeByLikeStatus.isPresent()){
+            countLike++;
+        }
+        System.err.println(countLike);
     }
 }

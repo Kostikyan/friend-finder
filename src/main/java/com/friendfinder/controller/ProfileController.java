@@ -1,8 +1,10 @@
 package com.friendfinder.controller;
 
 import com.friendfinder.entity.Post;
+import com.friendfinder.entity.PostLike;
 import com.friendfinder.entity.User;
 import com.friendfinder.security.CurrentUser;
+import com.friendfinder.service.LikeAndDislikeService;
 import com.friendfinder.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -19,6 +21,7 @@ import java.util.List;
 public class ProfileController {
 
     private final PostService postService;
+    private final LikeAndDislikeService likeAndDislikeService;
 
     @GetMapping
     public String postPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
@@ -45,5 +48,21 @@ public class ProfileController {
         postService.deletePostId(id, currentUser);
         return "redirect:/users/profile";
 
+    }
+
+    @PostMapping("/likes/{postId}")
+    public String addLike(@ModelAttribute PostLike postLike,
+                          @AuthenticationPrincipal CurrentUser currentUser,
+                          @PathVariable("postId") Post post) {
+        likeAndDislikeService.saveLike(postLike, currentUser, post);
+        return "redirect:/users/profile";
+    }
+
+    @PostMapping("/dislikes/{postId}")
+    public String addDislike(@ModelAttribute PostLike postLike,
+                             @AuthenticationPrincipal CurrentUser currentUser,
+                             @PathVariable("postId") Post post) {
+        likeAndDislikeService.saveDislike(postLike, currentUser, post);
+        return "redirect:/users/profile";
     }
 }

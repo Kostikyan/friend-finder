@@ -21,9 +21,8 @@ public class PostLike {
     private LikeStatus likeStatus;
 
     @ManyToOne
-    @JoinColumn(name = "post_id")
-    private Post postLikes;
+    private Post post;
 
-    @OneToOne
+    @ManyToOne
     private User user;
 }
