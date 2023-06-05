@@ -345,6 +345,7 @@ create table `friend_finder`.`post_like`
     `user_id`        int(11)                            not null,
     constraint `postLike_postLike_fk` foreign key (`post_id`) references `friend_finder`.`post` (`id`),
     constraint `post_like_userLike_fk` foreign key (`user_id`) references `friend_finder`.`user` (`id`)
+
 );
 
 
