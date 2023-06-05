@@ -25,7 +25,7 @@ public class InputEndpoint {
 
         if (currentUser != null) {
             modelMap.addAttribute("user", currentUser.getUser());
-            return "timeline";
+            return "newsfeed";
         }
 
         modelMap.addAttribute("countries", mainService.findAllCountries());
@@ -46,6 +46,6 @@ public class InputEndpoint {
 
     @GetMapping("/successLogin")
     public String customSuccessLogin() {
-        return "redirect:/posts/add";
+        return "redirect:/posts";
     }
 }

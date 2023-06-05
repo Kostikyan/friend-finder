@@ -1,14 +1,19 @@
 package com.friendfinder.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "post")
 public class Post {
     @Id
@@ -21,6 +26,10 @@ public class Post {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date postDatetime;
+
+    @OneToMany(mappedBy = "postLikes")
+    private List<PostLike> postLikes;
+
 
     @ManyToOne
     private User user;
