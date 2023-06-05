@@ -267,18 +267,18 @@ VALUES (1, 'Afghanistan'),
 
 create table `friend_finder`.`user`
 (
-       `id`                   int(11)                not null auto_increment primary key,
-       `name`                 varchar(255)           not null, # First Name
-       `surname`              varchar(255)           not null, # Last Name
-       `email`                varchar(255)           not null,
-       `password`             varchar(255)           not null,
-       `date_of_birth`        date                   not null,
-       `gender`               enum ('MALE','FEMALE') not null,
-       `city`                 varchar(255)           not null,
-       `country_id`           int(11)                not null,
-       `profile_pic`          varchar(255),
-       `personal_information` varchar(255),
-       constraint `user_country__fk` foreign key (`country_id`) references `friend_finder`.`user_country` (`id`)
+    `id`                   int(11)                not null auto_increment primary key,
+    `name`                 varchar(255)           not null, # First Name
+    `surname`              varchar(255)           not null, # Last Name
+    `email`                varchar(255)           not null,
+    `password`             varchar(255)           not null,
+    `date_of_birth`        date                   not null,
+    `gender`               enum ('MALE','FEMALE') not null,
+    `city`                 varchar(255)           not null,
+    `country_id`           int(11)                not null,
+    `profile_pic`          varchar(255),
+    `personal_information` varchar(255),
+    constraint `user_country__fk` foreign key (`country_id`) references `friend_finder`.`user_country` (`id`)
 );
 
 create table `friend_finder`.`interests`
@@ -323,7 +323,6 @@ create table `friend_finder`.`work_experiences`
 );
 
 
-
 create table `friend_finder`.`post`
 (
     `id`              int(11) not null auto_increment primary key,
@@ -335,6 +334,19 @@ create table `friend_finder`.`post`
 
     constraint `user_post__fk` foreign key (`user_id`) references user (`id`)
 );
+
+
+
+create table `friend_finder`.`post_like`
+(
+    `id`             int(11) auto_increment primary key not null,
+    `like_status`        enum('LIKE','DISLIKE'),
+    `post_id`        int(11)                            not null,
+    `user_id`        int(11)                            not null,
+    constraint `postLike_postLike_fk` foreign key (`post_id`) references `friend_finder`.`post` (`id`),
+    constraint `post_like_userLike_fk` foreign key (`user_id`) references `friend_finder`.`user` (`id`)
+);
+
 
 create table `friend_finder`.`commentary`
 (
