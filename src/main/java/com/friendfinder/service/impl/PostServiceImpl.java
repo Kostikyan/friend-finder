@@ -16,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,20 +39,6 @@ public class PostServiceImpl implements PostService {
         return postRepository.findAll(pageable);
     }
 
-    @Override
-    public int postLikeCount(int likeCount){
-        Post post = new Post();
-        int length = LikeStatus.values().length;
-        List<PostLike> postLikes = post.getPostLikes();
-        for (PostLike postLike : postLikes) {
-            List<LikeStatus> postLikeCountByLikeStatus = postRepository.findPostLikeCountByLikeStatus(postLike.getLikeStatus());
-            if (post.getId() == postLikeCountByLikeStatus.size()){
-                likeCount++;
-            }
-        }
-        return likeCount;
-        }
-
 
 
     @Override
@@ -63,8 +50,6 @@ public class PostServiceImpl implements PostService {
                 .user(currentUser.getUser())
                 .build());
     }
-
-
     @Override
     public List<Post> postUserById(int id) {
         return postRepository.findPostByUser_id(id);

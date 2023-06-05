@@ -2,7 +2,6 @@ package com.friendfinder.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -27,8 +26,8 @@ public class Post {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date postDatetime;
 
-    @OneToMany(mappedBy = "postLikes")
-    private List<PostLike> postLikes;
+    @ManyToOne
+    private PostLike postLikes;
 
 
     @ManyToOne

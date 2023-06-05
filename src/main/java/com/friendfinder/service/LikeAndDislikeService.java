@@ -11,5 +11,4 @@ public interface LikeAndDislikeService {
     void saveLike(PostLike postLike, CurrentUser currentUser, Post post);
 
     void saveDislike(PostLike postLike, CurrentUser currentUser, Post post);
-
 }
