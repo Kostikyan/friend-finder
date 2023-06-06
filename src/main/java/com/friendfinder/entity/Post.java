@@ -26,8 +26,8 @@ public class Post {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date postDatetime;
 
-    @ManyToOne
-    private PostLike postLikes;
+//    @ManyToOne
+//    private PostLike postLikes;
 
 
     @ManyToOne

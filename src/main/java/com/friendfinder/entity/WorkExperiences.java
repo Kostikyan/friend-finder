@@ -11,8 +11,8 @@ public class WorkExperiences {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "we_name")
-    private String weName;
+    @Column(name = "company")
+    private String company;
 
     @Column(name = "we_designation")
     private String weDesignation;
@@ -31,6 +31,5 @@ public class WorkExperiences {
 
     @ManyToOne
     private User user;
-
 
 }
