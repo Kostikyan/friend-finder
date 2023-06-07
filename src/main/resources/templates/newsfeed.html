@@ -192,24 +192,22 @@
                                 <h6 class="text-muted" th:text="${post.user.surname}"></h6>
                             </div>
                             <div class="reaction">
-                                <form class="btn text-green" th:action="@{/posts/likes/{postId}(postId=${post.id})}"
+                                <form class="btn text-green" th:action="@{posts/likes/{postId}(postId=${post.id})}"
                                       method="post" id="like">
-                                    <i class="icon ion-thumbsup" onclick="document.getElementById('like').submit()"
+                                    <i class="icon ion-thumbsup" onclick="$(this).parent()[0].submit()"
                                        href="#">
                                     </i>
                                 </form>
-
-                                <form class="btn text-red" th:action="@{/posts/dislikes/{postId}(postId=${post.id})}"
+                                <form class="btn text-red" th:action="@{posts/dislikes/{postId}(postId=${post.id})}"
                                       method="post" id="dislike">
-                                    <i class="fa fa-thumbs-down" onclick="document.getElementById('dislike').submit()"
+                                    <i class="fa fa-thumbs-down" onclick="$(this).parent()[0].submit()"
                                        href="#">
                                     </i>
                                 </form>
                             </div>
                             <div class="line-divider"></div>
                             <div class="post-text">
-                                <p th:text="${post.description}"><i class="em em-anguished"></i>
-                                    <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
+                                <p th:text="${post.description}"></p>
                             </div>
                             <div class="line-divider"></div>
                             <div class="post-comment">

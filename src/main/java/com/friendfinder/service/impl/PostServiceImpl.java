@@ -1,8 +1,6 @@
 package com.friendfinder.service.impl;
 
 import com.friendfinder.entity.Post;
-import com.friendfinder.entity.PostLike;
-import com.friendfinder.entity.types.LikeStatus;
 import com.friendfinder.repository.PostRepository;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.PostService;
@@ -16,7 +14,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,7 +37,6 @@ public class PostServiceImpl implements PostService {
     }
 
 
-
     @Override
     public void postSave(Post post, CurrentUser currentUser, MultipartFile image, MultipartFile video) {
         postRepository.save(Post.builder()
@@ -48,8 +44,10 @@ public class PostServiceImpl implements PostService {
                 .musicFileName(ImageUtil.uploadImage(video, postVideoUploadPath))
                 .postDatetime(new Date())
                 .user(currentUser.getUser())
+                .description(post.getDescription())
                 .build());
     }
+
     @Override
     public List<Post> postUserById(int id) {
         return postRepository.findPostByUser_id(id);

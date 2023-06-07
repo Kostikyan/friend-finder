@@ -22,11 +22,13 @@ public class PostController {
 
     private final PostService postService;
     private final LikeAndDislikeService likeAndDislikeService;
+
     @GetMapping()
     public String postAddPage(ModelMap modelMap,
                               @AuthenticationPrincipal CurrentUser currentUser,
                               @ModelAttribute Post post) {
         return listByPage(modelMap, 1, currentUser);
+
     }
 
     @GetMapping("/page/{pageNumber}")

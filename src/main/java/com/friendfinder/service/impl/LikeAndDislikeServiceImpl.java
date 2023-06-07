@@ -26,8 +26,6 @@ public class LikeAndDislikeServiceImpl implements LikeAndDislikeService {
             postLike.setUser(currentUser.getUser());
             postLike.setPost(post);
             postLike.setLikeStatus(LikeStatus.LIKE);
-            int countLike = 0;
-            countLike(countLike);
             postLikeRepository.save(postLike);
         } else {
             postLikeRepository.deleteById(byUserIdAndPostId.get().getId());
@@ -47,12 +45,6 @@ public class LikeAndDislikeServiceImpl implements LikeAndDislikeService {
             postLikeRepository.deleteById(byUserIdAndPostId.get().getId());
         }
     }
-
-    public void countLike(int countLike){
-        Optional<PostLike> postLikeByLikeStatus = postLikeRepository.findPostLikeByLikeStatus(LikeStatus.LIKE);
-        if (postLikeByLikeStatus.isPresent()){
-            countLike++;
-        }
-        System.err.println(countLike);
-    }
 }
+
+

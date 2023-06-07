@@ -171,14 +171,14 @@
                     <div class="reaction">
                       <form class="btn text-green" th:action="@{/users/profile/likes/{postId}(postId=${post.id})}"
                             method="post" id="like">
-                        <i class="icon ion-thumbsup" onclick="document.getElementById('like').submit()"
+                        <i class="icon ion-thumbsup" onclick="$(this).parent()[0].submit()"
                            href="#">
                         </i>
                       </form>
 
                       <form class="btn text-red" th:action="@{/users/profile/dislikes/{postId}(postId=${post.id})}"
                             method="post" id="dislike">
-                        <i class="fa fa-thumbs-down" onclick="document.getElementById('dislike').submit()"
+                        <i class="fa fa-thumbs-down" onclick="$(this).parent()[0].submit()"
                            href="#">
                         </i>
                       </form>
