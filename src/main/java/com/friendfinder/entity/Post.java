@@ -27,10 +27,6 @@ public class Post {
     private Date postDatetime;
 
     @ManyToOne
-    private PostLike postLikes;
-
-
-    @ManyToOne
     private User user;
 
 }
