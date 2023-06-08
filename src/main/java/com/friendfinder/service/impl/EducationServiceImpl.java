@@ -16,11 +16,8 @@ public class EducationServiceImpl implements EducationService {
 
     @Override
     public void saveEducation(Education education, CurrentUser currentUser) {
-        if (currentUser != null) {
             User user = currentUser.getUser();
             education.setUser(user);
             educationRepository.save(education);
-
-        }
     }
 }

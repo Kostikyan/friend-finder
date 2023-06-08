@@ -21,10 +21,8 @@ public class WorkExperiencesServiceImpl implements WorkExperiencesService {
 
     @Override
     public void saveWorkExperiences(WorkExperiences workExperiences, CurrentUser currentUser) {
-        if (currentUser != null) {
             User user = currentUser.getUser();
             workExperiences.setUser(user);
             workExperiencesRepository.save(workExperiences);
-        }
     }
 }
