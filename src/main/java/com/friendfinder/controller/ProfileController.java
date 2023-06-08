@@ -54,15 +54,8 @@ public class ProfileController {
     public String addLike(@ModelAttribute PostLike postLike,
                           @AuthenticationPrincipal CurrentUser currentUser,
                           @PathVariable("postId") Post post) {
-        likeAndDislikeService.saveLike(postLike, currentUser, post);
+        likeAndDislikeService.saveReaction(postLike, currentUser, post);
         return "redirect:/users/profile";
     }
 
-    @PostMapping("/dislikes/{postId}")
-    public String addDislike(@ModelAttribute PostLike postLike,
-                             @AuthenticationPrincipal CurrentUser currentUser,
-                             @PathVariable("postId") Post post) {
-        likeAndDislikeService.saveDislike(postLike, currentUser, post);
-        return "redirect:/users/profile";
-    }
 }

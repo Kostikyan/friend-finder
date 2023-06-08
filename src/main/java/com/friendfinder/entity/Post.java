@@ -5,7 +5,6 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter
@@ -22,6 +21,8 @@ public class Post {
     private String description;
     private String imgName;
     private String musicFileName;
+    private int likeCount;
+    private int dislikeCount;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date postDatetime;
