@@ -44,6 +44,12 @@ public class InputEndpoint {
         return mainService.getProfilePic(imageName);
     }
 
+    @GetMapping(value = "/getBgProfilePic",
+            produces = MediaType.IMAGE_JPEG_VALUE)
+    public @ResponseBody byte[] getBgProfilePic(@RequestParam("imageName") String imageName) throws IOException {
+        return mainService.getBgProfilePic(imageName);
+    }
+
     @GetMapping("/login-register")
     public String loginPage(ModelMap modelMap) {
         modelMap.addAttribute("countries", mainService.findAllCountries());

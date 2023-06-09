@@ -15,4 +15,6 @@ public interface TimelineService {
     void updateUser(@ModelAttribute User user, @AuthenticationPrincipal CurrentUser currentUser);
 
     void updateUserProfilePic(MultipartFile profilePic, CurrentUser currentUser);
+
+    void updateUserProfileBackgroundPic(MultipartFile bgPic, CurrentUser currentUser);
 }

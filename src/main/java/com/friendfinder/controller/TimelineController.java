@@ -41,4 +41,10 @@ public class TimelineController {
         timelineService.updateUserProfilePic(profilePic, currentUser);
         return "redirect:/users/profile";
     }
+
+    @PostMapping("/change-profile-bg-pic")
+    public String changeProfileBackgroundPic(@RequestParam("profile-bg-pic") MultipartFile bgPic, @AuthenticationPrincipal CurrentUser currentUser) {
+        timelineService.updateUserProfileBackgroundPic(bgPic, currentUser);
+        return "redirect:/users/profile";
+    }
 }

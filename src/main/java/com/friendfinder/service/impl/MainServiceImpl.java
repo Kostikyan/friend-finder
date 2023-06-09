@@ -27,6 +27,9 @@ public class MainServiceImpl implements MainService {
     @Value("${user.profile.picture.path}")
     private String userProfilePicPath;
 
+    @Value("${user.profile.background-picture.path}")
+    private String userBgProfilePicPath;
+
     private final CountryRepository countryRepository;
 
     @Override
@@ -55,12 +58,16 @@ public class MainServiceImpl implements MainService {
         if (file.exists()) {
             FileInputStream fis = new FileInputStream(file);
             return IOUtils.toByteArray(fis);
-        } else {
-            File fileVideoByDownload = new File(videoUploadPath + imageName);
-            if (fileVideoByDownload.exists()) {
-                FileInputStream fis = new FileInputStream(fileVideoByDownload);
-                return IOUtils.toByteArray(fis);
-            }
+        }
+        return null;
+    }
+
+    @Override
+    public @ResponseBody byte[] getBgProfilePic(String imageName) throws IOException {
+        File file = new File(userBgProfilePicPath + imageName);
+        if (file.exists()) {
+            FileInputStream fis = new FileInputStream(file);
+            return IOUtils.toByteArray(fis);
         }
         return null;
     }
