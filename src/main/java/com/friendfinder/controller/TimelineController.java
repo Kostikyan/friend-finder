@@ -30,6 +30,11 @@ public class TimelineController {
         return "edit-profile-basic";
     }
 
+    @GetMapping("/edit-work-edu")
+    public String editBasicPage() {
+        return "edit-profile-work-edu";
+    }
+
     @PostMapping("/edit-basic")
     public String editBasic(@ModelAttribute User user, @AuthenticationPrincipal CurrentUser currentUser) {
         timelineService.updateUser(user, currentUser);

@@ -59,7 +59,7 @@
           <div class="timeline-nav-bar hidden-sm hidden-xs">
             <form action="/timeline/change-profile-bg-pic" method="post" enctype="multipart/form-data" id="profile-bg-form">
               <input type="file" name="profile-bg-pic" style="display: none" id="profile-bg-picture">
-              <a href="#" onclick="document.getElementById('profile-bg-picture').click()"> <img th:if="${user.getProfileBackgroundPic() == null}" src="/images/covers/1.jpg" alt="" > </a>
+              <a href="#" onclick="document.getElementById('profile-bg-picture').click()"> <img th:if="${user.getProfileBackgroundPic() == null || user.getProfileBackgroundPic().equalsIgnoreCase('null')}" src="/images/covers/1.jpg" alt="" > </a>
               <a href="#" onclick="document.getElementById('profile-bg-picture').click()"> <img th:if="${user.getProfileBackgroundPic() != null}" th:src="@{/getBgProfilePic(imageName=${user.getProfileBackgroundPic()})}" width="1030" alt="" id="profile-bg-pic"  > </a>
             </form>
             <script>
@@ -92,7 +92,7 @@
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
                   <li><a href="/posts/add" class="active">Timeline</a></li>
-                  <li><a href="timeline-about.html">About</a></li>
+                  <li><a href="/user/about">About</a></li>
                   <li><a href="timeline-album.html">Album</a></li>
                   <li><a href="timeline-friends.html">Friends</a></li>
                 </ul>

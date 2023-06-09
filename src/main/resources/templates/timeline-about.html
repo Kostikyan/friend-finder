@@ -121,7 +121,7 @@
                   <div class="organization" th:each="we : ${workExperiences}">
                     <img src="/images/envato.png" alt="" class="pull-left img-org">
                     <div class="work-info">
-                      <h5 th:text="${we.weName}"></h5>
+                      <h5 th:text="${we.company}"></h5>
                       <p th:text="${we.weDesignation}"> </p>
                       <span class="text-grey" th:text="from + ${we.weFromDate} + to-+ ${we.weToDate}"></span>
                     </div>
@@ -185,9 +185,6 @@
     <div id="spinner-wrapper">
       <div class="spinner"></div>
     </div>
-    
-    <!--Buy button-->
-    <a href="../cart/add_items.html?item_ids=18711273&ref=thunder-team" target="_blank" class="btn btn-buy"><span class="italy">Buy with:</span><img src="images/envato_logo.png" alt=""><span class="price">Only $20!</span></a>
 
     <!-- Scripts
     ================================================= -->
