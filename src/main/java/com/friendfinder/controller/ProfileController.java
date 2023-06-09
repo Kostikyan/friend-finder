@@ -51,11 +51,20 @@ public class ProfileController {
 
     }
 
-    @PostMapping("/likes/{postId}")
+    @PostMapping("/reaction/like/{postId}")
     public String addLike(@ModelAttribute PostLike postLike,
                           @AuthenticationPrincipal CurrentUser currentUser,
-                          @PathVariable("postId") Post post) {
-            likeAndDislikeService.saveReaction(postLike, currentUser, post);
+                          @PathVariable(name = "postId") Post post) {
+        postLike.setLikeStatus(LikeStatus.LIKE);
+        likeAndDislikeService.saveReaction(postLike, currentUser, post);
+        return "redirect:/users/profile";
+    }
+    @PostMapping("/reaction/dislike/{postId}")
+    public String addDislike(@ModelAttribute PostLike postLike,
+                             @AuthenticationPrincipal CurrentUser currentUser,
+                             @PathVariable(name = "postId") Post post) {
+        postLike.setLikeStatus(LikeStatus.DISLIKE);
+        likeAndDislikeService.saveReaction(postLike, currentUser, post);
         return "redirect:/users/profile";
     }
 
