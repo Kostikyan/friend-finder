@@ -312,7 +312,7 @@ create table `friend_finder`.`education`
 create table `friend_finder`.`work_experiences`
 (
     `id`             int(11) auto_increment primary key not null,
-    `we_name`        varchar(255),
+    `company`        varchar(255),
     `we_designation` varchar(255),
     `we_from_date`   int(11),
     `we_to_date`     int(11),
@@ -330,6 +330,8 @@ create table `friend_finder`.`post`
     `description`     text(500),
     `img_name`        varchar(255),
     `music_file_name` varchar(255),
+    `like_count` int(11),
+    `dislike_count` int(11),
     `post_datetime`   datetime,
 
     constraint `user_post__fk` foreign key (`user_id`) references user (`id`)

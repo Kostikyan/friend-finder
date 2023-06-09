@@ -3,6 +3,7 @@ package com.friendfinder.controller;
 import com.friendfinder.entity.Post;
 import com.friendfinder.entity.PostLike;
 import com.friendfinder.entity.User;
+import com.friendfinder.entity.types.LikeStatus;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.LikeAndDislikeService;
 import com.friendfinder.service.PostService;
@@ -54,7 +55,7 @@ public class ProfileController {
     public String addLike(@ModelAttribute PostLike postLike,
                           @AuthenticationPrincipal CurrentUser currentUser,
                           @PathVariable("postId") Post post) {
-        likeAndDislikeService.saveReaction(postLike, currentUser, post);
+            likeAndDislikeService.saveReaction(postLike, currentUser, post);
         return "redirect:/users/profile";
     }
 

@@ -194,16 +194,14 @@
                             <div class="reaction">
                                 <form class="btn text-green" th:action="@{posts/reaction/like/{postId}(postId=${post.id})}"
                                       method="post" id="like">
-                                    <span th:text="${post.likeCount}"></span>
                                     <i class="icon ion-thumbsup" onclick="$(this).parent()[0].submit()"
-                                       href="#">
+                                       href="#" th:text="${post.likeCount}">
                                     </i>
                                 </form>
                                 <form class="btn text-red" th:action="@{posts/reaction/dislike/{postId}(postId=${post.id})}"
                                       method="post" id="dislike">
-                                    <span th:text="${post.dislikeCount}"></span>
                                     <i class="fa fa-thumbs-down" onclick="$(this).parent()[0].submit()"
-                                       href="#">
+                                       href="#" th:text="${post.dislikeCount}">
                                     </i>
                                 </form>
                             </div>

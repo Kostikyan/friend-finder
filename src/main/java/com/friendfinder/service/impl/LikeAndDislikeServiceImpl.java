@@ -11,7 +11,7 @@ import com.friendfinder.service.LikeAndDislikeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +19,6 @@ public class LikeAndDislikeServiceImpl implements LikeAndDislikeService {
 
     private final PostLikeRepository postLikeRepository;
     private final PostRepository postRepository;
-
 
     @Override
     public void saveReaction(PostLike postLike, CurrentUser currentUser, Post post) {
