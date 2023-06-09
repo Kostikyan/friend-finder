@@ -1,10 +1,12 @@
 package com.friendfinder.controller;
 
+import com.friendfinder.entity.Comment;
 import com.friendfinder.entity.Post;
 import com.friendfinder.entity.PostLike;
 import com.friendfinder.entity.User;
 import com.friendfinder.entity.types.LikeStatus;
 import com.friendfinder.security.CurrentUser;
+import com.friendfinder.service.CommentService;
 import com.friendfinder.service.LikeAndDislikeService;
 import com.friendfinder.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -23,13 +25,16 @@ public class ProfileController {
 
     private final PostService postService;
     private final LikeAndDislikeService likeAndDislikeService;
+    private final CommentService commentService;
 
     @GetMapping
     public String postPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
         List<Post> users = postService.postUserById(currentUser.getUser().getId());
         User user = currentUser.getUser();
+        List<Comment> comments = commentService.commentList();
         modelMap.addAttribute("users", users);
         modelMap.addAttribute("user", user);
+        modelMap.addAttribute("comments", comments);
         return "timeline";
     }
 
@@ -65,6 +70,20 @@ public class ProfileController {
                              @PathVariable(name = "postId") Post post) {
         postLike.setLikeStatus(LikeStatus.DISLIKE);
         likeAndDislikeService.saveReaction(postLike, currentUser, post);
+        return "redirect:/users/profile";
+    }
+
+    @PostMapping("/comment/{postId}")
+    public String addComment(@ModelAttribute Comment comment,
+                             @AuthenticationPrincipal CurrentUser currentUser,
+                             @PathVariable("postId") Post post) {
+        commentService.addComment(comment, currentUser, post);
+        return "redirect:/users/profile";
+    }
+
+    @GetMapping("/comment/delete")
+    public String removeComment(@RequestParam("id") int id) {
+        commentService.deleteComment(id);
         return "redirect:/users/profile";
     }
 

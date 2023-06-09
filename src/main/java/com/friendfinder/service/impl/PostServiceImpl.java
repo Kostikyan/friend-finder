@@ -1,6 +1,7 @@
 package com.friendfinder.service.impl;
 
 import com.friendfinder.entity.Post;
+import com.friendfinder.repository.CommentRepository;
 import com.friendfinder.repository.PostRepository;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.PostService;
@@ -22,6 +23,7 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
+    private final CommentRepository commentRepository;
 
     @Value("${post.upload.image.path}")
     private String postImageUploadPath;

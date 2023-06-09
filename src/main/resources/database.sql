@@ -357,6 +357,7 @@ create table `friend_finder`.`commentary`
     `user_id`         int(11)   not null,
     `post_id`         int(11)   not null,
     `commentary_text` text(500) not null,
+    `datetime` datetime not null,
 
     constraint `user_commentary__fk` foreign key (`user_id`) references user (`id`),
     constraint `commentary_post__fk` foreign key (`post_id`) references post (`id`)

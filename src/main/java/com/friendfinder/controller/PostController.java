@@ -1,9 +1,11 @@
 package com.friendfinder.controller;
 
+import com.friendfinder.entity.Comment;
 import com.friendfinder.entity.Post;
 import com.friendfinder.entity.PostLike;
 import com.friendfinder.entity.types.LikeStatus;
 import com.friendfinder.security.CurrentUser;
+import com.friendfinder.service.CommentService;
 import com.friendfinder.service.LikeAndDislikeService;
 import com.friendfinder.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -23,11 +25,14 @@ public class PostController {
 
     private final PostService postService;
     private final LikeAndDislikeService likeAndDislikeService;
+    private final CommentService commentService;
 
     @GetMapping()
     public String postAddPage(ModelMap modelMap,
                               @AuthenticationPrincipal CurrentUser currentUser,
                               @ModelAttribute Post post) {
+        List<Comment> comments = commentService.commentList();
+        modelMap.addAttribute("comments", comments);
         return listByPage(modelMap, 1, currentUser);
 
     }
@@ -66,13 +71,28 @@ public class PostController {
         likeAndDislikeService.saveReaction(postLike, currentUser, post);
         return "redirect:/posts";
     }
+
     @PostMapping("/reaction/dislike/{postId}")
     public String addDislike(@ModelAttribute PostLike postLike,
-                          @AuthenticationPrincipal CurrentUser currentUser,
-                          @PathVariable(name = "postId") Post post) {
+                             @AuthenticationPrincipal CurrentUser currentUser,
+                             @PathVariable(name = "postId") Post post) {
         postLike.setLikeStatus(LikeStatus.DISLIKE);
         likeAndDislikeService.saveReaction(postLike, currentUser, post);
         return "redirect:/posts";
     }
 
+
+    @PostMapping("/comment/{postId}")
+    public String addComment(@ModelAttribute Comment comment,
+                             @AuthenticationPrincipal CurrentUser currentUser,
+                             @PathVariable("postId") Post post) {
+        commentService.addComment(comment, currentUser, post);
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/comment/delete")
+    public String removeComment(@RequestParam("id") int id) {
+        commentService.deleteComment(id);
+        return "redirect:/posts";
+    }
 }
