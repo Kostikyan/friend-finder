@@ -6,8 +6,11 @@ import com.friendfinder.repository.CountryRepository;
 import com.friendfinder.repository.UserRepository;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.TimelineService;
+import com.friendfinder.util.ImageUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -17,6 +20,9 @@ public class TimelineServiceImpl implements TimelineService {
 
     private final CountryRepository countryRepository;
     private final UserRepository userRepository;
+
+    @Value("${user.profile.picture.path}")
+    private String userProfilePicPath;
 
     @Override
     public List<Country> findAllCountries() {
@@ -36,5 +42,12 @@ public class TimelineServiceImpl implements TimelineService {
         loggedInUser.setCountry(user.getCountry());
         loggedInUser.setPersonalInformation(user.getPersonalInformation());
         userRepository.save(loggedInUser);
+    }
+
+    @Override
+    public void updateUserProfilePic(MultipartFile profilePic, CurrentUser currentUser) {
+        User user = currentUser.getUser();
+        user.setProfilePicture(ImageUtil.uploadImage(profilePic, userProfilePicPath));
+        userRepository.save(user);
     }
 }

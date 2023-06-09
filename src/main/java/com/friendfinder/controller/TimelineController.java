@@ -7,10 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/timeline")
@@ -18,6 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TimelineController {
 
     private final TimelineServiceImpl timelineService;
+
+    @GetMapping()
+    public String timelinePage(){
+        return "timeline";
+    }
 
     @GetMapping("/edit-basic")
     public String editBasicPage(@AuthenticationPrincipal CurrentUser currentUser, ModelMap modelMap) {
@@ -31,5 +34,11 @@ public class TimelineController {
     public String editBasic(@ModelAttribute User user, @AuthenticationPrincipal CurrentUser currentUser) {
         timelineService.updateUser(user, currentUser);
         return "redirect:/timeline/edit-basic";
+    }
+
+    @PostMapping("/change-profile-pic")
+    public String changeProfilePic(@RequestParam("profile-pic") MultipartFile profilePic, @AuthenticationPrincipal CurrentUser currentUser) {
+        timelineService.updateUserProfilePic(profilePic, currentUser);
+        return "redirect:/users/profile";
     }
 }
