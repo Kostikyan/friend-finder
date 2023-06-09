@@ -54,12 +54,21 @@
       <!-- Timeline
       ================================================= -->
       <div class="timeline">
-        <div class="timeline-cover" style="background: url('../static/images/covers/1.jpg') no-repeat;">
-
+        <div class="timeline-cover" >
           <!--Timeline Menu for Large Screens-->
           <div class="timeline-nav-bar hidden-sm hidden-xs">
+            <form action="/timeline/change-profile-bg-pic" method="post" enctype="multipart/form-data" id="profile-bg-form">
+              <input type="file" name="profile-bg-pic" style="display: none" id="profile-bg-picture">
+              <a href="#" onclick="document.getElementById('profile-bg-picture').click()"> <img th:if="${user.getProfileBackgroundPic() == null}" src="/images/covers/1.jpg" alt="" > </a>
+              <a href="#" onclick="document.getElementById('profile-bg-picture').click()"> <img th:if="${user.getProfileBackgroundPic() != null}" th:src="@{/getBgProfilePic(imageName=${user.getProfileBackgroundPic()})}" width="1030" alt="" id="profile-bg-pic"  > </a>
+            </form>
+            <script>
+              document.getElementById('profile-bg-picture').addEventListener('change', function() {
+                document.getElementById('profile-bg-form').submit();
+              });
+            </script>
             <div class="row">
-              <div class="col-md-3">x
+              <div class="col-md-3">
                 <form action="/timeline/change-profile-pic" method="post" enctype="multipart/form-data" id="profile-form">
                     <input type="file" name="profile-pic" style="display: none" id="profile-pic">
                   <div class="profile-info" th:if="${user.getProfilePicture() == null || user.getProfilePicture().equalsIgnoreCase('null')}" >

@@ -15,4 +15,7 @@ public interface MainService {
 
     @ResponseBody
     byte[] getProfilePic(String imageName) throws IOException;
+
+    @ResponseBody
+    byte[] getBgProfilePic(String imageName) throws IOException;
 }

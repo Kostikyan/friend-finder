@@ -34,6 +34,9 @@ public class User {
     @Column(name = "profile_pic")
     private String profilePicture;
 
+    @Column(name = "profile_bg_pic")
+    private String profileBackgroundPic;
+
     @Column(name = "personal_information")
     private String personalInformation;
 

@@ -24,6 +24,9 @@ public class TimelineServiceImpl implements TimelineService {
     @Value("${user.profile.picture.path}")
     private String userProfilePicPath;
 
+    @Value("${user.profile.background-picture.path}")
+    private String userBgProfilePicPath;
+
     @Override
     public List<Country> findAllCountries() {
         return countryRepository.findAll();
@@ -48,6 +51,13 @@ public class TimelineServiceImpl implements TimelineService {
     public void updateUserProfilePic(MultipartFile profilePic, CurrentUser currentUser) {
         User user = currentUser.getUser();
         user.setProfilePicture(ImageUtil.uploadImage(profilePic, userProfilePicPath));
+        userRepository.save(user);
+    }
+
+    @Override
+    public void updateUserProfileBackgroundPic(MultipartFile bgPic, CurrentUser currentUser) {
+        User user = currentUser.getUser();
+        user.setProfileBackgroundPic(ImageUtil.uploadImage(bgPic, userBgProfilePicPath));
         userRepository.save(user);
     }
 }
