@@ -15,10 +15,10 @@
 		<link rel="stylesheet" href="/css/ionicons.min.css">
         <link rel="stylesheet" href="/css/font-awesome.min.css">
         <link href="/css/emoji.css" rel="stylesheet">
-    
+
     <!--Google Font-->
     <link href="/../css.css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
-    
+
     <!--Favicon-->
     <link rel="shortcut icon" type="image/png" href="/images/fav.png">
 	</head>
@@ -43,7 +43,7 @@
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div th:include="fragment/header-menu-fragment::header-menu"></div>
-          
+
         </div><!-- /.container -->
       </nav>
     </header>
@@ -54,22 +54,30 @@
       <!-- Timeline
       ================================================= -->
       <div class="timeline">
-        <div class="timeline-cover">
+        <div class="timeline-cover" style="background: url('../static/images/covers/1.jpg') no-repeat;">
 
           <!--Timeline Menu for Large Screens-->
           <div class="timeline-nav-bar hidden-sm hidden-xs">
             <div class="row">
-              <div class="col-md-3">
-                <form action="/users/profile" method="get">
-                  <div class="profile-info" th:if="${user.profilePicture == null || user.profilePicture.equalsIgnoreCase('null')}" >
-                    <img alt="" class="img-responsive profile-photo" src="/images/post-images/difault.png" >
+              <div class="col-md-3">x
+                <form action="/timeline/change-profile-pic" method="post" enctype="multipart/form-data" id="profile-form">
+                    <input type="file" name="profile-pic" style="display: none" id="profile-pic">
+                  <div class="profile-info" th:if="${user.getProfilePicture() == null || user.getProfilePicture().equalsIgnoreCase('null')}" >
+                    <a href="#" onclick="document.getElementById('profile-pic').click()"><img alt="" class="img-responsive profile-photo" src="/images/post-images/difault.png"> </a>
+
                     <h3><i th:text="${user.name}"></i>  <i th:text="${user.surname}"></i></h3>
                   </div>
-                  <div class="profile-info" th:if="${user.profilePicture != null}">
-                    <img alt="" class="img-responsive profile-photo" th:src="@{/getImage(imageName=${user.profilePicture})}">
+                  <div class="profile-info" th:if="${user.getProfilePicture() != null}">
+                    <a href="#" onclick="document.getElementById('profile-pic').click()"><img alt="" class="img-responsive profile-photo" th:src="@{/getProfilePic(imageName=${user.getProfilePicture()})}"> </a>
+
                     <h3><i th:text="${user.name}"></i>  <i th:text="${user.surname}"></i></h3>
                   </div>
                 </form>
+                  <script>
+                      document.getElementById('profile-pic').addEventListener('change', function() {
+                          document.getElementById('profile-form').submit();
+                      });
+                  </script>
 
               </div>
               <div class="col-md-9">
@@ -92,10 +100,12 @@
             <div class="profile-info" th:if="${user.profilePicture == null || user.profilePicture.equalsIgnoreCase('null')}" >
               <img alt="" class="img-responsive profile-photo" src="/images/post-images/difault.png" >
               <h3><i th:text="${user.name}"></i>  <i th:text="${user.surname}"></i></h3>
+              <a href="#" onclick="document.getElementById('profile-pic').click()"><i class="ion-images"></i></a>
             </div>
             <div class="profile-info" th:if="${user.profilePicture != null}">
-              <img alt="" class="img-responsive profile-photo" th:src="@{/getImage(imageName=${user.profilePicture})}">
+              <img alt="" class="img-responsive profile-photo" th:src="@{/getProfilePic(imageName=${user.getProfilePicture()})}">
               <h3><i th:text="${user.name}"></i>  <i th:text="${user.surname}"></i></h3>
+              <a href="#" onclick="document.getElementById('profile-pic').click()"><i class="ion-images"></i></a>
             </div>
             <div class="mobile-menu">
               <ul class="list-inline">
@@ -107,7 +117,6 @@
               <button class="btn-primary">Add Friend</button>
             </div>
           </div><!--Timeline Menu for Small Screens End-->
-
         </div>
         <div id="page-contents">
           <div class="row">
@@ -127,7 +136,7 @@
                         <textarea name="description"  cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
                       </div>
                       <div class="form-group" th:if="${user.profilePicture != null}">
-                        <img  th:src="@{/getImage(imageName=${user.profilePicture})}" alt="" class="profile-photo-md">
+                        <img  th:src="@{/getProfilePic(imageName=${user.getProfilePicture()})}" alt="" class="profile-photo-md">
                         <textarea name="description"  cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
                       </div>
                     </div>
@@ -161,7 +170,7 @@
                 <div  class="post-container">
                   <img th:if="${user.profilePicture == null || user.profilePicture.equalsIgnoreCase('null')}"
                        src="/images/post-images/difault.png" alt="user" class="profile-photo-md pull-left">
-                  <img th:if="${user.profilePicture != null}" th:src="@{/getImage(imageName=${user.profilePicture})}"
+                  <img th:if="${user.profilePicture != null}" th:src="@{/getProfilePic(imageName=${user.getProfilePicture()})}"
                        alt="user" class="profile-photo-md pull-left">
                   <div class="post-detail">
                     <div class="user-info">

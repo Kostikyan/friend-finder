@@ -62,7 +62,7 @@
                                 th:text="${user.surname}"></i></a></h5>
                     </div>
                     <div class="profile-card" th:if="${user.profilePicture != null}">
-                        <img th:src="@{/getImage(imageName=${user.profilePicture})}" alt="user" class="profile-photo">
+                        <img th:src="@{/getProfilePic(imageName=${user.profilePicture})}" alt="user" class="profile-photo">
                         <h5><a href="/users/profile" class="text-white"><i th:text="${user.name}"></i> <i
                                 th:text="${user.surname}"></i></a></h5>
                     </div>
@@ -147,7 +147,7 @@
                                               placeholder="Write what you wish"></textarea>
                                 </div>
                                 <div class="form-group" th:if="${user.profilePicture != null}">
-                                    <img th:src="@{/getImage(imageName=${user.profilePicture})}" alt=""
+                                    <img th:src="@{/getProfilePic(imageName=${user.getProfilePicture()})}" alt=""
                                          class="profile-photo-md">
                                     <textarea name="description" cols="30" rows="1" class="form-control"
                                               placeholder="Write what you wish"></textarea>
@@ -183,7 +183,7 @@
                         <img th:if="${user.profilePicture == null || user.profilePicture.equalsIgnoreCase('null')}"
                              src="/images/post-images/difault.png" alt="user" class="profile-photo-md pull-left">
                         <img th:if="${user.profilePicture != null}"
-                             th:src="@{/getImage(imageName=${user.profilePicture})}" alt="user"
+                             th:src="@{/getProfilePic(imageName=${user.getProfilePicture()})}" alt="user"
                              class="profile-photo-md pull-left">
                         <div class="post-detail">
                             <div class="user-info">

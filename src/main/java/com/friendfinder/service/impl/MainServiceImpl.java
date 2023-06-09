@@ -24,6 +24,9 @@ public class MainServiceImpl implements MainService {
     @Value("${post.video.upload.image.path}")
     private String videoUploadPath;
 
+    @Value("${user.profile.picture.path}")
+    private String userProfilePicPath;
+
     private final CountryRepository countryRepository;
 
     @Override
@@ -36,6 +39,21 @@ public class MainServiceImpl implements MainService {
         File fileImageByDownload = new File(imageUploadPath + imageName);
         if (fileImageByDownload.exists()) {
             FileInputStream fis = new FileInputStream(fileImageByDownload);
+            return IOUtils.toByteArray(fis);
+        } else {
+            File fileVideoByDownload = new File(videoUploadPath + imageName);
+            if (fileVideoByDownload.exists()) {
+                FileInputStream fis = new FileInputStream(fileVideoByDownload);
+                return IOUtils.toByteArray(fis);
+            }
+        }
+        return null;
+    }
+    @Override
+    public @ResponseBody byte[] getProfilePic(String imageName) throws IOException {
+        File file = new File(userProfilePicPath + imageName);
+        if (file.exists()) {
+            FileInputStream fis = new FileInputStream(file);
             return IOUtils.toByteArray(fis);
         } else {
             File fileVideoByDownload = new File(videoUploadPath + imageName);
