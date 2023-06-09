@@ -277,6 +277,7 @@ create table `friend_finder`.`user`
     `city`                 varchar(255)           not null,
     `country_id`           int(11)                not null,
     `profile_pic`          varchar(255),
+    `profile_bg_pic`       varchar(255),
     `personal_information` varchar(255),
     constraint `user_country__fk` foreign key (`country_id`) references `friend_finder`.`user_country` (`id`)
 );
@@ -330,8 +331,8 @@ create table `friend_finder`.`post`
     `description`     text(500),
     `img_name`        varchar(255),
     `music_file_name` varchar(255),
-    `like_count` int(11),
-    `dislike_count` int(11),
+    `like_count`      int(11),
+    `dislike_count`   int(11),
     `post_datetime`   datetime,
 
     constraint `user_post__fk` foreign key (`user_id`) references user (`id`)
@@ -341,10 +342,10 @@ create table `friend_finder`.`post`
 
 create table `friend_finder`.`post_like`
 (
-    `id`             int(11) auto_increment primary key not null,
-    `like_status`        enum('LIKE','DISLIKE'),
-    `post_id`        int(11)                            not null,
-    `user_id`        int(11)                            not null,
+    `id`          int(11) auto_increment primary key not null,
+    `like_status` enum ('LIKE','DISLIKE'),
+    `post_id`     int(11)                            not null,
+    `user_id`     int(11)                            not null,
     constraint `postLike_postLike_fk` foreign key (`post_id`) references `friend_finder`.`post` (`id`),
     constraint `post_like_userLike_fk` foreign key (`user_id`) references `friend_finder`.`user` (`id`)
 
