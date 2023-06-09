@@ -206,18 +206,26 @@
                       <p th:text="${post.description}"> <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
                     </div>
                     <div class="line-divider"></div>
-                    <div class="post-comment">
-                      <img src="/images/users/user-11.jpg" alt="" class="profile-photo-sm">
-                      <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
+                    <div th:each="comment: ${comments}" th:if="${post.id == comment.post.id}">
+                      <div class="post-comment">
+                        <img th:if="${comment.user.profilePicture == null || comment.user.profilePicture.equalsIgnoreCase('null')}"
+                             src="/images/post-images/difault.png" alt="" class="profile-photo-sm">
+                        <img th:if="${comment.user.profilePicture != null}"
+                             th:src="@{/getImage(imageName=${comment.user.profilePicture})}" alt=""
+                             class="profile-photo-sm">
+                        <p><a href="timeline.html" class="profile-link" th:text="${comment.user.name}"> </a> <i
+                                th:text="${comment.commentaryText}"></i><br></p>
+                      </div>
+                      <samp th:text="${#temporals.format(comment.datetime, 'dd-MM-yyyy HH:mm')}"></samp>
                     </div>
-                    <div class="post-comment">
-                      <img src="/images/users/user-4.jpg" alt="" class="profile-photo-sm">
-                      <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
+
+
+                    <form class="post-comment" th:action="@{/users/profile/comment/{postId}(postId=${post.id})}"
+                          method="post">
                       <img src="/images/users/user-1.jpg" alt="" class="profile-photo-sm">
-                      <input type="text" class="form-control" placeholder="Post a comment">
-                    </div>
+                      <input type="text" class="form-control" name="commentaryText"
+                             placeholder="Post a comment">
+                    </form>
                   </div>
                 </div>
               </div>
