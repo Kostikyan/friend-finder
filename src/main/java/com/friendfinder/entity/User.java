@@ -41,11 +41,4 @@ public class User {
     @Column(name = "personal_information")
     private String personalInformation;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_friends",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "friend_id"))
-    private List<User> friends;
-
 }
