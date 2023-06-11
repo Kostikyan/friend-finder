@@ -1,10 +1,17 @@
 package com.friendfinder.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Table(name = "commentary")
 public class Comment {
     @Id
@@ -16,5 +23,9 @@ public class Comment {
 
     @ManyToOne
     private Post post;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime datetime;
+
     private String commentaryText;
 }
