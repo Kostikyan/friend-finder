@@ -40,4 +40,24 @@ public class FriendRequestServiceImpl implements FriendRequestService {
         return bySenderIdAndReceiverId.orElse(null);
     }
 
+    @Override
+    public void delete(FriendRequest friendRequest) {
+        friendRequestRepository.delete(friendRequest);
+    }
+
+    @Override
+    public List<User> findFriendsByUserId(int userId) {
+        List<FriendRequest> all = friendRequestRepository.findAll();
+        List<User> result = new ArrayList<>();
+        for (FriendRequest friendRequest : all) {
+            if (friendRequest.getSender().getId() == userId && friendRequest.getStatus() == FriendStatus.ACCEPTED) {
+                result.add(friendRequest.getReceiver());
+            }
+            if (friendRequest.getReceiver().getId() == userId && friendRequest.getStatus() == FriendStatus.ACCEPTED) {
+                result.add(friendRequest.getSender());
+            }
+        }
+        return result;
+    }
+
 }

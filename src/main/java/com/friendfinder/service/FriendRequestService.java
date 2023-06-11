@@ -11,4 +11,10 @@ public interface FriendRequestService {
     List<User> findSenderByReceiverId(int receiverId);
 
     FriendRequest findBySenderIdAndReceiverId(int senderId, int receiverId);
+
+    void delete(FriendRequest friendRequest);
+
+    List<User> findFriendsByUserId(int userId);
+
+
 }
