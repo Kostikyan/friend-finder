@@ -2,10 +2,13 @@ package com.friendfinder.controller;
 
 import com.friendfinder.entity.Post;
 import com.friendfinder.entity.PostLike;
+import com.friendfinder.entity.User;
 import com.friendfinder.entity.types.LikeStatus;
 import com.friendfinder.security.CurrentUser;
+import com.friendfinder.service.FriendRequestService;
 import com.friendfinder.service.LikeAndDislikeService;
 import com.friendfinder.service.PostService;
+import com.friendfinder.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -14,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,6 +27,8 @@ public class PostController {
 
     private final PostService postService;
     private final LikeAndDislikeService likeAndDislikeService;
+    private final UserService userService;
+    private final FriendRequestService friendRequestService;
 
     @GetMapping()
     public String postAddPage(ModelMap modelMap,
@@ -40,12 +46,24 @@ public class PostController {
         int totalPages = page.getTotalPages();
 
         List<Post> content = page.getContent();
+        List<User> users = userService.userFindAll();
+        List<User> userForAddFriend = new ArrayList<>();
+        for (User user : users) {
+            if (friendRequestService.findBySenderIdAndReceiverId(user.getId(), currentUser.getUser().getId()) == null &&
+                    user.getId() != currentUser.getUser().getId() && friendRequestService.findBySenderIdAndReceiverId(currentUser.getUser().getId(),
+                    user.getId()) == null) {
+                userForAddFriend.add(user);
+            }
+        }
+        List<User> requestSenders = friendRequestService.findSenderByReceiverId(currentUser.getUser().getId());
 
         modelMap.addAttribute("currentPage", currentPage);
         modelMap.addAttribute("totalItems", totalItems);
         modelMap.addAttribute("totalPages", totalPages);
         modelMap.addAttribute("posts", content);
         modelMap.addAttribute("user", currentUser.getUser());
+        modelMap.addAttribute("users", userForAddFriend);
+        modelMap.addAttribute("requestSenders", requestSenders);
         return "newsfeed";
     }
 
@@ -66,10 +84,11 @@ public class PostController {
         likeAndDislikeService.saveReaction(postLike, currentUser, post);
         return "redirect:/posts";
     }
+
     @PostMapping("/reaction/dislike/{postId}")
     public String addDislike(@ModelAttribute PostLike postLike,
-                          @AuthenticationPrincipal CurrentUser currentUser,
-                          @PathVariable(name = "postId") Post post) {
+                             @AuthenticationPrincipal CurrentUser currentUser,
+                             @PathVariable(name = "postId") Post post) {
         postLike.setLikeStatus(LikeStatus.DISLIKE);
         likeAndDislikeService.saveReaction(postLike, currentUser, post);
         return "redirect:/posts";
