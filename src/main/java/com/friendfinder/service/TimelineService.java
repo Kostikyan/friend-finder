@@ -2,6 +2,7 @@ package com.friendfinder.service;
 
 import com.friendfinder.entity.Country;
 import com.friendfinder.entity.User;
+import com.friendfinder.entity.UserImage;
 import com.friendfinder.security.CurrentUser;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,7 +15,7 @@ public interface TimelineService {
 
     void updateUser(@ModelAttribute User user, @AuthenticationPrincipal CurrentUser currentUser);
 
-    void updateUserProfilePic(MultipartFile profilePic, CurrentUser currentUser);
+    void updateUserProfilePic(MultipartFile profilePic, CurrentUser currentUser, UserImage userImage);
 
     void updateUserProfileBackgroundPic(MultipartFile bgPic, CurrentUser currentUser);
 }

@@ -38,7 +38,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href=""><img src="/images/logo.png" alt="logo"></a>
+            <a class="navbar-brand" href="/posts"><img src="/images/logo.png" alt="logo"></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -60,35 +60,24 @@
           <div class="timeline-nav-bar hidden-sm hidden-xs">
             <form action="/timeline/change-profile-bg-pic" method="post" enctype="multipart/form-data" id="profile-bg-form">
               <input type="file" name="profile-bg-pic" style="display: none" id="profile-bg-picture">
-              <a href="#" onclick="document.getElementById('profile-bg-picture').click()"> <img th:if="${user.getProfileBackgroundPic() == null || user.getProfileBackgroundPic().equalsIgnoreCase('null')}" src="/images/covers/1.jpg" alt="" > </a>
-              <a href="#" onclick="document.getElementById('profile-bg-picture').click()"> <img th:if="${user.getProfileBackgroundPic() != null}" th:src="@{/getBgProfilePic(imageName=${user.getProfileBackgroundPic()})}" width="1030" alt="" id="profile-bg-pic"  > </a>
+              <img th:if="${user.getProfileBackgroundPic() == null || user.getProfileBackgroundPic().equalsIgnoreCase('null')}" src="/images/covers/1.jpg" alt="" >
+              <img th:if="${user.getProfileBackgroundPic() != null}" th:src="@{/getBgProfilePic(imageName=${user.getProfileBackgroundPic()})}" width="1030" alt="" id="profile-bg-pic"  >
             </form>
-            <script>
-              document.getElementById('profile-bg-picture').addEventListener('change', function() {
-                document.getElementById('profile-bg-form').submit();
-              });
-            </script>
             <div class="row">
               <div class="col-md-3">
                 <form action="/timeline/change-profile-pic" method="post" enctype="multipart/form-data" id="profile-form">
                     <input type="file" name="profile-pic" style="display: none" id="profile-pic">
                   <div class="profile-info" th:if="${user.getProfilePicture() == null || user.getProfilePicture().equalsIgnoreCase('null')}" >
-                    <a href="#" onclick="document.getElementById('profile-pic').click()"><img alt="" class="img-responsive profile-photo" src="/images/post-images/difault.png"> </a>
+                    <img alt="" class="img-responsive profile-photo" src="/images/post-images/difault.png">
 
                     <h3><i th:text="${user.name}"></i>  <i th:text="${user.surname}"></i></h3>
                   </div>
                   <div class="profile-info" th:if="${user.getProfilePicture() != null}">
-                    <a href="#" onclick="document.getElementById('profile-pic').click()"><img alt="" class="img-responsive profile-photo" th:src="@{/getProfilePic(imageName=${user.getProfilePicture()})}"> </a>
+                    <img alt="" class="img-responsive profile-photo" th:src="@{/getProfilePic(imageName=${user.getProfilePicture()})}">
 
                     <h3><i th:text="${user.name}"></i>  <i th:text="${user.surname}"></i></h3>
                   </div>
                 </form>
-                  <script>
-                      document.getElementById('profile-pic').addEventListener('change', function() {
-                          document.getElementById('profile-form').submit();
-                      });
-                  </script>
-
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
@@ -137,37 +126,11 @@
 
               <!-- Post Create Box
               ================================================= -->
-              <div class="create-post">
-                <form action="/users/profile/add" method="post" enctype="multipart/form-data">
-                  <input type="file" name="image" style="display: none" id="upload-image">
-                  <input type="file" name="video" style="display: none" id="upload-video">
-                  <div class="row">
-                    <div class="col-md-7 col-sm-7">
-                      <div class="form-group" th:if="${user.profilePicture == null || user.profilePicture.equalsIgnoreCase('null')}">
-                        <img  src="/images/post-images/difault.png" alt="" class="profile-photo-md">
-                        <textarea name="description"  cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
-                      </div>
-                      <div class="form-group" th:if="${user.profilePicture != null}">
-                        <img  th:src="@{/getProfilePic(imageName=${user.getProfilePicture()})}" alt="" class="profile-photo-md">
-                        <textarea name="description"  cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
-                      </div>
-                    </div>
-                    <div class="col-md-5 col-sm-5">
-                      <div class="tools">
-                        <ul class="publishing-tools list-inline">
-                          <li><a href="#" onclick="document.getElementById('upload-image').click()"><i class="ion-images"></i></a></li>
-                          <li><a href="#" onclick="document.getElementById('upload-video').click()"><i class="ion-ios-videocam"></i></a></li>
-                        </ul>
-                        <button class="btn btn-primary pull-right" type="submit">Publish</button>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div><!-- Post Create Box End-->
+              <div class="line-divider"></div><br><br>
 
               <!-- Post Content
               ================================================= -->
-              <div class="post-content" th:each="post : ${users}">
+              <div class="post-content" th:each="post : ${userPage}">
 
                 <!--Post Date-->
                 <div class="post-date hidden-xs hidden-sm">
@@ -182,22 +145,22 @@
                 <div  class="post-container">
                   <img th:if="${user.profilePicture == null || user.profilePicture.equalsIgnoreCase('null')}"
                        src="/images/post-images/difault.png" alt="user" class="profile-photo-md pull-left">
-                  <img th:if="${user.profilePicture != null}" th:src="@{/getProfilePic(imageName=${post.user.getProfilePicture()})}"
+                  <img th:if="${user.profilePicture != null}" th:src="@{/getProfilePic(imageName=${user.getProfilePicture()})}"
                        alt="user" class="profile-photo-md pull-left">
                   <div class="post-detail">
                     <div class="user-info">
-                      <h5 th:text="${post.user.name}"><a href="/posts" class="profile-link"></a> <span class="following">following</span></h5>
-                      <h6 class="text-muted" th:text="${post.user.surname}"></h6>
+                      <h5 th:text="${user.name}"><a href="/posts" class="profile-link"></a> <span class="following">following</span></h5>
+                      <h6 class="text-muted" th:text="${user.surname}"></h6>
                     </div>
                     <div class="reaction">
-                      <form class="btn text-green" th:action="@{/users/profile/reaction/like/{postId}(postId=${post.id})}"
+                      <form class="btn text-green" th:action="@{/users/profile/page/reaction/like/{postId}(postId=${post.id})}"
                             method="post" id="like">
                         <i class="icon ion-thumbsup" onclick="$(this).parent()[0].submit()"
                            href="#" th:text="${post.likeCount}">
                         </i>
                       </form>
 
-                      <form class="btn text-red" th:action="@{/users/profile/reaction/dislike/{postId}(postId=${post.id})}"
+                      <form class="btn text-red" th:action="@{/users/profile/page/reaction/dislike/{postId}(postId=${post.id})}"
                             method="post" id="dislike">
                         <i class="fa fa-thumbs-down" onclick="$(this).parent()[0].submit()"
                            href="#" th:text="${post.dislikeCount}">
@@ -223,7 +186,7 @@
                     </div>
 
 
-                    <form class="post-comment" th:action="@{/users/profile/comment/{postId}(postId=${post.id})}"
+                    <form class="post-comment" th:action="@{/users/profile/page/comment/{postId}(postId=${post.id})}"
                           method="post">
                       <img src="/images/users/user-1.jpg" alt="" class="profile-photo-sm">
                       <input type="text" class="form-control" name="commentaryText"
