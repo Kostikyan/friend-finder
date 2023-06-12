@@ -2,10 +2,12 @@ package com.friendfinder.service.impl;
 
 import com.friendfinder.entity.Country;
 import com.friendfinder.entity.User;
+import com.friendfinder.entity.UserImage;
 import com.friendfinder.repository.CountryRepository;
 import com.friendfinder.repository.UserRepository;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.TimelineService;
+import com.friendfinder.service.UserImageService;
 import com.friendfinder.util.ImageUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +22,7 @@ public class TimelineServiceImpl implements TimelineService {
 
     private final CountryRepository countryRepository;
     private final UserRepository userRepository;
+    private final UserImageService userImageService;
 
     @Value("${user.profile.picture.path}")
     private String userProfilePicPath;
@@ -48,10 +51,11 @@ public class TimelineServiceImpl implements TimelineService {
     }
 
     @Override
-    public void updateUserProfilePic(MultipartFile profilePic, CurrentUser currentUser) {
+    public void updateUserProfilePic(MultipartFile profilePic, CurrentUser currentUser, UserImage userImage) {
         User user = currentUser.getUser();
         user.setProfilePicture(ImageUtil.uploadImage(profilePic, userProfilePicPath));
         userRepository.save(user);
+        userImageService.userImageSave(userImage, currentUser);
     }
 
     @Override

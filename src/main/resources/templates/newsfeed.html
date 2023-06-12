@@ -181,17 +181,18 @@
                         </video>
                     </div>
                     <div class="post-container">
-                        <img th:if="${user.profilePicture == null || user.profilePicture.equalsIgnoreCase('null')}"
+                        <img th:if="${post.user.profilePicture == null || post.user.profilePicture.equalsIgnoreCase('null')}"
                              src="/images/post-images/difault.png" alt="user" class="profile-photo-md pull-left">
-                        <img th:if="${user.profilePicture != null}"
-                             th:src="@{/getProfilePic(imageName=${post.getUser().getProfilePicture()})}" alt="user"
+
+                        <img th:if="${post.user.profilePicture != null}"
+                             th:src="@{/getProfilePic(imageName=${post.user.getProfilePicture()})}" alt="user"
+
                              class="profile-photo-md pull-left">
                         <div class="post-detail">
                             <div class="user-info">
-                                <h5 th:text="${post.user.name}"><a href="/posts/add" class="profile-link"></a> <span
-                                        class="following">following</span></h5>
-                                <h6 class="text-muted" th:text="${post.user.surname}"></h6>
-                            </div>
+                                <h5><a th:href="@{'/users/profile/page/' + ${post.user.id}}" class="profile-link">
+                                    <i th:text="${post.user.name}"></i> <i th:text="${post.user.surname}"></i></a></h5>
+                            </div><br>
                             <div class="reaction">
                                 <form class="btn text-green"
                                       th:action="@{posts/reaction/like/{postId}(postId=${post.id})}"
@@ -218,9 +219,9 @@
                                     <img th:if="${comment.user.profilePicture == null || comment.user.profilePicture.equalsIgnoreCase('null')}"
                                          src="/images/post-images/difault.png" alt="" class="profile-photo-sm">
                                     <img th:if="${comment.user.profilePicture != null}"
-                                         th:src="@{/getImage(imageName=${comment.user.profilePicture})}" alt=""
+                                         th:src="@{/getProfilePic(imageName=${comment.user.profilePicture})}" alt=""
                                          class="profile-photo-sm">
-                                    <p><a href="timeline.html" class="profile-link" th:text="${comment.user.name}"> </a> <i
+                                    <p><a th:href="@{'/users/profile/page/' + ${comment.user.id}}" class="profile-link" th:text="${comment.user.name}"> </a> <i
                                             th:text="${comment.commentaryText}"></i><br></p>
                                 </div>
                                 <samp th:text="${#temporals.format(comment.datetime, 'dd-MM-yyyy HH:mm')}"></samp>

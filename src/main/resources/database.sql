@@ -358,11 +358,21 @@ create table `friend_finder`.`commentary`
     `user_id`         int(11)   not null,
     `post_id`         int(11)   not null,
     `commentary_text` text(500) not null,
-    `datetime` datetime not null,
+    `datetime`        datetime  not null,
 
     constraint `user_commentary__fk` foreign key (`user_id`) references user (`id`),
     constraint `commentary_post__fk` foreign key (`post_id`) references post (`id`)
 );
+
+
+create table `friend_finder`.`user_image`
+(
+    `id`         int(11)      not null auto_increment primary key,
+    `image_name` varchar(255) not null,
+    `user_id`    int(11)      not null,
+    constraint `user_user_image__fk` foreign key (`user_id`) references user (`id`)
+);
+
 
 
 create table `friend_finder`.`friend_request`

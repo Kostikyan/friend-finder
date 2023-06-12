@@ -1,11 +1,13 @@
 package com.friendfinder.service.impl;
 
 import com.friendfinder.entity.Post;
-import com.friendfinder.repository.CommentRepository;
+import com.friendfinder.entity.User;
 import com.friendfinder.repository.PostRepository;
+import com.friendfinder.repository.UserRepository;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.PostService;
 import com.friendfinder.util.ImageUtil;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -17,13 +19,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
-    private final CommentRepository commentRepository;
+    private final UserRepository userRepository;
 
     @Value("${post.upload.image.path}")
     private String postImageUploadPath;
@@ -52,7 +55,13 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> postUserById(int id) {
-        return postRepository.findPostByUser_id(id);
+        Optional<User> byId = userRepository.findById(id);
+        if (byId.isPresent()){
+            User user = byId.get();
+           return postRepository.findByUserId(user.getId());
+        }
+        return null;
+
     }
 
     @Override
