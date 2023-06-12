@@ -6,6 +6,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -39,7 +40,5 @@ public class User {
 
     @Column(name = "personal_information")
     private String personalInformation;
-
-
 
 }

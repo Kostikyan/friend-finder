@@ -377,21 +377,13 @@ create table `friend_finder`.`user_image`
 
 create table `friend_finder`.`friend_request`
 (
+    `id` int(11) not null auto_increment primary key,
     `sender_id`   int(11) not null,
     `receiver_id` int(11) not null,
     `status`      enum ('PENDING', 'ACCEPTED', 'REJECTED'),
 
     constraint `friend_request_sender__fk` foreign key (`sender_id`) references user (`id`),
     constraint `friend_request_receiver__fk` foreign key (`receiver_id`) references user (`id`)
-);
-create table `friend_finder`.`user_friends`
-(
-    `user_id`   int(11) not null,
-    `friend_id` int(11) not null,
-    primary key (user_id, friend_id),
-
-    constraint `user__fk` foreign key (`user_id`) references user (`id`),
-    constraint `friends__fk` foreign key (`friend_id`) references user (`id`)
 );
 
 
