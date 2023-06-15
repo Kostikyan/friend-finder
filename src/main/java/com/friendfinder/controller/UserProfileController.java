@@ -47,6 +47,14 @@ public class UserProfileController {
         return "redirect:/users/profile/" + currentUser.getUser().getId();
     }
 
+    @GetMapping("/delete")
+    public String deletePostById(@RequestParam("id") int id,
+                                 @AuthenticationPrincipal CurrentUser currentUser) {
+        postService.deletePostId(id, currentUser);
+        return "redirect:/users/profile/" + currentUser.getUser().getId();
+
+    }
+
     @PostMapping("/reaction/like/{postId}")
     public String addLike(@ModelAttribute PostLike postLike,
                           @AuthenticationPrincipal CurrentUser currentUser,
@@ -72,5 +80,11 @@ public class UserProfileController {
                              @PathVariable("postId") Post post) {
         commentService.addComment(comment, currentUser, post);
         return "redirect:/users/profile/page/" + post.getUser().getId();
+    }
+
+    @GetMapping("/comment/delete")
+    public String removeComment(@RequestParam("id") int id, @AuthenticationPrincipal CurrentUser currentUser) {
+        commentService.deleteComment(id);
+        return "redirect:/users/profile/" +currentUser.getUser().getId();
     }
 }
