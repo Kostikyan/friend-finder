@@ -25,6 +25,7 @@ public class Comment {
     private Post post;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @Column(name = "date_time")
     private LocalDateTime datetime;
 
     private String commentaryText;

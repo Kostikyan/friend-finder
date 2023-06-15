@@ -423,4 +423,13 @@
     <changeSet id="dropTestTable" author="hhakobyan">
         <dropTable tableName="test"/>
     </changeSet>
+    <changeSet id="addDateTimeInCommentaryTable" author="hhakobyan">
+        <addColumn tableName="commentary">
+            <column afterColumn="id"
+                    name="date_time"
+                    type="datetime">
+                <constraints nullable="false" />
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
