@@ -14,12 +14,13 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/users/profile/page")
+@RequestMapping("/users/profile")
 public class UserProfileController {
 
     private final PostService postService;
@@ -27,15 +28,24 @@ public class UserProfileController {
     private final LikeAndDislikeService likeAndDislikeService;
 
     @GetMapping("/{userId}")
-    public String getUserId(@PathVariable("userId") User user, ModelMap modelMap) {
+    public String getUserId(@PathVariable("userId") User user, ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
         List<Post> attributeValue = postService.postUserById(user.getId());
         List<Comment> comments = commentService.commentList();
         modelMap.addAttribute("userPage", attributeValue);
         modelMap.addAttribute("user", user);
+        modelMap.addAttribute("profile", currentUser.getUser());
         modelMap.addAttribute("comments", comments);
-        return "userProfile";
+        return "timeline";
     }
 
+    @PostMapping("/add")
+    public String postAdd(@ModelAttribute Post post,
+                          @AuthenticationPrincipal CurrentUser currentUser,
+                          @RequestParam("image") MultipartFile image,
+                          @RequestParam("video") MultipartFile video) {
+        postService.postSave(post, currentUser, image, video);
+        return "redirect:/users/profile/" + currentUser.getUser().getId();
+    }
 
     @PostMapping("/reaction/like/{postId}")
     public String addLike(@ModelAttribute PostLike postLike,

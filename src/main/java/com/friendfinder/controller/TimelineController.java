@@ -46,12 +46,12 @@ public class TimelineController {
     public String changeProfilePic(@RequestParam("profile-pic") MultipartFile profilePic,
                                    @AuthenticationPrincipal CurrentUser currentUser, @ModelAttribute UserImage userImage) {
         timelineService.updateUserProfilePic(profilePic, currentUser, userImage);
-        return "redirect:/users/profile";
+        return "redirect:/users/profile/" + currentUser.getUser().getId();
     }
 
     @PostMapping("/change-profile-bg-pic")
     public String changeProfileBackgroundPic(@RequestParam("profile-bg-pic") MultipartFile bgPic, @AuthenticationPrincipal CurrentUser currentUser) {
         timelineService.updateUserProfileBackgroundPic(bgPic, currentUser);
-        return "redirect:/users/profile";
+        return "redirect:/users/profile/"+ currentUser.getUser().getId();
     }
 }
