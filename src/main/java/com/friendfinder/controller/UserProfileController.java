@@ -28,7 +28,8 @@ public class UserProfileController {
     private final LikeAndDislikeService likeAndDislikeService;
 
     @GetMapping("/{userId}")
-    public String getUserId(@PathVariable("userId") User user, ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
+    public String getUserId(@PathVariable("userId") User user, ModelMap modelMap,
+                            @AuthenticationPrincipal CurrentUser currentUser) {
         List<Post> attributeValue = postService.postUserById(user.getId());
         List<Comment> comments = commentService.commentList();
         modelMap.addAttribute("userPage", attributeValue);
