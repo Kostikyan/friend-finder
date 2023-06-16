@@ -119,7 +119,7 @@
                   	<div class="card-info">
                       <img th:src="@{/getProfilePic(imageName=${friend.getProfilePicture()})}" alt="user" class="profile-photo-lg">
                       <div class="friend-info">
-                      	<h5><a href="timeline.html" class="profile-link" th:text="${friend.name}+' '+${friend.surname}"></a></h5>
+                      	<h5><a th:href="@{'/users/profile/' + ${friend.id}}" class="profile-link" th:text="${friend.name}+' '+${friend.surname}"></a></h5>
                       	<p th:text="'from ' + ${friend.city}" ></p>
                       </div>
                     </div>

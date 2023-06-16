@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/users/about/profile")
 @RequiredArgsConstructor
 public class AboutController {
     private final WorkExperiencesService workExperiencesService;
@@ -28,19 +28,17 @@ public class AboutController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
-    @GetMapping("/about")
-    public String workExperiences(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser != null) {
-            User user = currentUser.getUser();
-            List<WorkExperiences> workExperiencesList = workExperiencesService.findAllByUserId(user.getId());
-            List<Interest> interestList = interestsService.findAllByUserId(user.getId());
-            List<Language> languageList = languageService.findAllByUserId(user.getId());
+    @GetMapping("/{userId}")
+    public String workExperiences(@PathVariable("userId") User user, ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
+        List<WorkExperiences> workExperiencesList = workExperiencesService.findAllByUserId(user.getId());
+        List<Interest> interestList = interestsService.findAllByUserId(user.getId());
+        List<Language> languageList = languageService.findAllByUserId(user.getId());
 
-            modelMap.addAttribute("workExperiences", workExperiencesList);
-            modelMap.addAttribute("interests", interestList);
-            modelMap.addAttribute("user", user);
-            modelMap.addAttribute("languages", languageList);
-        }
+        modelMap.addAttribute("workExperiences", workExperiencesList);
+        modelMap.addAttribute("interests", interestList);
+        modelMap.addAttribute("profile", currentUser.getUser());
+        modelMap.addAttribute("user", user);
+        modelMap.addAttribute("languages", languageList);
         return "timeline-about";
     }
 
@@ -64,9 +62,9 @@ public class AboutController {
                 return "redirect:/posts";
             }
             modelMap.addAttribute("massage", "Password is not confirmed.");
-            return "redirect:/user/changePassword";
+            return "redirect:/users/about/profile/changePassword";
         }
         modelMap.addAttribute("massage", "Incorrect password");
-        return "redirect:/user/changePassword";
+        return "redirect:/users/about/profile/changePassword";
     }
 }
