@@ -1,12 +1,11 @@
 package com.friendfinder.controller;
 
-import com.friendfinder.entity.Comment;
-import com.friendfinder.entity.Post;
-import com.friendfinder.entity.PostLike;
-import com.friendfinder.entity.User;
+import com.friendfinder.entity.*;
+import com.friendfinder.entity.types.FriendStatus;
 import com.friendfinder.entity.types.LikeStatus;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.CommentService;
+import com.friendfinder.service.FriendRequestService;
 import com.friendfinder.service.LikeAndDislikeService;
 import com.friendfinder.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +25,7 @@ public class UserProfileController {
     private final PostService postService;
     private final CommentService commentService;
     private final LikeAndDislikeService likeAndDislikeService;
+    private final FriendRequestService friendRequestService;
 
     @GetMapping("/{userId}")
     public String getUserId(@PathVariable("userId") User user, ModelMap modelMap,
@@ -46,6 +46,17 @@ public class UserProfileController {
                           @RequestParam("video") MultipartFile video) {
         postService.postSave(post, currentUser, image, video);
         return "redirect:/users/profile/" + currentUser.getUser().getId();
+    }
+
+    @GetMapping("/sendRequest")
+    public String sendRequest(@RequestParam("sender") User sender,
+                              @RequestParam("receiver") User receiver) {
+        friendRequestService.save(FriendRequest.builder()
+                .sender(sender)
+                .receiver(receiver)
+                .status(FriendStatus.PENDING)
+                .build());
+        return "redirect:/users/profile/" + receiver.getId();
     }
 
     @GetMapping("/delete")

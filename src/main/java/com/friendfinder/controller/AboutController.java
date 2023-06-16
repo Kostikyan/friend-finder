@@ -1,14 +1,9 @@
 package com.friendfinder.controller;
 
-import com.friendfinder.entity.Interest;
-import com.friendfinder.entity.Language;
-import com.friendfinder.entity.User;
-import com.friendfinder.entity.WorkExperiences;
+import com.friendfinder.entity.*;
+import com.friendfinder.entity.types.FriendStatus;
 import com.friendfinder.security.CurrentUser;
-import com.friendfinder.service.InterestsService;
-import com.friendfinder.service.LanguageService;
-import com.friendfinder.service.UserService;
-import com.friendfinder.service.WorkExperiencesService;
+import com.friendfinder.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,6 +22,7 @@ public class AboutController {
     private final LanguageService languageService;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private final FriendRequestService friendRequestService;
 
     @GetMapping("/{userId}")
     public String workExperiences(@PathVariable("userId") User user, ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
@@ -40,6 +36,17 @@ public class AboutController {
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("languages", languageList);
         return "timeline-about";
+    }
+
+    @GetMapping("/sendRequest")
+    public String sendRequest(@RequestParam("sender") User sender,
+                              @RequestParam("receiver") User receiver) {
+        friendRequestService.save(FriendRequest.builder()
+                .sender(sender)
+                .receiver(receiver)
+                .status(FriendStatus.PENDING)
+                .build());
+        return "redirect:/users/about/profile/" + receiver.getId();
     }
 
     @GetMapping("/changePassword")

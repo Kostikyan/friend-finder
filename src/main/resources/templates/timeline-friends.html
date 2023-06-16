@@ -116,7 +116,7 @@
                 <ul class="follow-me list-inline">
                   <li>1,299 people following her</li>
                   <li th:if="${profile.id != user.id}">
-                    <a th:href="@{'/sendRequest?sender=' + ${profile.id} + '&receiver=' +${user.id}}">
+                    <a th:href="@{'/users/friend/profile/sendRequest?sender=' + ${profile.id} + '&receiver=' +${user.id}}">
                     <button class="btn-primary" >Add Friend</button>
                   </a></li>
                 </ul>
@@ -164,7 +164,7 @@
                         <img th:if="${friend.getProfilePicture() != null}"
                              th:src="@{/getProfilePic(imageName=${friend.getProfilePicture()})}" alt="user" class="profile-photo-lg">
                         <div class="friend-info">
-                          <a href="#" class="pull-right text-green">My Friend</a>
+                          <p class="pull-right text-green" style="color: #4cae4c">My Friend</p>
                           <h5><a th:href="@{'/users/profile/' + ${friend.id}}" class="profile-link" th:text="${friend.name} + ' ' + ${friend.surname}"></a></h5>
                           <p th:text="${friend.country.name} + ', ' + ${friend.city}"></p>
                         </div>
