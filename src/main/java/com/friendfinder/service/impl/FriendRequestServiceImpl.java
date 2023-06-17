@@ -19,7 +19,9 @@ public class FriendRequestServiceImpl implements FriendRequestService {
 
     @Override
     public void save(FriendRequest friendRequest) {
-        friendRequestRepository.save(friendRequest);
+        if (findBySenderIdAndReceiverId(friendRequest.getSender().getId(), friendRequest.getReceiver().getId()) == null
+                && findBySenderIdAndReceiverId(friendRequest.getReceiver().getId(), friendRequest.getSender().getId()) == null)
+            friendRequestRepository.save(friendRequest);
     }
 
     @Override
