@@ -1,12 +1,11 @@
 package com.friendfinder.controller;
 
+
 import com.friendfinder.entity.FriendRequest;
 import com.friendfinder.entity.User;
-import com.friendfinder.entity.UserImage;
 import com.friendfinder.entity.types.FriendStatus;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.FriendRequestService;
-import com.friendfinder.service.UserImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -16,26 +15,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/users/image/profile")
-public class UserImageProfileController {
+@RequestMapping("/users/friend/profile")
+public class UserFriendProfileController {
 
-
-    private final UserImageService userImageService;
     private final FriendRequestService friendRequestService;
 
     @GetMapping("/{userId}")
-    public String getUserId(@PathVariable("userId") User user, ModelMap modelMap,
-                            @AuthenticationPrincipal CurrentUser currentUser) {
-        List<UserImage> userImageById = userImageService.getUserImageById(user.getId());
-        modelMap.addAttribute("userPage", userImageById);
+    public String friendsPage(@PathVariable("userId") User user, ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
+        modelMap.addAttribute("friends", friendRequestService.findFriendsByUserId(currentUser.getUser().getId()));
         modelMap.addAttribute("profile", currentUser.getUser());
         modelMap.addAttribute("user", user);
-        return "timeline-album";
+        return "timeline-friends";
     }
+
 
     @GetMapping("/sendRequest")
     public String sendRequest(@RequestParam("sender") User sender,
@@ -45,6 +39,6 @@ public class UserImageProfileController {
                 .receiver(receiver)
                 .status(FriendStatus.PENDING)
                 .build());
-        return "redirect:/users/image/profile/" + receiver.getId();
+        return "redirect:/users/friend/profile/" + receiver.getId();
     }
 }

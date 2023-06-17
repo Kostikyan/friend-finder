@@ -58,9 +58,17 @@
           <!--Timeline Menu for Large Screens-->
           <div class="timeline-nav-bar hidden-sm hidden-xs">
             <form action="/timeline/change-profile-bg-pic" method="post" enctype="multipart/form-data" id="profile-bg-form">
-              <input type="file" name="profile-bg-pic" style="display: none" id="profile-bg-picture">
-              <a href="#" onclick="document.getElementById('profile-bg-picture').click()"> <img th:if="${user.getProfileBackgroundPic() == null || user.getProfileBackgroundPic().equalsIgnoreCase('null')}" src="/images/covers/1.jpg" alt="" > </a>
-              <a href="#" onclick="document.getElementById('profile-bg-picture').click()"> <img th:if="${user.getProfileBackgroundPic() != null}" th:src="@{/getBgProfilePic(imageName=${user.getProfileBackgroundPic()})}" width="1030" alt="" id="profile-bg-pic"  > </a>
+              <div th:if="${profile.id == user.id}">
+                <input type="file" name="profile-bg-pic" style="display: none" id="profile-bg-picture">
+                <a href="#" onclick="document.getElementById('profile-bg-picture').click()">
+                  <img th:if="${user.getProfileBackgroundPic() == null || user.getProfileBackgroundPic().equalsIgnoreCase('null')}" src="/images/covers/1.jpg" alt="" > </a>
+                <a href="#" onclick="document.getElementById('profile-bg-picture').click()">
+                  <img th:if="${user.getProfileBackgroundPic() != null}" th:src="@{/getBgProfilePic(imageName=${user.getProfileBackgroundPic()})}" width="1030" alt="" id="profile-bg-pic"  > </a>
+              </div>
+              <div th:if="${profile.id != user.id}">
+                <a> <img th:if="${user.getProfileBackgroundPic() == null || user.getProfileBackgroundPic().equalsIgnoreCase('null')}" src="/images/covers/1.jpg" alt="" > </a>
+                <a> <img th:if="${user.getProfileBackgroundPic() != null}" th:src="@{/getBgProfilePic(imageName=${user.getProfileBackgroundPic()})}" width="1030" alt=""  > </a>
+              </div>
             </form>
             <script>
               document.getElementById('profile-bg-picture').addEventListener('change', function() {
@@ -71,15 +79,27 @@
               <div class="col-md-3">
                 <form action="/timeline/change-profile-pic" method="post" enctype="multipart/form-data" id="profile-form">
                   <input type="file" name="profile-pic" style="display: none" id="profile-pic">
-                  <div class="profile-info" th:if="${user.getProfilePicture() == null || user.getProfilePicture().equalsIgnoreCase('null')}" >
-                    <a href="#" onclick="document.getElementById('profile-pic').click()"><img alt="" class="img-responsive profile-photo" src="/images/post-images/difault.png"> </a>
+                  <div th:if="${profile.id == user.id}">
+                    <div class="profile-info" th:if="${user.getProfilePicture() == null || user.getProfilePicture().equalsIgnoreCase('null')}" >
+                      <a  href="#" onclick="document.getElementById('profile-pic').click()"><img alt="" class="img-responsive profile-photo" src="/images/post-images/difault.png"> </a>
 
-                    <h3><i th:text="${user.name}"></i>  <i th:text="${user.surname}"></i></h3>
+                      <h3><i th:text="${user.name}"></i>  <i th:text="${user.surname}"></i></h3>
+                    </div>
+                    <div class="profile-info" th:if="${user.getProfilePicture() != null}">
+                      <a href="#" onclick="document.getElementById('profile-pic').click()"><img alt="" class="img-responsive profile-photo" th:src="@{/getProfilePic(imageName=${user.getProfilePicture()})}"> </a>
+
+                      <h3><i th:text="${user.name}"></i>  <i th:text="${user.surname}"></i></h3>
+                    </div>
                   </div>
-                  <div class="profile-info" th:if="${user.getProfilePicture() != null}">
-                    <a href="#" onclick="document.getElementById('profile-pic').click()"><img alt="" class="img-responsive profile-photo" th:src="@{/getProfilePic(imageName=${user.getProfilePicture()})}"> </a>
-
-                    <h3><i th:text="${user.name}"></i>  <i th:text="${user.surname}"></i></h3>
+                  <div th:if="${profile.id != user.id}">
+                    <div class="profile-info" th:if="${user.getProfilePicture() == null || user.getProfilePicture().equalsIgnoreCase('null')}" >
+                      <a><img alt="" class="img-responsive profile-photo" src="/images/post-images/difault.png"> </a>
+                      <h3><i th:text="${user.name}"></i>  <i th:text="${user.surname}"></i></h3>
+                    </div>
+                    <div class="profile-info" th:if="${user.getProfilePicture() != null}">
+                      <a><img alt="" class="img-responsive profile-photo" th:src="@{/getProfilePic(imageName=${user.getProfilePicture()})}"> </a>
+                      <h3><i th:text="${user.name}"></i>  <i th:text="${user.surname}"></i></h3>
+                    </div>
                   </div>
                 </form>
                 <script>
@@ -91,14 +111,17 @@
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
-                  <li><a href="/users/profile" >Timeline</a></li>
-                  <li><a href="/user/about" class="active">About</a></li>
-                  <li><a href="/users/profile/album" >Album</a></li>
-                  <li><a href="timeline-friends.html">Friends</a></li>
+                  <li><a th:href="@{'/users/profile/' + ${user.id}}" >Timeline</a></li>
+                  <li><a th:href="@{'/user/about/profile' + ${user.id}}" class="active">About</a></li>
+                  <li><a th:href="@{'/users/image/profile/' + ${user.id}}" >Album</a></li>
+                  <li><a th:href="@{'/users/friend/profile/' + ${user.id}}">Friends</a></li>
                 </ul>
                 <ul class="follow-me list-inline">
                   <li>1,299 people following her</li>
-                  <li><button class="btn-primary">Add Friend</button></li>
+                  <li th:if="${profile.id != user.id}">
+                    <a th:href="@{'/users/about/profile/sendRequest?sender=' + ${profile.id} + '&receiver=' +${user.id}}">
+                    <button class="btn-primary" >Add Friend</button>
+                  </a></li>
                 </ul>
               </div>
             </div>

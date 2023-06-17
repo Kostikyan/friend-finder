@@ -109,14 +109,17 @@
           </div>
           <div class="col-md-9">
             <ul class="list-inline profile-menu">
-              <li><a href="/posts/add" class="active">Timeline</a></li>
-              <li><a href="/user/about">About</a></li>
-              <li><a href="/users/profile/album">Album</a></li>
-              <li><a href="timeline-friends.html">Friends</a></li>
+              <li><a th:href="@{'/users/profile/' + ${user.id}}" class="active">Timeline</a></li>
+              <li><a th:href="@{'/users/about/profile/' + ${user.id}}">About</a></li>
+              <li><a th:href="@{'/users/image/profile/' + ${user.id}}">Album</a></li>
+              <li><a th:href="@{'/users/friend/profile/' + ${user.id}}">Friends</a></li>
             </ul>
             <ul class="follow-me list-inline">
               <li>1,299 people following her</li>
-              <li><button class="btn-primary" >Add Friend</button></li>
+              <li th:if="${profile.id != user.id}">
+                <a th:href="@{'/users/profile/sendRequest?sender=' + ${profile.id} + '&receiver=' +${user.id}}">
+                <button class="btn-primary" >Add Friend</button>
+              </a></li>
             </ul>
           </div>
         </div>
@@ -138,8 +141,8 @@
         <div class="mobile-menu">
           <ul class="list-inline">
             <li><a th:href="@{'/users/profile/' + ${user.id}}" class="active">Timeline</a></li>
-            <li><a href="/user/about">About</a></li>
-            <li><a th:href="@{'/users/image/profile/page/' + ${user.id}}">Album</a></li>
+            <li><a th:href="@{'/users/about/profile/' + ${user.id}}">About</a></li>
+            <li><a th:href="@{'/users/image/profile/' + ${user.id}}">Album</a></li>
             <li><a href="timeline-friends.html">Friends</a></li>
           </ul>
           <button class="btn-primary">Add Friend</button>

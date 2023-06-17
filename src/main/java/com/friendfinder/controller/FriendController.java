@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class FriendController {
     private final FriendRequestService friendRequestService;
 
-    @GetMapping("friendsPage")
+    @GetMapping("/friendsPage")
     public String friendsPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser){
         modelMap.addAttribute("friends",friendRequestService.findFriendsByUserId(currentUser.getUser().getId()));
         return "newsfeed-friends";

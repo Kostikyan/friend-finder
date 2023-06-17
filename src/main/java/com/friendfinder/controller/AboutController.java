@@ -1,14 +1,9 @@
 package com.friendfinder.controller;
 
-import com.friendfinder.entity.Interest;
-import com.friendfinder.entity.Language;
-import com.friendfinder.entity.User;
-import com.friendfinder.entity.WorkExperiences;
+import com.friendfinder.entity.*;
+import com.friendfinder.entity.types.FriendStatus;
 import com.friendfinder.security.CurrentUser;
-import com.friendfinder.service.InterestsService;
-import com.friendfinder.service.LanguageService;
-import com.friendfinder.service.UserService;
-import com.friendfinder.service.WorkExperiencesService;
+import com.friendfinder.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/users/about/profile")
 @RequiredArgsConstructor
 public class AboutController {
     private final WorkExperiencesService workExperiencesService;
@@ -27,21 +22,31 @@ public class AboutController {
     private final LanguageService languageService;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private final FriendRequestService friendRequestService;
 
-    @GetMapping("/about")
-    public String workExperiences(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser != null) {
-            User user = currentUser.getUser();
-            List<WorkExperiences> workExperiencesList = workExperiencesService.findAllByUserId(user.getId());
-            List<Interest> interestList = interestsService.findAllByUserId(user.getId());
-            List<Language> languageList = languageService.findAllByUserId(user.getId());
+    @GetMapping("/{userId}")
+    public String workExperiences(@PathVariable("userId") User user, ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
+        List<WorkExperiences> workExperiencesList = workExperiencesService.findAllByUserId(user.getId());
+        List<Interest> interestList = interestsService.findAllByUserId(user.getId());
+        List<Language> languageList = languageService.findAllByUserId(user.getId());
 
-            modelMap.addAttribute("workExperiences", workExperiencesList);
-            modelMap.addAttribute("interests", interestList);
-            modelMap.addAttribute("user", user);
-            modelMap.addAttribute("languages", languageList);
-        }
+        modelMap.addAttribute("workExperiences", workExperiencesList);
+        modelMap.addAttribute("interests", interestList);
+        modelMap.addAttribute("profile", currentUser.getUser());
+        modelMap.addAttribute("user", user);
+        modelMap.addAttribute("languages", languageList);
         return "timeline-about";
+    }
+
+    @GetMapping("/sendRequest")
+    public String sendRequest(@RequestParam("sender") User sender,
+                              @RequestParam("receiver") User receiver) {
+        friendRequestService.save(FriendRequest.builder()
+                .sender(sender)
+                .receiver(receiver)
+                .status(FriendStatus.PENDING)
+                .build());
+        return "redirect:/users/about/profile/" + receiver.getId();
     }
 
     @GetMapping("/changePassword")
@@ -64,9 +69,9 @@ public class AboutController {
                 return "redirect:/posts";
             }
             modelMap.addAttribute("massage", "Password is not confirmed.");
-            return "redirect:/user/changePassword";
+            return "redirect:/users/about/profile/changePassword";
         }
         modelMap.addAttribute("massage", "Incorrect password");
-        return "redirect:/user/changePassword";
+        return "redirect:/users/about/profile/changePassword";
     }
 }
