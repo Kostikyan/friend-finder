@@ -43,6 +43,12 @@ public class PostServiceImpl implements PostService {
 
 
     @Override
+    public List<Post> postsAll(){
+        return postRepository.findAll();
+    }
+
+
+    @Override
     public void postSave(Post post, CurrentUser currentUser, MultipartFile image, MultipartFile video) {
         postRepository.save(Post.builder()
                 .imgName(ImageUtil.uploadImage(image, postImageUploadPath))
