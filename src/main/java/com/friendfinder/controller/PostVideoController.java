@@ -1,6 +1,9 @@
 package com.friendfinder.controller;
 
-import com.friendfinder.entity.*;
+import com.friendfinder.entity.Comment;
+import com.friendfinder.entity.Post;
+import com.friendfinder.entity.PostLike;
+import com.friendfinder.entity.User;
 import com.friendfinder.entity.types.LikeStatus;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.CommentService;
@@ -16,8 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/posts/images")
-public class PostImageController {
+@RequestMapping("/posts/video")
+public class PostVideoController {
 
     private final PostService postService;
     private final CommentService commentService;
@@ -31,7 +34,7 @@ public class PostImageController {
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("profile", currentUser.getUser());
         modelMap.addAttribute("comments", commentService.commentList());
-        return "newsfeed-images";
+        return "newsfeed-videos";
     }
 
     @PostMapping("/create")
@@ -40,7 +43,7 @@ public class PostImageController {
                           @RequestParam("image") MultipartFile image,
                           @RequestParam("video") MultipartFile video) {
         postService.postSave(post, currentUser, image, video);
-        return "redirect:/posts/images/" + currentUser.getUser().getId();
+        return "redirect:/posts/video/" + currentUser.getUser().getId();
     }
 
     @PostMapping("/reaction/like/{postId}")
@@ -49,7 +52,7 @@ public class PostImageController {
                           @PathVariable(name = "postId") Post post) {
         postLike.setLikeStatus(LikeStatus.LIKE);
         likeAndDislikeService.saveReaction(postLike, currentUser, post);
-        return "redirect:/posts/images/" + currentUser.getUser().getId();
+        return "redirect:/posts/video/" + currentUser.getUser().getId();
     }
 
     @PostMapping("/reaction/dislike/{postId}")
@@ -58,7 +61,7 @@ public class PostImageController {
                              @PathVariable(name = "postId") Post post) {
         postLike.setLikeStatus(LikeStatus.DISLIKE);
         likeAndDislikeService.saveReaction(postLike, currentUser, post);
-        return "redirect:/posts/images/" + currentUser.getUser().getId();
+        return "redirect:/posts/video/" + currentUser.getUser().getId();
     }
 
     @PostMapping("/comment/{postId}")
@@ -66,6 +69,6 @@ public class PostImageController {
                              @AuthenticationPrincipal CurrentUser currentUser,
                              @PathVariable("postId") Post post) {
         commentService.addComment(comment, currentUser, post);
-        return "redirect:/posts/images/" + currentUser.getUser().getId();
+        return "redirect:/posts/video/" + currentUser.getUser().getId();
     }
 }
