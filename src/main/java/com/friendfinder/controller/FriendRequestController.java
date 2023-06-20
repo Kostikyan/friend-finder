@@ -29,8 +29,7 @@ public class FriendRequestController {
     public String accessRequest(@RequestParam("sender") User sender,
                                 @RequestParam("receiver") User receiver) {
         FriendRequest bySenderIdAndReceiverId = friendRequestService.findBySenderIdAndReceiverId(sender.getId(), receiver.getId());
-        bySenderIdAndReceiverId.setStatus(FriendStatus.ACCEPTED);
-        friendRequestService.save(bySenderIdAndReceiverId);
+        friendRequestService.changeStatus(bySenderIdAndReceiverId);
         return "redirect:/posts";
     }
     @GetMapping("rejectRequest")

@@ -62,4 +62,10 @@ public class FriendRequestServiceImpl implements FriendRequestService {
         return result;
     }
 
+    @Override
+    public void changeStatus(FriendRequest friendRequest) {
+        friendRequest.setStatus(FriendStatus.ACCEPTED);
+        friendRequestRepository.save(friendRequest);
+    }
+
 }

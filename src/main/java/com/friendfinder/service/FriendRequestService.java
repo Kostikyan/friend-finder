@@ -16,5 +16,5 @@ public interface FriendRequestService {
 
     List<User> findFriendsByUserId(int userId);
 
-
+    void changeStatus(FriendRequest friendRequest);
 }
