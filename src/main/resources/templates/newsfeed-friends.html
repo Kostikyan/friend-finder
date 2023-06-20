@@ -115,13 +115,19 @@
             	<div class="row">
             		<div class="col-md-6 col-sm-6" th:each="friend : ${friends}">
                   <div class="friend-card">
-                  	<img th:src="@{/getBgProfilePic(imageName=${friend.getProfilePicture()})}" alt="profile-cover" class="img-responsive cover">
+                      <img th:if="${friend.getProfileBackgroundPic() == null || friend.getProfileBackgroundPic().equalsIgnoreCase('null')}"
+                           src="/images/covers/1.jpg" alt="profile-cover" class="img-responsive cover">
+                      <img th:if="${friend.getProfileBackgroundPic() != null}"
+                           th:src="@{/getBgProfilePic(imageName=${friend.getProfileBackgroundPic()})}"  alt="profile-cover" class="img-responsive cover">
                   	<div class="card-info">
-                      <img th:src="@{/getProfilePic(imageName=${friend.getProfilePicture()})}" alt="user" class="profile-photo-lg">
+                        <img th:if="${friend.getProfilePicture() == null || friend.getProfilePicture().equalsIgnoreCase('null')}"
+                             src="/images/post-images/difault.png" alt="user" class="profile-photo-lg">
+                        <img th:if="${friend.getProfilePicture() != null}"
+                             th:src="@{/getProfilePic(imageName=${friend.getProfilePicture()})}" alt="user" class="profile-photo-lg">
                       <div class="friend-info">
                           <a th:href="@{'/delete?sender=' + ${user.id} + '&receiver=' +${friend.id}}" class="pull-right text-green">delete from friend list</a>
                       	<h5><a th:href="@{'/users/profile/' + ${friend.id}}" class="profile-link" th:text="${friend.name}+' '+${friend.surname}"></a></h5>
-                      	<p th:text="${friend.city}" ></p>
+                      	<p th:text="${friend.country.name} + ', ' + ${friend.city}"></p>
                       </div>
                     </div>
                   </div>
