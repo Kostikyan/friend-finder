@@ -1,13 +1,16 @@
 package com.friendfinder.service.impl;
 
+import com.friendfinder.entity.FriendRequest;
 import com.friendfinder.entity.Post;
 import com.friendfinder.entity.User;
+import com.friendfinder.entity.types.FriendStatus;
+import com.friendfinder.repository.FriendRequestRepository;
 import com.friendfinder.repository.PostRepository;
 import com.friendfinder.repository.UserRepository;
 import com.friendfinder.security.CurrentUser;
+import com.friendfinder.service.FriendRequestService;
 import com.friendfinder.service.PostService;
 import com.friendfinder.util.ImageUtil;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -17,6 +20,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +31,7 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private final FriendRequestService friendRequestService;
 
     @Value("${post.upload.image.path}")
     private String postImageUploadPath;
@@ -41,7 +46,6 @@ public class PostServiceImpl implements PostService {
         return postRepository.findAll(pageable);
     }
 
-
     @Override
     public void postSave(Post post, CurrentUser currentUser, MultipartFile image, MultipartFile video) {
         postRepository.save(Post.builder()
@@ -54,11 +58,28 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<Post> getAllPostFriends(CurrentUser currentUser) {
+        List<User> friendsByUserId = friendRequestService.findFriendsByUserId(currentUser.getUser().getId());
+        List<Integer> friendsIds = friendsByUserId
+                .stream()
+                .map(User::getId)
+                .toList();
+
+        List<Post> postList = new ArrayList<>();
+        for (Integer friendsId : friendsIds) {
+            postList.addAll(postRepository.findByUserId(friendsId));
+        }
+
+        return postList;
+    }
+
+
+    @Override
     public List<Post> postUserById(int id) {
         Optional<User> byId = userRepository.findById(id);
-        if (byId.isPresent()){
+        if (byId.isPresent()) {
             User user = byId.get();
-           return postRepository.findByUserId(user.getId());
+            return postRepository.findByUserId(user.getId());
         }
         return null;
 

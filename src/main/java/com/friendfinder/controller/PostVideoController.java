@@ -5,7 +5,6 @@ import com.friendfinder.entity.types.FriendStatus;
 import com.friendfinder.entity.types.LikeStatus;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.CommentService;
-import com.friendfinder.service.FriendRequestService;
 import com.friendfinder.service.LikeAndDislikeService;
 import com.friendfinder.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -15,56 +14,34 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/users/profile")
-public class UserProfileController {
+@RequestMapping("/posts/video")
+public class PostVideoController {
 
     private final PostService postService;
     private final CommentService commentService;
     private final LikeAndDislikeService likeAndDislikeService;
-    private final FriendRequestService friendRequestService;
+
 
     @GetMapping("/{userId}")
     public String getUserId(@PathVariable("userId") User user, ModelMap modelMap,
                             @AuthenticationPrincipal CurrentUser currentUser) {
-        List<Post> attributeValue = postService.postUserById(user.getId());
-        List<Comment> comments = commentService.commentList();
-        modelMap.addAttribute("userPage", attributeValue);
+        modelMap.addAttribute("userPage", postService.getAllPostFriends(currentUser));
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("profile", currentUser.getUser());
-        modelMap.addAttribute("comments", comments);
-        return "timeline";
+        modelMap.addAttribute("comments", commentService.commentList());
+        return "newsfeed-videos";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/create")
     public String postAdd(@ModelAttribute Post post,
                           @AuthenticationPrincipal CurrentUser currentUser,
                           @RequestParam("image") MultipartFile image,
                           @RequestParam("video") MultipartFile video) {
         postService.postSave(post, currentUser, image, video);
-        return "redirect:/users/profile/" + currentUser.getUser().getId();
-    }
-
-    @GetMapping("/sendRequest")
-    public String sendRequest(@RequestParam("sender") User sender,
-                              @RequestParam("receiver") User receiver) {
-        friendRequestService.save(FriendRequest.builder()
-                .sender(sender)
-                .receiver(receiver)
-                .status(FriendStatus.PENDING)
-                .build());
-        return "redirect:/users/profile/" + receiver.getId();
-    }
-
-    @GetMapping("/delete")
-    public String deletePostById(@RequestParam("id") int id,
-                                 @AuthenticationPrincipal CurrentUser currentUser) {
-        postService.deletePostId(id, currentUser);
-        return "redirect:/users/profile/" + currentUser.getUser().getId();
-
+        return "redirect:/posts/video/" + currentUser.getUser().getId();
     }
 
     @PostMapping("/reaction/like/{postId}")
@@ -73,7 +50,7 @@ public class UserProfileController {
                           @PathVariable(name = "postId") Post post) {
         postLike.setLikeStatus(LikeStatus.LIKE);
         likeAndDislikeService.saveReaction(postLike, currentUser, post);
-        return "redirect:/users/profile/" + post.getUser().getId();
+        return "redirect:/posts/video/" + currentUser.getUser().getId();
     }
 
     @PostMapping("/reaction/dislike/{postId}")
@@ -82,21 +59,14 @@ public class UserProfileController {
                              @PathVariable(name = "postId") Post post) {
         postLike.setLikeStatus(LikeStatus.DISLIKE);
         likeAndDislikeService.saveReaction(postLike, currentUser, post);
-        return "redirect:/users/profile/" + post.getUser().getId();
+        return "redirect:/posts/video/" + currentUser.getUser().getId();
     }
-
 
     @PostMapping("/comment/{postId}")
     public String addComment(@ModelAttribute Comment comment,
                              @AuthenticationPrincipal CurrentUser currentUser,
                              @PathVariable("postId") Post post) {
         commentService.addComment(comment, currentUser, post);
-        return "redirect:/users/profile/page/" + post.getUser().getId();
-    }
-
-    @GetMapping("/comment/delete")
-    public String removeComment(@RequestParam("id") int id, @AuthenticationPrincipal CurrentUser currentUser) {
-        commentService.deleteComment(id);
-        return "redirect:/users/profile/" +currentUser.getUser().getId();
+        return "redirect:/posts/video/" + currentUser.getUser().getId();
     }
 }

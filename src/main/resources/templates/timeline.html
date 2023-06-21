@@ -211,14 +211,14 @@
                   <h6 class="text-muted" th:text="${user.surname}"></h6>
                 </div>
                 <div class="reaction">
-                  <form class="btn text-green" th:action="@{/users/profile/page/reaction/like/{postId}(postId=${post.id})}"
+                  <form class="btn text-green" th:action="@{/users/profile/reaction/like/{postId}(postId=${post.id})}"
                         method="post" id="like">
                     <i class="icon ion-thumbsup" onclick="$(this).parent()[0].submit()"
                        href="#" th:text="${post.likeCount}">
                     </i>
                   </form>
 
-                  <form class="btn text-red" th:action="@{/users/profile/page/reaction/dislike/{postId}(postId=${post.id})}"
+                  <form class="btn text-red" th:action="@{/users/profile/reaction/dislike/{postId}(postId=${post.id})}"
                         method="post" id="dislike">
                     <i class="fa fa-thumbs-down" onclick="$(this).parent()[0].submit()"
                        href="#" th:text="${post.dislikeCount}">
@@ -246,9 +246,16 @@
 
                 <form class="post-comment" th:action="@{/users/profile/page/comment/{postId}(postId=${post.id})}"
                       method="post">
-                  <img src="/images/users/user-1.jpg" alt="" class="profile-photo-sm">
-                  <input type="text" class="form-control" name="commentaryText"
-                         placeholder="Post a comment">
+                  <form class="post-comment" th:action="@{/posts/comment/{postId}(postId=${post.id})}"
+                        method="post">
+                    <img th:if="${user.profilePicture == null || user.profilePicture.equalsIgnoreCase('null')}"
+                         src="/images/post-images/difault.png" alt="" class="profile-photo-sm">
+                    <img th:if="${user.profilePicture != null}"
+                         th:src="@{/getProfilePic(imageName=${user.profilePicture})}" alt=""
+                         class="profile-photo-sm">
+                    <input type="text" class="form-control" name="commentaryText"
+                           placeholder="Post a comment">
+                  </form>
                 </form>
               </div>
             </div>
