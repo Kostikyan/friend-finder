@@ -3,6 +3,7 @@ package com.friendfinder.entity;
 import com.friendfinder.entity.types.UserGender;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -40,5 +41,4 @@ public class User {
 
     @Column(name = "personal_information")
     private String personalInformation;
-
 }

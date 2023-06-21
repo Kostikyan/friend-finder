@@ -145,7 +145,7 @@
             <div class="media">
             	<div class="row js-masonry" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": ".grid-sizer", "percentPosition": true }'>
                 <div class="grid-sizer col-md-6 col-sm-6"></div>
-                <div class="grid-item col-md-6 col-sm-6" th:each="post : ${userPage}">
+                <div class="grid-item col-md-6 col-sm-6" th:each="post : ${userPage}" >
             			<div class="media-grid" th:if="${post.imgName != null}">
                     <div class="img-wrapper" data-toggle="modal"
                          th:data-target="'.' + ${#strings.replace(post.imgName, '.','')}">

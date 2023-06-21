@@ -1,6 +1,7 @@
 package com.friendfinder.controller;
 
 import com.friendfinder.entity.*;
+import com.friendfinder.entity.types.FriendStatus;
 import com.friendfinder.entity.types.LikeStatus;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.CommentService;
@@ -27,7 +28,7 @@ public class PostImageController {
     @GetMapping("/{userId}")
     public String getUserId(@PathVariable("userId") User user, ModelMap modelMap,
                             @AuthenticationPrincipal CurrentUser currentUser) {
-        modelMap.addAttribute("userPage", postService.postUserById(user.getId()));
+        modelMap.addAttribute("userPage", postService.getAllPostFriends(currentUser));
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("profile", currentUser.getUser());
         modelMap.addAttribute("comments", commentService.commentList());

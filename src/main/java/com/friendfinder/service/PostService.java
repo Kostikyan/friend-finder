@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface PostService {
 
@@ -19,5 +18,5 @@ public interface PostService {
     void deletePostId(int id, CurrentUser currentUser);
 
 
-    List<Post> getAllPostFriends(int userId);
+    List<Post> getAllPostFriends(CurrentUser currentUser);
 }

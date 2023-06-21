@@ -24,7 +24,7 @@ public class UserFriendProfileController {
 
     @GetMapping("/{userId}")
     public String friendsPage(@PathVariable("userId") User user, ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        modelMap.addAttribute("friends", friendRequestService.findFriendsByUserId(currentUser.getUser().getId()));
+        modelMap.addAttribute("friends", friendRequestService.findFriendsByUserId(user.getId()));
         modelMap.addAttribute("profile", currentUser.getUser());
         modelMap.addAttribute("user", user);
         return "timeline-friends";
