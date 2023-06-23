@@ -41,4 +41,8 @@ public class User {
 
     @Column(name = "personal_information")
     private String personalInformation;
+
+    private boolean enabled;
+
+    private String token;
 }

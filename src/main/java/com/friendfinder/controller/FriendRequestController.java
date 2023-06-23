@@ -4,6 +4,7 @@ import com.friendfinder.entity.FriendRequest;
 import com.friendfinder.entity.User;
 import com.friendfinder.entity.types.FriendStatus;
 import com.friendfinder.service.FriendRequestService;
+import com.friendfinder.service.impl.MailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class FriendRequestController {
     private final FriendRequestService friendRequestService;
+    private final MailService mailService;
 
     @GetMapping("/sendRequest")
     public String sendRequest(@RequestParam("sender") User sender,
@@ -22,6 +24,8 @@ public class FriendRequestController {
                 .receiver(receiver)
                 .status(FriendStatus.PENDING)
                 .build());
+        mailService.sendMail(receiver.getEmail(), "You have a new friend request", "Hi, " + receiver.getName() +
+                ". You have an friend request from " + sender.getName() + " " + sender.getSurname());
         return "redirect:/posts";
     }
 
@@ -30,8 +34,11 @@ public class FriendRequestController {
                                 @RequestParam("receiver") User receiver) {
         FriendRequest bySenderIdAndReceiverId = friendRequestService.findBySenderIdAndReceiverId(sender.getId(), receiver.getId());
         friendRequestService.changeStatus(bySenderIdAndReceiverId);
+        mailService.sendMail(sender.getEmail(), "Your friend request is accepted", "Hi, " + sender.getName() +
+                ". " + receiver.getName() + " accepted your request.");
         return "redirect:/posts";
     }
+
     @GetMapping("rejectRequest")
     public String rejectRequest(@RequestParam("sender") User sender,
                                 @RequestParam("receiver") User receiver) {

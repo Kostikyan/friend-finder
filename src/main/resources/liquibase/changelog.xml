@@ -446,4 +446,21 @@
             </column>
         </dropColumn>
     </changeSet>
+    <changeSet id="addColumnUserEnabled" author="hhakobyan">
+        <addColumn tableName="user">
+            <column name="enabled"
+            type="boolean"
+            defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="addColumnUserToken" author="hhakobyan">
+        <addColumn tableName="user">
+            <column name="token"
+            type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
