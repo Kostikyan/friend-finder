@@ -37,7 +37,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html"><img src="/images/logo.png" alt="logo"></a>
+        <a class="navbar-brand" href="/posts"><img src="/images/logo.png" alt="logo"></a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -67,10 +67,10 @@
           </div>
           <div class="col-md-9">
             <ul class="list-inline profile-menu">
-              <li><a href="timeline.html">Timeline</a></li>
-              <li><a href="timeline-about.html" class="active">About</a></li>
-              <li><a href="timeline-album.html">Album</a></li>
-              <li><a href="timeline-friends.html">Friends</a></li>
+              <li><a th:href="@{'/users/profile/' + ${user.id}}" >Timeline</a></li>
+              <li><a th:href="@{'/users/about/profile/' + ${user.id}}" class="active">About</a></li>
+              <li><a th:href="@{'/users/image/profile/' + ${user.id}}">Album</a></li>
+              <li><a th:href="@{'/users/friend/profile/' + ${user.id}}">Friends</a></li>
             </ul>
             <ul class="follow-me list-inline">
               <li>1,299 people following her</li>
@@ -89,10 +89,10 @@
         </div>
         <div class="mobile-menu">
           <ul class="list-inline">
-            <li><a href="timeline.html">Timeline</a></li>
-            <li><a href="timeline-about.html" class="active">About</a></li>
-            <li><a href="timeline-album.html">Album</a></li>
-            <li><a href="timeline-friends.html">Friends</a></li>
+            <li><a th:href="@{'/users/profile/' + ${user.id}}" >Timeline</a></li>
+            <li><a th:href="@{'/users/about/profile/' + ${user.id}}" class="active">About</a></li>
+            <li><a th:href="@{'/users/image/profile/' + ${user.id}}">Album</a></li>
+            <li><a th:href="@{'/users/friend/profile/' + ${user.id}}">Friends</a></li>
           </ul>
           <button class="btn-primary">Add Friend</button>
         </div>
@@ -238,9 +238,6 @@
 <div id="spinner-wrapper">
   <div class="spinner"></div>
 </div>
-
-<!--Buy button-->
-<a href="/../cart/add_items.html?item_ids=18711273&ref=thunder-team" target="_blank" class="btn btn-buy"><span class="italy">Buy with:</span><img src="/images/envato_logo.png" alt=""><span class="price">Only $20!</span></a>
 
 <!-- Scripts
 ================================================= -->

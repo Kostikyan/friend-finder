@@ -16,10 +16,10 @@ public class NewsfeedController {
 
     private final UserServiceImpl userService;
 
-    @GetMapping("/people-nearby")
-    public String peopleNearbyPage(){
-        return "newsfeed-people-nearby";
-    }
+//    @GetMapping("/people-nearby")
+//    public String peopleNearbyPage(){
+//        return "newsfeed-people-nearby";
+//    }
     @GetMapping("/friends")
     public String friendsPage(){
         return "newsfeed-friends";

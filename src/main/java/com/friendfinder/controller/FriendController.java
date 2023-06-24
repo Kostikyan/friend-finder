@@ -17,11 +17,12 @@ public class FriendController {
     private final FriendRequestService friendRequestService;
 
     @GetMapping("/friends")
-    public String friendsPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser){
-        modelMap.addAttribute("friends",friendRequestService.findFriendsByUserId(currentUser.getUser().getId()));
-        modelMap.addAttribute("user",currentUser.getUser());
+    public String friendsPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
+        modelMap.addAttribute("friends", friendRequestService.findFriendsByUserId(currentUser.getUser().getId()));
+        modelMap.addAttribute("user", currentUser.getUser());
         return "newsfeed-friends";
     }
+
     @GetMapping("/delete")
     public String deleteFromFriends(@RequestParam("sender") User sender,
                                     @RequestParam("receiver") User receiver) {

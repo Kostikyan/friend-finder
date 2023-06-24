@@ -1,7 +1,9 @@
 package com.friendfinder.controller;
 
-import com.friendfinder.entity.*;
-import com.friendfinder.entity.types.FriendStatus;
+import com.friendfinder.entity.Comment;
+import com.friendfinder.entity.Post;
+import com.friendfinder.entity.PostLike;
+import com.friendfinder.entity.User;
 import com.friendfinder.entity.types.LikeStatus;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.CommentService;
@@ -12,7 +14,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
@@ -33,15 +34,6 @@ public class PostVideoController {
         modelMap.addAttribute("profile", currentUser.getUser());
         modelMap.addAttribute("comments", commentService.commentList());
         return "newsfeed-videos";
-    }
-
-    @PostMapping("/create")
-    public String postAdd(@ModelAttribute Post post,
-                          @AuthenticationPrincipal CurrentUser currentUser,
-                          @RequestParam("image") MultipartFile image,
-                          @RequestParam("video") MultipartFile video) {
-        postService.postSave(post, currentUser, image, video);
-        return "redirect:/posts/video/" + currentUser.getUser().getId();
     }
 
     @PostMapping("/reaction/like/{postId}")

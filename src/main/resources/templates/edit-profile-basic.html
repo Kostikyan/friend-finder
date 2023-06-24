@@ -34,7 +34,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html"><img src="/images/logo.png" alt="logo"></a>
+            <a class="navbar-brand" href="/posts"><img src="/images/logo.png" alt="logo"></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -87,10 +87,10 @@
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
-                  <li><a href="timeline.html">Timeline</a></li>
-                  <li><a href="timeline-about.html" class="active">About</a></li>
-                  <li><a href="timeline-album.html">Album</a></li>
-                  <li><a href="timeline-friends.html">Friends</a></li>
+                  <li><a th:href="@{'/users/profile/' + ${user.id}}" >Timeline</a></li>
+                  <li><a th:href="@{'/users/about/profile/' + ${user.id}}" class="active">About</a></li>
+                  <li><a th:href="@{'/users/image/profile/' + ${user.id}}">Album</a></li>
+                  <li><a th:href="@{'/users/friend/profile/' + ${user.id}}">Friends</a></li>
                 </ul>
                 <ul class="follow-me list-inline">
                   <li>1,299 people following her</li>
@@ -102,30 +102,30 @@
 
           <!--Timeline Menu for Small Screens-->
           <div class="navbar-mobile hidden-lg hidden-md">
-            <form action="/timeline/change-profile-pic" method="post" enctype="multipart/form-data" id="profile-form">
-              <input type="file" name="profile-pic" style="display: none" id="profile-pic">
+            <form action="/timeline/change-profile-pic" method="post" enctype="multipart/form-data" id="profile-formName">
+              <input type="file" name="profile-pic" style="display: none" id="profile-picName">
               <div class="profile-info" th:if="${user.getProfilePicture() == null || user.getProfilePicture().equalsIgnoreCase('null')}" >
-                <a href="#" onclick="document.getElementById('profile-pic').click()"><img alt="" class="img-responsive profile-photo" src="/images/post-images/difault.png"> </a>
+                <a href="#" onclick="document.getElementById('profile-picName').click()"><img alt="" class="img-responsive profile-photo" src="/images/post-images/difault.png"> </a>
 
                 <h3><i th:text="${user.name}"></i>  <i th:text="${user.surname}"></i></h3>
               </div>
               <div class="profile-info" th:if="${user.getProfilePicture() != null}">
-                <a href="#" onclick="document.getElementById('profile-pic').click()"><img alt="" class="img-responsive profile-photo" th:src="@{/getProfilePic(imageName=${user.getProfilePicture()})}"> </a>
+                <a href="#" onclick="document.getElementById('profile-picName').click()"><img alt="" class="img-responsive profile-photo" th:src="@{/getProfilePic(imageName=${user.getProfilePicture()})}"> </a>
 
                 <h3><i th:text="${user.name}"></i>  <i th:text="${user.surname}"></i></h3>
               </div>
             </form>
             <script>
-              document.getElementById('profile-pic').addEventListener('change', function() {
-                document.getElementById('profile-form').submit();
+              document.getElementById('profile-picName').addEventListener('change', function() {
+                document.getElementById('profile-formName').submit();
               });
             </script>
             <div class="mobile-menu">
               <ul class="list-inline">
-                <li><a href="/timeline">Timeline</a></li>
-                <li><a href="/user/about" class="active">About</a></li>
-                <li><a href="timeline-album.html">Album</a></li>
-                <li><a href="timeline-friends.html">Friends</a></li>
+                <li><a th:href="@{'/users/profile/' + ${user.id}}" >Timeline</a></li>
+                <li><a th:href="@{'/users/about/profile/' + ${user.id}}" class="active">About</a></li>
+                <li><a th:href="@{'/users/image/profile/' + ${user.id}}">Album</a></li>
+                <li><a th:href="@{'/users/friend/profile/' + ${user.id}}">Friends</a></li>
               </ul>
               <button class="btn-primary">Add Friend</button>
             </div>
@@ -257,9 +257,6 @@
     <div id="spinner-wrapper">
       <div class="spinner"></div>
     </div>
-    
-    <!--Buy button-->
-    <a href="../cart/add_items.html?item_ids=18711273&ref=thunder-team" target="_blank" class="btn btn-buy"><span class="italy">Buy with:</span><img src="images/envato_logo.png" alt=""><span class="price">Only $20!</span></a>
 
     <!-- Scripts
     ================================================= -->

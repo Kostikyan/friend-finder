@@ -28,11 +28,10 @@
                    aria-expanded="false">Newsfeed <span><img src="/images/down-arrow.png" alt=""></span></a>
                 <ul class="dropdown-menu newsfeed-home">
                     <li><a href="/posts">Newsfeed</a></li>
-                    <li><a href="/newsfeed/people-nearby">People Nearly</a></li>
-                    <li><a href="/newsfeed/friends">My friends</a></li>
+                    <li><a href="/friends">My friends</a></li>
                     <li><a href="/newsfeed/messages">Chatroom</a></li>
-                    <li><a href="/newsfeed/images">Images</a></li>
-                    <li><a href="/newsfeed/videos">Videos</a></li>
+                    <li><a th:href="@{'/posts/images/' + ${user.id}}">Images</a></li>
+                    <li><a th:href="@{'/posts/video/' + ${user.id}}">Videos</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -55,18 +54,16 @@
                    aria-expanded="false">All Pages <span><img src="/images/down-arrow.png" alt=""></span></a>
                 <ul class="dropdown-menu page-list">
                     <li><a href="/posts">Newsfeed</a></li>
-                    <li><a href="/newsfeed/people-nearby">People Nearly</a></li>
-                    <li><a href="/newsfeed/friends">My friends</a></li>
+                    <li><a href="/friends">My friends</a></li>
                     <li><a href="/newsfeed/messages">Chatroom</a></li>
-                    <li><a href="/newsfeed/images">Images</a></li>
-                    <li><a href="/newsfeed/videos">Videos</a></li>
+                    <li><a th:href="@{'/posts/images/' + ${user.id}}">Images</a></li>
+                    <li><a th:href="@{'/posts/video/' + ${user.id}}">Videos</a></li>
                     <li><a th:href="@{'/users/profile/' + ${user.id}}" >Timeline</a></li>
                     <li><a th:href="@{'/users/about/profile/' + ${user.id}}">Timeline About</a></li>
                     <li><a th:href="@{'/users/image/profile/' + ${user.id}}">Timeline Album</a></li>
                     <li><a th:href="@{'/users/friend/profile/' + ${user.id}}">Timeline Friends</a></li>
                     <li><a href="/timeline/edit-basic">Edit Profile</a></li>
                     <li><a href="/contact">Contact Us</a></li>
-                    <li><a href="/faq">FAQ Page</a></li>
                     <li><a href="/error404">404 Not Found</a></li>
                 </ul>
             </li>
