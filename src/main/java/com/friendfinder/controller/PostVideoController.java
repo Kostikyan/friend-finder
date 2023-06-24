@@ -6,9 +6,7 @@ import com.friendfinder.entity.PostLike;
 import com.friendfinder.entity.User;
 import com.friendfinder.entity.types.LikeStatus;
 import com.friendfinder.security.CurrentUser;
-import com.friendfinder.service.CommentService;
-import com.friendfinder.service.LikeAndDislikeService;
-import com.friendfinder.service.PostService;
+import com.friendfinder.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -22,8 +20,10 @@ import org.springframework.web.bind.annotation.*;
 public class PostVideoController {
 
     private final PostService postService;
+    private final UserService userService;
     private final CommentService commentService;
     private final LikeAndDislikeService likeAndDislikeService;
+    private final FriendRequestService friendRequestService;
 
 
     @GetMapping("/{userId}")
@@ -33,6 +33,8 @@ public class PostVideoController {
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("profile", currentUser.getUser());
         modelMap.addAttribute("comments", commentService.commentList());
+        modelMap.addAttribute("users", userService.userForAddFriend(currentUser));
+        modelMap.addAttribute("requestSenders", friendRequestService.findSenderByReceiverId(currentUser.getUser().getId()));
         return "newsfeed-videos";
     }
 

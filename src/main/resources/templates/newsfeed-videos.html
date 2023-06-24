@@ -38,7 +38,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html"><img src="/images/logo.png" alt="logo"></a>
+            <a class="navbar-brand" href="/posts"><img src="/images/logo.png" alt="logo"></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -91,36 +91,6 @@
 
             <!-- Post Create Box
             ================================================= -->
-            <div class="create-post">
-              <form action="/posts/create" method="post" enctype="multipart/form-data">
-                <input type="file" name="video" style="display: none" id="upload-video">
-                <div class="row">
-                  <div class="col-md-7 col-sm-7">
-                    <div class="form-group"
-                         th:if="${user.profilePicture == null || user.profilePicture.equalsIgnoreCase('null')}">
-                      <img src="/images/post-images/difault.png" alt="" class="profile-photo-md">
-                      <textarea name="description" cols="30" rows="1" class="form-control"
-                                placeholder="Write what you wish"></textarea>
-                    </div>
-                    <div class="form-group" th:if="${user.profilePicture != null}">
-                      <img th:src="@{/getProfilePic(imageName=${user.getProfilePicture()})}" alt=""
-                           class="profile-photo-md">
-                      <textarea name="description" cols="30" rows="1" class="form-control"
-                                placeholder="Write what you wish"></textarea>
-                    </div>
-                  </div>
-                  <div class="col-md-5 col-sm-5">
-                    <div class="tools">
-                      <ul class="publishing-tools list-inline">
-                        <li><a href="#" onclick="document.getElementById('upload-video').click()"><i
-                                class="ion-videos"></i></a></li>
-                      </ul>
-                      <button class="btn btn-primary pull-right" type="submit">Publish</button>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div><!-- Post Create Box End -->
 
             <!-- Media
             ================================================= -->
@@ -252,46 +222,40 @@
 
     			<!-- Newsfeed Common Side Bar Right
           ================================================= -->
-    			<div class="col-md-2 static">
-            <div class="suggestions" id="sticky-sidebar">
-              <h4 class="grey">Who to Follow</h4>
-              <div class="follow-user">
-                <img src="/images/users/user-11.jpg" alt="" class="profile-photo-sm pull-left">
-                <div>
-                  <h5><a href="timeline.html">Diana Amber</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
+              <div class="col-md-2 static">
+                <div class="suggestions" id="sticky-sidebar">
+                  <h4 class="grey">Who to Follow</h4>
+                  <div class="follow-user" th:each="us : ${users}">
+                    <img th:if="${us.getProfilePicture() == null || us.getProfilePicture().equalsIgnoreCase('null')}"
+                         src="/images/post-images/difault.png" alt="" class="profile-photo-sm pull-left">
+                    <img th:if="${us.getProfilePicture() != null}"
+                         th:src="@{/getProfilePic(imageName=${us.getProfilePicture()})}" alt="" class="profile-photo-sm pull-left">
+                    <div>
+                      <h5><a th:href="@{'/users/profile/' + ${us.id}}" th:text="${us.name}+' '+${us.surname}"></a></h5>
+                      <a th:href="@{'/sendRequest?sender=' + ${user.id} + '&receiver=' +${us.id}}"
+                         class="text-green">Add friend</a>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="follow-user">
-                <img src="/images/users/user-12.jpg" alt="" class="profile-photo-sm pull-left">
-                <div>
-                  <h5><a href="timeline.html">Cris Haris</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
+              <div class="col-md-2 static">
+                <div class="suggestions" id="sticky-sidebar1">
+                  <h4 class="grey" th:if="${requestSenders.size()>0}">Friend Requests</h4>
+                  <div class="follow-user" th:each="sender : ${requestSenders}">
+                    <img th:if="${sender.getProfilePicture() == null || sender.getProfilePicture().equalsIgnoreCase('null')}"
+                         src="/images/post-images/difault.png" alt="" class="profile-photo-sm pull-left">
+                    <img th:if="${sender.getProfilePicture() != null}"
+                         th:src="@{/getProfilePic(imageName=${sender.getProfilePicture()})}" alt="" class="profile-photo-sm pull-left">
+                    <div>
+                      <h5><a th:href="@{'/users/profile/' + ${sender.id}}" th:text="${sender.name}+' '+${sender.surname}"></a></h5>
+                      <a th:href="@{'/accessRequest?sender=' + ${sender.id} + '&receiver=' +${user.id}}"
+                         class="text-green">Accept</a>
+                      <a th:href="@{'/rejectRequest?sender=' + ${sender.id} + '&receiver=' +${user.id}}"
+                         class="text-green"> Reject</a>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="follow-user">
-                <img src="/images/users/user-13.jpg" alt="" class="profile-photo-sm pull-left">
-                <div>
-                  <h5><a href="timeline.html">Brian Walton</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="/images/users/user-14.jpg" alt="" class="profile-photo-sm pull-left">
-                <div>
-                  <h5><a href="timeline.html">Olivia Steward</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="/images/users/user-15.jpg" alt="" class="profile-photo-sm pull-left">
-                <div>
-                  <h5><a href="timeline.html">Sophia Page</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
-                </div>
-              </div>
-            </div>
-          </div>
     		</div>
     	</div>
     </div>
