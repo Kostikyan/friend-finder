@@ -103,19 +103,29 @@
                                 <li class="active" th:each="chat, iterStat : ${chats}" >
                                     <a th:href="${'#contact-' + chat.getAnotherUser().getId()}" data-toggle="tab">
                                         <div class="contact">
-                                            <img th:if="${chat.getAnotherUser().getProfilePicture() != null}"
+                                            <img th:if="${chat.getAnotherUser().getId() != user.getId() && chat.getAnotherUser().getProfilePicture() != null}"
                                                  th:src="@{/getProfilePic(imageName=${chat.getAnotherUser().getProfilePicture()})}"
                                                  alt="" class="profile-photo-sm pull-left">
-                                            <img th:if="${chat.getAnotherUser().getProfilePicture() == null
-                                            || chat.getAnotherUser().getProfilePicture().equalsIgnoreCase('null')}"
+                                            <img th:if="${chat.getAnotherUser().getId() != user.getId() && (chat.getAnotherUser().getProfilePicture() == null
+                                            || chat.getAnotherUser().getProfilePicture().equalsIgnoreCase('null'))}"
                                                  src="/images/users/difault.png" alt=""
                                                  class="profile-photo-sm pull-left">
+
+                                            <img th:if="${chat.getAnotherUser().getId() == user.getId() && chat.getCurrentUser().getProfilePicture() != null}"
+                                                 th:src="@{/getProfilePic(imageName=${chat.getCurrentUser().getProfilePicture()})}"
+                                                 alt="" class="profile-photo-sm pull-left">
+                                            <img th:if="${chat.getAnotherUser().getId() == user.getId() && (chat.getCurrentUser().getProfilePicture() == null
+                                            || chat.getCurrentUser().getProfilePicture().equalsIgnoreCase('null'))}"
+                                                 src="/images/users/difault.png" alt=""
+                                                 class="profile-photo-sm pull-left">
+
                                             <div class="msg-preview">
-                                                <h6 th:text="${chat.getAnotherUser().getName() + ' ' + chat.getAnotherUser().getSurname()}"></h6>
+                                                <h6 th:if="${chat.getAnotherUser().getId() != user.getId()}" th:text="${chat.getAnotherUser().getName() + ' ' + chat.getAnotherUser().getSurname()}"></h6>
+                                                <h6 th:if="${chat.getAnotherUser().getId() == user.getId()}" th:text="${chat.getCurrentUser().getName() + ' ' + chat.getCurrentUser().getSurname()}"></h6>
                                                 <p class="text-muted"></p>  <!-- TODO: new message -->
-                                                <small class="text-muted">a min ago</small>
+                                                <small class="text-muted">click there</small>
                                                 <!-- TODO: new message time -->
-                                                <div class="chat-alert">1</div> <!-- TODO: none read messages count-->
+
                                             </div>
                                         </div>
                                     </a>
@@ -127,15 +137,23 @@
 
                             <!--Chat Messages in Right-->
                             <div class="tab-content scrollbar-wrapper wrapper scrollbar-outer">
-                                <div class="tab-pane active" th:each="chat, iterStat : ${chats}" th:id="${'contact-' + chat.getAnotherUser().getId()}">
+                                <div class="tab-pane" th:each="chat, iterStat : ${chats}" th:id="${'contact-' + chat.getAnotherUser().getId()}">
                                     <input type="hidden" id="anotherUserId" th:value="${chat.getAnotherUser().getId()}">
                                     <div class="chat-body">
                                         <ul class="chat-message">
                                             <li th:each="message : ${chat.getMessages()}"
-                                                th:class="${message.isSentByCurrentUser(chat.getCurrentUser()) ? 'right' : 'left'}">
-                                                <img th:src="${message.getSender().getProfilePicture() != null
-                        ? '/getProfilePic(imageName=' + message.getSender().getProfilePicture() + ')'
-                        : '/images/users/difault.png'}" alt="" th:class="'profile-photo-sm pull-' + ${message.isSentByCurrentUser(chat.getCurrentUser()) ? 'right' : 'left'}">
+                                                th:class="${message.isSentByCurrentUser(user) ? 'right' : 'left'}">
+
+                                                <img th:if="${message.getSender().getProfilePicture() != null}"
+                                                     th:src="@{/getProfilePic(imageName=${message.getSender().getProfilePicture()})}"
+                                                     alt="" th:class="'profile-photo-sm pull-' + ${message.isSentByCurrentUser(user) ? 'right' : 'left'}">
+
+                                                <img th:if="${(message.getSender().getProfilePicture() == null
+                                            || message.getSender().getProfilePicture().equalsIgnoreCase('null'))}"
+                                                     src="/images/users/difault.png" alt=""
+                                                     th:class="'profile-photo-sm pull-' + ${message.isSentByCurrentUser(user) ? 'right' : 'left'}">
+
+
 
                                                 <div class="chat-item">
                                                     <div class="chat-item-header">
@@ -147,7 +165,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <form action="/newsfeed/send-message" method="post">
+                                    <form action="/newsfeed/send-message/{}" method="post">
                                         <div class="send-message">
                                             <div class="input-group">
                                                 <input type="text" class="form-control" name="content" placeholder="Type your message">
@@ -239,6 +257,17 @@
             // Добавляем класс 'active' только соответствующему элементу содержимого чата
             chatContentItems[index].classList.add('active');
         });
+    });
+
+    window.addEventListener('load', function() {
+        // Здесь вы можете указать индекс чата, который должен быть активным при загрузке страницы
+        var activeChatIndex = 0;
+
+        // Применяем класс 'active' к элементу списка контактов
+        contactListItems[activeChatIndex].classList.add('active');
+
+        // Применяем класс 'active' к содержимому чата
+        chatContentItems[activeChatIndex].classList.add('active');
     });
 </script>
 </body>
