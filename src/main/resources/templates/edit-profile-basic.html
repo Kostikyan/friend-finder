@@ -92,10 +92,6 @@
                   <li><a th:href="@{'/users/image/profile/' + ${user.id}}">Album</a></li>
                   <li><a th:href="@{'/users/friend/profile/' + ${user.id}}">Friends</a></li>
                 </ul>
-                <ul class="follow-me list-inline">
-                  <li>1,299 people following her</li>
-                  <li><button class="btn-primary">Add Friend</button></li>
-                </ul>
               </div>
             </div>
           </div><!--Timeline Menu for Large Screens End-->
@@ -127,7 +123,6 @@
                 <li><a th:href="@{'/users/image/profile/' + ${user.id}}">Album</a></li>
                 <li><a th:href="@{'/users/friend/profile/' + ${user.id}}">Friends</a></li>
               </ul>
-              <button class="btn-primary">Add Friend</button>
             </div>
           </div><!--Timeline Menu for Small Screens End-->
 
@@ -139,10 +134,10 @@
               <!--Edit Profile Menu-->
               <ul class="edit-menu">
               	<li class="active"><i class="icon ion-ios-information-outline"></i><a href="/timeline/edit-basic">Basic Information</a></li>
-              	<li><i class="icon ion-ios-briefcase-outline"></i><a href="/timeline/edit-work-edu">Education and Work</a></li>
-              	<li><i class="icon ion-ios-heart-outline"></i><a href="/timeline/edit-interests">My Interests</a></li>
+              	<li><i class="icon ion-ios-briefcase-outline"></i><a href="/profile/work-education">Education and Work</a></li>
+              	<li><i class="icon ion-ios-heart-outline"></i><a href="/interests">My Interests</a></li>
                 <li><i class="icon ion-ios-settings"></i><a href="/timeline/edit-settings">Account Settings</a></li>
-              	<li><i class="icon ion-ios-locked-outline"></i><a href="/timeline/change-password">Change Password</a></li>
+              	<li><i class="icon ion-ios-locked-outline"></i><a href="/users/about/profile/changePassword">Change Password</a></li>
               </ul>
             </div>
             <div class="col-md-7">
