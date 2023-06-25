@@ -19,5 +19,7 @@ public interface UserService {
 
     void save(User user);
 
+    Optional<User> findUserById(int id);
 
+    List<User> findAllExceptCurrentUser(int currentUserId);
 }

@@ -9,8 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -57,4 +59,16 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public Optional<User> findUserById(int id){
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public List<User> findAllExceptCurrentUser(int currentUserId){
+        return userRepository.findAll()
+                .stream()
+                .filter(user -> user.getId() != currentUserId)
+                .collect(Collectors.toList());
+    }
 }

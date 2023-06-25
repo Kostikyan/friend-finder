@@ -463,4 +463,29 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet id="message" author="VaheKostikyan">
+        <sql>
+            CREATE TABLE if not exists chat (
+                                                `id` INT PRIMARY KEY auto_increment,
+                                                `current_user_id` INT NOT NULL,
+                                                `another_user_id` INT NOT NULL,
+                                                FOREIGN KEY (current_user_id) REFERENCES `user`(id),
+                FOREIGN KEY (another_user_id) REFERENCES `user`(id)
+                );
+            create table if not exists messages(
+                `id` INT PRIMARY KEY auto_increment,
+                `sender_id` INT NOT NULL,
+                `receiver_id` INT NOT NULL,
+                `content` TEXT,
+                `sent_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                `chat_id` INT NOT NULL,
+
+                FOREIGN KEY (`chat_id`) REFERENCES `chat`(id),
+                FOREIGN KEY (`sender_id`) REFERENCES `user`(id),
+                FOREIGN KEY (`receiver_id`) REFERENCES `user`(id)
+            )
+
+        </sql>
+
+    </changeSet>
 </databaseChangeLog>
