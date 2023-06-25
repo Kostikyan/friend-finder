@@ -30,6 +30,11 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+    public List<Message> findAllByChatId(int id) {
+        return messageRepository.findAllByChatId(id);
+    }
+
+    @Override
     public void save(Message message) {
         messageRepository.save(message);
     }

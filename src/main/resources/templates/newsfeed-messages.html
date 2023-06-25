@@ -131,28 +131,18 @@
                                     <input type="hidden" id="anotherUserId" th:value="${chat.getAnotherUser().getId()}">
                                     <div class="chat-body">
                                         <ul class="chat-message">
-                                            <li class="right">
-                                                <img th:if="${chat.getCurrentUser().getProfilePicture() != null}"
-                                                     th:src="@{/getProfilePic(imageName=${chat.getCurrentUser().getProfilePicture()})}" alt="user"
-                                                     class="profile-photo-sm pull-right">
-                                                <img th:if="${chat.getCurrentUser().getProfilePicture() == null || chat.getCurrentUser().getProfilePicture().equalsIgnoreCase('null')}"
-                                                     src="/images/users/difault.png" alt="user" class="profile-photo-sm pull-right">
+                                            <li th:each="message : ${chat.getMessages()}"
+                                                th:class="${message.isSentByCurrentUser(chat.getCurrentUser()) ? 'right' : 'left'}">
+                                                <img th:src="${message.getSender().getProfilePicture() != null
+                        ? '/getProfilePic(imageName=' + message.getSender().getProfilePicture() + ')'
+                        : '/images/users/difault.png'}" alt="" th:class="'profile-photo-sm pull-' + ${message.isSentByCurrentUser(chat.getCurrentUser()) ? 'right' : 'left'}">
+
                                                 <div class="chat-item">
                                                     <div class="chat-item-header">
-                                                        <h5 th:text="${chat.getCurrentUser().getName() + ' ' + chat.getCurrentUser().getSurname()}"></h5>
-                                                        <small class="text-muted">3 days ago</small>
+                                                        <h5 th:text="${message.getSender().getName() + ' ' + message.getSender().getSurname()}"></h5>
+                                                        <small class="text-muted" th:text="${message.getSentAt()}"></small>
                                                     </div>
-                                                    <p><i class="em em-hand"></i></p>
-                                                </div>
-                                            </li>
-                                            <li class="left">
-                                                <img src="images/users/user-2.jpg" alt="" class="profile-photo-sm pull-left">
-                                                <div class="chat-item">
-                                                    <div class="chat-item-header">
-                                                        <h5>Linda Lohan</h5>
-                                                        <small class="text-muted">a min ago</small>
-                                                    </div>
-                                                    <p>Hi there, how are you</p>
+                                                    <p th:text="${message.getContent()}"></p>
                                                 </div>
                                             </li>
                                         </ul>
@@ -162,6 +152,7 @@
                                             <div class="input-group">
                                                 <input type="text" class="form-control" name="content" placeholder="Type your message">
                                                 <input type="hidden" name="chatId" th:value="${chat.getId()}">
+                                                <input type="hidden" name="receiverId" th:value="${chat.getAnotherUser().getId()}">
                                                 <span class="input-group-btn">
                                                 <button class="btn btn-default" type="submit">Send</button>
                                       </span>

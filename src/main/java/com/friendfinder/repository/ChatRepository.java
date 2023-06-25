@@ -12,3 +12,4 @@ public interface ChatRepository extends JpaRepository<Chat, Integer> {
     List<Chat> findAllByCurrentUserId(int currentUserId);
     List<Chat> findAllByAnotherUserId(int anotherUserId);
 }
+

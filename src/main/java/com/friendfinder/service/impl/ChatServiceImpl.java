@@ -1,11 +1,8 @@
 package com.friendfinder.service.impl;
 
 import com.friendfinder.entity.Chat;
-import com.friendfinder.entity.Language;
 import com.friendfinder.repository.ChatRepository;
-import com.friendfinder.repository.LanguageRepository;
 import com.friendfinder.service.ChatService;
-import com.friendfinder.service.LanguageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +30,13 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
+    public Optional<Chat> findById(int id) {
+        return chatRepository.findById(id);
+    }
+
+    @Override
     public void save(Chat chat) {
         chatRepository.save(chat);
     }
 }
+
