@@ -50,7 +50,8 @@ public class AboutController {
     }
 
     @GetMapping("/changePassword")
-    public String changePasswordPage() {
+    public String changePasswordPage(@AuthenticationPrincipal CurrentUser currentUser, ModelMap modelMap) {
+        modelMap.addAttribute("user", currentUser.getUser());
         return "edit-profile-password";
     }
 

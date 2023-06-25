@@ -145,9 +145,8 @@
                   <div class="organization" th:each="we : ${workExperiences}">
                     <img src="/images/envato.png" alt="" class="pull-left img-org">
                     <div class="work-info">
-                      <h5 th:text="${we.company}"></h5>
-                      <p th:text="${we.weDesignation}"> </p>
-                      <span class="text-grey" th:text="from + ${we.weFromDate} + to-+ ${we.weToDate}"></span>
+                      <h5> <i th:text="${we.company}"></i> <i th:text="${we.weDesignation}"></i></h5>
+                      <span class="text-grey" th:text="'from - ' + ${we.weFromDate} + ' to - '+ ${we.weToDate}"></span>
                     </div>
                   </div>
 
