@@ -21,5 +21,15 @@ public class MailService {
         mailSender.send(simpleMailMessage);
     }
 
+    @Async
+    public void sendFromMail(String toEmail, String fromEmail, String subject, String name, String text){
+        SimpleMailMessage message = new SimpleMailMessage();
 
+        message.setTo(toEmail);
+        message.setSubject(subject);
+        message.setText("Sender: " + name + ", " + fromEmail
+                + "\nmessage: " + text);
+
+        mailSender.send(message);
+    }
 }
