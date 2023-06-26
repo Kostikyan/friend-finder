@@ -22,7 +22,7 @@ public class MailService {
     }
 
     @Async
-    public void sendFromMail(String toEmail, String fromEmail, String subject, String name, String text){
+    public void sendFromMail(String toEmail, String fromEmail, String subject, String name, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
 
         message.setTo(toEmail);

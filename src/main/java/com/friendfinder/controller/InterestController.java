@@ -1,6 +1,5 @@
 package com.friendfinder.controller;
 
-import com.friendfinder.entity.Interest;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.InterestsService;
 import lombok.RequiredArgsConstructor;

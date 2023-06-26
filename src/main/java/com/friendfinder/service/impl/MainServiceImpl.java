@@ -52,6 +52,7 @@ public class MainServiceImpl implements MainService {
         }
         return null;
     }
+
     @Override
     public @ResponseBody byte[] getProfilePic(String imageName) throws IOException {
         File file = new File(userProfilePicPath + imageName);

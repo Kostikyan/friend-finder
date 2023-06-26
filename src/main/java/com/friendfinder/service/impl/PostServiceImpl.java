@@ -1,10 +1,7 @@
 package com.friendfinder.service.impl;
 
-import com.friendfinder.entity.FriendRequest;
 import com.friendfinder.entity.Post;
 import com.friendfinder.entity.User;
-import com.friendfinder.entity.types.FriendStatus;
-import com.friendfinder.repository.FriendRequestRepository;
 import com.friendfinder.repository.PostRepository;
 import com.friendfinder.repository.UserRepository;
 import com.friendfinder.security.CurrentUser;

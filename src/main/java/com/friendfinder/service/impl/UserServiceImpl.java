@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
         }
         return userForAddFriend;
     }
+
     @Override
     public List<Country> findAllCountries() {
         return countryRepository.findAll();
@@ -77,12 +78,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUserById(int id){
+    public Optional<User> findUserById(int id) {
         return userRepository.findById(id);
     }
 
     @Override
-    public List<User> findAllExceptCurrentUser(int currentUserId){
+    public List<User> findAllExceptCurrentUser(int currentUserId) {
         return userRepository.findAll()
                 .stream()
                 .filter(user -> user.getId() != currentUserId)

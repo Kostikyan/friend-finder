@@ -29,8 +29,7 @@ public class LikeAndDislikeServiceImpl implements LikeAndDislikeService {
             if (postLike.getLikeStatus() == LikeStatus.LIKE) {
                 post.setLikeCount(post.getLikeCount() + 1);
                 postRepository.save(post);
-            }
-            else {
+            } else {
                 post.setDislikeCount(post.getDislikeCount() + 1);
                 postRepository.save(post);
             }
@@ -38,11 +37,10 @@ public class LikeAndDislikeServiceImpl implements LikeAndDislikeService {
         } else {
             PostLike postLike1 = byUserIdAndPostId.get();
             postLikeRepository.delete(postLike1);
-            if(postLike1.getLikeStatus()==LikeStatus.LIKE){
+            if (postLike1.getLikeStatus() == LikeStatus.LIKE) {
                 post.setLikeCount(post.getLikeCount() - 1);
                 postRepository.save(post);
-            }
-            else {
+            } else {
                 post.setDislikeCount(post.getDislikeCount() - 1);
                 postRepository.save(post);
             }

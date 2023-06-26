@@ -6,13 +6,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 
-
 @UtilityClass
 public class ImageUtil {
 
-
-    public static String uploadImage(MultipartFile multipartFile, String path){
-        String fileName = null;
+    public static String uploadImage(MultipartFile multipartFile, String path) {
+        String fileName;
         try {
             if (multipartFile != null && !multipartFile.isEmpty()) {
                 fileName = System.nanoTime() + "_" + multipartFile.getOriginalFilename();
@@ -20,7 +18,7 @@ public class ImageUtil {
                 multipartFile.transferTo(file);
                 return fileName;
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             System.err.println(e.getMessage());
         }
         return null;

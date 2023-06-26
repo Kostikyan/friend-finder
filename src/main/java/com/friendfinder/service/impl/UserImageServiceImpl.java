@@ -1,6 +1,5 @@
 package com.friendfinder.service.impl;
 
-
 import com.friendfinder.entity.User;
 import com.friendfinder.entity.UserImage;
 import com.friendfinder.repository.UserImageRepository;
@@ -20,36 +19,22 @@ public class UserImageServiceImpl implements UserImageService {
     private final UserImageRepository userImageRepository;
     private final UserRepository userRepository;
 
-
     @Override
-    public List<UserImage> getAllUserImage(UserImage userImage, CurrentUser currentUser) {
-        List<UserImage> userImageByUserId = userImageRepository.findUserImageAllByUserId(currentUser.getUser().getId());
-        if (!userImageByUserId.isEmpty()) {
-            return userImageByUserId;
-        }
-        return null;
-    }
-
-    @Override
-    public List<UserImage> getUserImageById(int userId){
+    public List<UserImage> getUserImageById(int userId) {
         Optional<User> byId = userRepository.findById(userId);
-        if (byId.isPresent()){
+        if (byId.isPresent()) {
             User user = byId.get();
             return userImageRepository.findByUserId(user.getId());
         }
         return null;
     }
+
     @Override
     public void userImageSave(UserImage userImage, CurrentUser currentUser) {
         userImageRepository.save(UserImage.builder()
                 .user(currentUser.getUser())
                 .imageName(currentUser.getUser().getProfilePicture())
                 .build());
-    }
-
-    @Override
-    public void deleteUserImageById(int id) {
-        userImageRepository.deleteById(id);
     }
 
 }

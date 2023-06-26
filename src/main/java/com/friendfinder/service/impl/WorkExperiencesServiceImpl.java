@@ -14,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WorkExperiencesServiceImpl implements WorkExperiencesService {
     private final WorkExperiencesRepository workExperiencesRepository;
+
     @Override
     public List<WorkExperiences> findAllByUserId(int userId) {
         return workExperiencesRepository.findAllByUserId(userId);
@@ -21,8 +22,8 @@ public class WorkExperiencesServiceImpl implements WorkExperiencesService {
 
     @Override
     public void saveWorkExperiences(WorkExperiences workExperiences, CurrentUser currentUser) {
-            User user = currentUser.getUser();
-            workExperiences.setUser(user);
-            workExperiencesRepository.save(workExperiences);
+        User user = currentUser.getUser();
+        workExperiences.setUser(user);
+        workExperiencesRepository.save(workExperiences);
     }
 }
