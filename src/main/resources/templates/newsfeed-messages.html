@@ -155,7 +155,7 @@
 
                                                 <div class="chat-item">
                                                     <div class="chat-item-header">
-                                                        <h5 th:text="${message.getSender().getName() + ' ' + message.getSender().getSurname()}"></h5>
+                                                        <h5 th:text="${message.sender.name + ' ' + message.sender.surname}"></h5>
                                                         <small class="text-muted" th:text="${message.getSentAt()}"></small>
                                                     </div>
                                                     <p th:text="${message.getContent()}"></p>
@@ -201,7 +201,7 @@
                                  src="/images/users/difault.png" alt="user" class="profile-photo-sm pull-left">
 
                             <div>
-                                <h5><a href="timeline.html" th:text="${user.getName() + ' ' + user.getSurname()}"></a>
+                                <h5><a th:href="@{'/users/profile/' + ${user.id}}" th:text="${user.getName() + ' ' + user.getSurname()}"></a>
                                 </h5>
                                 <a href="#" class="text-green">Add friend</a>
                             </div>

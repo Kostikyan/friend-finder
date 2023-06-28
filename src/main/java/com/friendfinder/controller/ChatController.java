@@ -35,6 +35,10 @@ public class ChatController {
         modelMap.addAttribute("users", userService.userFindAll());
         modelMap.addAttribute("allExceptCurrentUser", userService.findAllExceptCurrentUser(currentUser.getUser().getId()));
 
+        if (!allChats.isEmpty()){
+            return "redirect:/error";
+        }
+
         return "newsfeed-messages";
     }
 
