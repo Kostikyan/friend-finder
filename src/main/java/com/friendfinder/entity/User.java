@@ -43,4 +43,13 @@ public class User {
     private boolean enabled;
 
     private String token;
+
+    /**
+     * The getter that automatically created @Data didn't work, so
+     * I wrote a separate one for the date and used it in the
+     * edit-profile-basic.html input of the date type to pass the value
+     * */
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
 }

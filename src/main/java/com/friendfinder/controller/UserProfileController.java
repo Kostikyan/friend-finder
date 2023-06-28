@@ -36,6 +36,7 @@ public class UserProfileController {
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("profile", currentUser.getUser());
         modelMap.addAttribute("comments", comments);
+        modelMap.addAttribute("friendsCount", friendRequestService.findFriendsByUserIdCount(user.getId()));
         return "timeline";
     }
 

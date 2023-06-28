@@ -68,4 +68,10 @@ public class FriendRequestServiceImpl implements FriendRequestService {
         friendRequestRepository.save(friendRequest);
     }
 
+    @Override
+    public int findFriendsByUserIdCount(int id) {
+        List<User> friendsByUserId = findFriendsByUserId(id);
+        return friendsByUserId.size();
+    }
+
 }

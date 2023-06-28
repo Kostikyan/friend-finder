@@ -22,9 +22,11 @@ public class FriendController {
     @GetMapping("/friends")
     public String friendsPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
         modelMap.addAttribute("friends", friendRequestService.findFriendsByUserId(currentUser.getUser().getId()));
+        modelMap.addAttribute("friendsCount", friendRequestService.findFriendsByUserIdCount(currentUser.getUser().getId()));
         modelMap.addAttribute("users", userService.userForAddFriend(currentUser));
         modelMap.addAttribute("requestSenders", friendRequestService.findSenderByReceiverId(currentUser.getUser().getId()));
         modelMap.addAttribute("user", currentUser.getUser());
+        modelMap.addAttribute("allExceptCurrentUser", userService.findAllExceptCurrentUser(currentUser.getUser().getId()));
         return "newsfeed-friends";
     }
 

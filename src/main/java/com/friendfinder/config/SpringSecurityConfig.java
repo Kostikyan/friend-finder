@@ -29,7 +29,11 @@ public class SpringSecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/").permitAll()
                         .requestMatchers("/register").permitAll()
                         .requestMatchers("/verify").permitAll()
-                        .requestMatchers("/**").permitAll()
+                        .requestMatchers("/css/**").permitAll()
+                        .requestMatchers("/fonts/**").permitAll()
+                        .requestMatchers("/icon/**").permitAll()
+                        .requestMatchers("/images/**").permitAll()
+                        .requestMatchers("/js/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

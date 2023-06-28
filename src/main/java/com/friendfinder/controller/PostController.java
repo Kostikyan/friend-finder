@@ -56,6 +56,7 @@ public class PostController {
         modelMap.addAttribute("user", currentUser.getUser());
         modelMap.addAttribute("users", userService.userForAddFriend(currentUser));
         modelMap.addAttribute("requestSenders", requestSenders);
+        modelMap.addAttribute("allExceptCurrentUser", userService.findAllExceptCurrentUser(currentUser.getUser().getId()));
         return "newsfeed";
     }
 
