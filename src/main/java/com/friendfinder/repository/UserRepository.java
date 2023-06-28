@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -17,4 +18,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Transactional
     @Query(value = "update `friend_finder`.`user` set `password` = :password where `id` = :id", nativeQuery = true)
     void updateUserPasswordById(@Param("password") String password, @Param("id") int id);
+
+    Optional<List<User>> findByNameContainingIgnoreCaseOrSurnameContainingIgnoreCase(String name, String surname);
+
 }
