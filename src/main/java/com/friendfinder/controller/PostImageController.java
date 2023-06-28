@@ -30,6 +30,7 @@ public class PostImageController {
     public String getUserId(@PathVariable("userId") User user, ModelMap modelMap,
                             @AuthenticationPrincipal CurrentUser currentUser) {
         modelMap.addAttribute("userPage", postService.getAllPostFriends(currentUser));
+        modelMap.addAttribute("allExceptCurrentUser", userService.findAllExceptCurrentUser(currentUser.getUser().getId()));
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("profile", currentUser.getUser());
         modelMap.addAttribute("comments", commentService.commentList());

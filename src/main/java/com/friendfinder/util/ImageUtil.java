@@ -1,6 +1,8 @@
 package com.friendfinder.util;
 
 import lombok.experimental.UtilityClass;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -8,6 +10,7 @@ import java.io.IOException;
 
 @UtilityClass
 public class ImageUtil {
+    Logger logger = LoggerFactory.getLogger(ImageUtil.class);
 
     public static String uploadImage(MultipartFile multipartFile, String path) {
         String fileName;
@@ -19,7 +22,7 @@ public class ImageUtil {
                 return fileName;
             }
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
         }
         return null;
     }

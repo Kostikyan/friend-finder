@@ -35,6 +35,7 @@ public class AboutController {
         modelMap.addAttribute("profile", currentUser.getUser());
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("languages", languageList);
+        modelMap.addAttribute("friendsCount", friendRequestService.findFriendsByUserIdCount(user.getId()));
         return "timeline-about";
     }
 

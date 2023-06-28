@@ -193,7 +193,7 @@
                     <div class="suggestions" id="sticky-sidebar">
                         <h4 class="grey">Who to Follow</h4>
 
-                        <div class="follow-user" th:each="user, iterStat : ${allExceptCurrentUser}" th:if="${iterStat.index <= 5}">
+                        <div class="follow-user" th:each="user, iterStat : ${userForAdd}">
                             <img th:if="${user.getProfilePicture() != null}"
                                  th:src="@{/getProfilePic(imageName=${user.getProfilePicture()})}" alt="user"
                                  class="profile-photo-sm pull-left">

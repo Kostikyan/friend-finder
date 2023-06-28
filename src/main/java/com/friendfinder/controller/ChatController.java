@@ -34,6 +34,7 @@ public class ChatController {
         modelMap.addAttribute("chats", new HashSet<>(allChats));
         modelMap.addAttribute("users", userService.userFindAll());
         modelMap.addAttribute("allExceptCurrentUser", userService.findAllExceptCurrentUser(currentUser.getUser().getId()));
+        modelMap.addAttribute("userForAdd", userService.userForAddFriend(currentUser));
 
         return "newsfeed-messages";
     }

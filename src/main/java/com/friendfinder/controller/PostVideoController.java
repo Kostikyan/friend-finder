@@ -34,6 +34,7 @@ public class PostVideoController {
         modelMap.addAttribute("profile", currentUser.getUser());
         modelMap.addAttribute("comments", commentService.commentList());
         modelMap.addAttribute("users", userService.userForAddFriend(currentUser));
+        modelMap.addAttribute("allExceptCurrentUser", userService.findAllExceptCurrentUser(currentUser.getUser().getId()));
         modelMap.addAttribute("requestSenders", friendRequestService.findSenderByReceiverId(currentUser.getUser().getId()));
         return "newsfeed-videos";
     }

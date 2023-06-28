@@ -115,7 +115,7 @@
               <li><a th:href="@{'/users/friend/profile/' + ${user.id}}">Friends</a></li>
             </ul>
             <ul class="follow-me list-inline">
-              <li>1,299 people following her</li>
+              <li th:text="${friendsCount + ' friends'}"></li>
               <li th:if="${profile.id != user.id}">
                 <a th:href="@{'/users/profile/sendRequest?sender=' + ${profile.id} + '&receiver=' +${user.id}}">
                 <button class="btn-primary" >Add Friend</button>

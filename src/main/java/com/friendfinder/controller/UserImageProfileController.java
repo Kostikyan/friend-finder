@@ -34,6 +34,7 @@ public class UserImageProfileController {
         modelMap.addAttribute("userPage", userImageById);
         modelMap.addAttribute("profile", currentUser.getUser());
         modelMap.addAttribute("user", user);
+        modelMap.addAttribute("friendsCount", friendRequestService.findFriendsByUserIdCount(user.getId()));
         return "timeline-album";
     }
 
