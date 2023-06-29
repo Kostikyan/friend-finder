@@ -46,3 +46,10 @@ user:
 
 site:
   url: http://localhost:8080
+
+server:
+  error:
+    path: /error
+
+    whitelabel:
+      enabled: false

@@ -1,19 +1,23 @@
 package com.friendfinder.service.impl;
 
+import com.friendfinder.dto.userDto.UserRegisterRequestDto;
 import com.friendfinder.entity.Country;
 import com.friendfinder.entity.User;
+import com.friendfinder.mapper.UserMapper;
 import com.friendfinder.repository.CountryRepository;
 import com.friendfinder.repository.UserRepository;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.FriendRequestService;
 import com.friendfinder.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,6 +28,10 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final CountryRepository countryRepository;
     private final FriendRequestService friendRequestService;
+    private final UserMapper userMapper;
+    private final MailService mailService;
+    @Value("${site.url}")
+    String siteUrl;
 
     @Override
     public List<User> userFindAll() {
@@ -51,13 +59,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void userRegister(User user) {
+    public void userRegister(UserRegisterRequestDto dto) {
+        User user = userMapper.map(dto);
+
         Optional<User> userFromDB = userRepository.findByEmail(user.getEmail());
         if (userFromDB.isEmpty()) {
             String password = user.getPassword();
             String encodedPassword = passwordEncoder.encode(password);
             user.setPassword(encodedPassword);
             user.setEnabled(false);
+            UUID uuid = UUID.randomUUID();
+            user.setToken(uuid.toString());
+            mailService.sendMail(user.getEmail(), "Verify Email",
+                    "Hi " + user.getName() + "!\nPlease verify your email by clicking on this URL:\n " +
+                            siteUrl + "/verify?email=" + user.getEmail() + "&token=" + uuid
+            );
             userRepository.save(user);
         }
     }

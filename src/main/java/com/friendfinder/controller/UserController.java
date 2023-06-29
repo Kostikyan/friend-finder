@@ -1,7 +1,9 @@
 package com.friendfinder.controller;
 
+import com.friendfinder.dto.userDto.UserRegisterRequestDto;
 import com.friendfinder.entity.Country;
 import com.friendfinder.entity.User;
+import com.friendfinder.mapper.UserMapper;
 import com.friendfinder.service.impl.MailService;
 import com.friendfinder.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +23,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserController {
     private final UserServiceImpl userService;
-    private final MailService mailService;
     @Value("${site.url}")
     String siteUrl;
 
@@ -34,14 +35,8 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute User user) {
-        UUID uuid = UUID.randomUUID();
-        user.setToken(uuid.toString());
-        userService.userRegister(user);
-        mailService.sendMail(user.getEmail(), "Verify Email",
-                "Hi " + user.getName() + "!\nPlease verify your email by clicking on this URL:\n " +
-                        siteUrl + "/verify?email=" + user.getEmail() + "&token=" + uuid
-        );
+    public String register(@ModelAttribute UserRegisterRequestDto userDto) {
+        userService.userRegister(userDto);
         return "redirect:/";
     }
 
