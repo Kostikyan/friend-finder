@@ -1,5 +1,6 @@
 package com.friendfinder.service;
 
+import com.friendfinder.dto.userDto.UserRegisterRequestDto;
 import com.friendfinder.entity.Country;
 import com.friendfinder.entity.User;
 import com.friendfinder.security.CurrentUser;
@@ -14,7 +15,7 @@ public interface UserService {
 
     List<User> userForAddFriend(CurrentUser currentUser);
 
-    void userRegister(User user);
+    void userRegister(UserRegisterRequestDto dto);
 
     void updateUserPasswordById(String password, int id);
 
