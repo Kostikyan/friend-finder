@@ -1,5 +1,6 @@
 package com.friendfinder.service;
 
+import com.friendfinder.dto.postDto.PostRequestDto;
 import com.friendfinder.entity.Post;
 import com.friendfinder.security.CurrentUser;
 import org.springframework.data.domain.Page;
@@ -11,7 +12,7 @@ public interface PostService {
 
     Page<Post> postFindPage(int pageNumber);
 
-    void postSave(Post post, CurrentUser currentUser, MultipartFile image, MultipartFile video);
+    void postSave(PostRequestDto post, CurrentUser currentUser, MultipartFile image, MultipartFile video);
 
     List<Post> postUserById(int id);
 

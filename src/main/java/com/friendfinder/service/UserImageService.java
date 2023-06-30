@@ -9,4 +9,7 @@ public interface UserImageService {
     List<UserImage> getUserImageById(int userId);
 
     void userImageSave(UserImage userImage, CurrentUser currentUser);
+
+
+    void deleteUserImageById(int id);
 }

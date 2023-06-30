@@ -3,8 +3,6 @@ package com.friendfinder.controller;
 import com.friendfinder.dto.userDto.UserRegisterRequestDto;
 import com.friendfinder.entity.Country;
 import com.friendfinder.entity.User;
-import com.friendfinder.mapper.UserMapper;
-import com.friendfinder.service.impl.MailService;
 import com.friendfinder.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor

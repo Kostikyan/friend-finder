@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="LOGS" value="/Users/Spring Teamwork Website/friend-finder/logs" />
+    <property name="LOGS" value="D:\java2023\friend-finder\logs" />
 
     <appender name="Console"
               class="ch.qos.logback.core.ConsoleAppender">

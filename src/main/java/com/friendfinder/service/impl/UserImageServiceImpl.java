@@ -37,4 +37,8 @@ public class UserImageServiceImpl implements UserImageService {
                 .build());
     }
 
+    @Override
+    public void deleteUserImageById(int id) {
+        userImageRepository.deleteById(id);
+    }
 }
