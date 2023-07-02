@@ -165,7 +165,7 @@
 
                                 </div>
                                 <a th:if="${profile.id == user.id}"
-                                   th:href="@{/users/profile/album/delete(id=${image.id})}" class="remove-image">
+                                   th:href="@{/users/image/profile/delete/imageId(imageId=${image.id})}" class="remove-image">
                                     <img src="/icon/delete.png" alt="">
                                 </a>
                             </div>

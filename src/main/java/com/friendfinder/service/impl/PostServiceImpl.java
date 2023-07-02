@@ -1,7 +1,10 @@
 package com.friendfinder.service.impl;
 
+import com.friendfinder.dto.postDto.PostRequestDto;
+import com.friendfinder.dto.postDto.PostResponseDto;
 import com.friendfinder.entity.Post;
 import com.friendfinder.entity.User;
+import com.friendfinder.mapper.PostMapper;
 import com.friendfinder.repository.PostRepository;
 import com.friendfinder.repository.UserRepository;
 import com.friendfinder.security.CurrentUser;
@@ -29,6 +32,7 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
     private final FriendRequestService friendRequestService;
+    private final PostMapper postMapper;
 
     @Value("${post.upload.image.path}")
     private String postImageUploadPath;
@@ -44,27 +48,27 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void postSave(Post post, CurrentUser currentUser, MultipartFile image, MultipartFile video) {
-        postRepository.save(Post.builder()
+    public void postSave(PostRequestDto requestDto, CurrentUser currentUser, MultipartFile image, MultipartFile video) {
+        Post post = postMapper.map(PostRequestDto.builder()
                 .imgName(ImageUtil.uploadImage(image, postImageUploadPath))
                 .musicFileName(ImageUtil.uploadImage(video, postVideoUploadPath))
                 .postDatetime(new Date())
-                .user(currentUser.getUser())
-                .description(post.getDescription())
+                .description(requestDto.getDescription())
                 .build());
+        postRepository.save(post);
     }
 
     @Override
-    public List<Post> getAllPostFriends(CurrentUser currentUser) {
+    public List<PostResponseDto> getAllPostFriends(CurrentUser currentUser) {
         List<User> friendsByUserId = friendRequestService.findFriendsByUserId(currentUser.getUser().getId());
         List<Integer> friendsIds = friendsByUserId
                 .stream()
                 .map(User::getId)
                 .toList();
 
-        List<Post> postList = new ArrayList<>();
+        List<PostResponseDto> postList = new ArrayList<>();
         for (Integer friendsId : friendsIds) {
-            postList.addAll(postRepository.findByUserId(friendsId));
+            postList.addAll(postMapper.mapResp(postRepository.findByUserId(friendsId)));
         }
 
         return postList;
@@ -84,8 +88,6 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void deletePostId(int id, CurrentUser currentUser) {
-        if (currentUser.getUser().getId() == id) {
-            postRepository.deleteById(id);
-        }
+        postRepository.deleteById(id);
     }
 }

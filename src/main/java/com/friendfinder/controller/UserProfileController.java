@@ -1,5 +1,6 @@
 package com.friendfinder.controller;
 
+import com.friendfinder.dto.postDto.PostRequestDto;
 import com.friendfinder.entity.*;
 import com.friendfinder.entity.types.FriendStatus;
 import com.friendfinder.entity.types.LikeStatus;
@@ -41,7 +42,7 @@ public class UserProfileController {
     }
 
     @PostMapping("/add")
-    public String postAdd(@ModelAttribute Post post,
+    public String postAdd(@RequestBody PostRequestDto post,
                           @AuthenticationPrincipal CurrentUser currentUser,
                           @RequestParam("image") MultipartFile image,
                           @RequestParam("video") MultipartFile video) {

@@ -48,4 +48,11 @@ public class UserImageProfileController {
                 .build());
         return "redirect:/users/image/profile/" + receiver.getId();
     }
+
+    @GetMapping("/delete/imageId")
+    public String deleteImageById(@RequestParam("imageId") int id,
+                                  @AuthenticationPrincipal CurrentUser currentUser) {
+        userImageService.deleteUserImageById(id);
+        return "redirect:/users/image/profile/" + currentUser.getUser().getId();
+    }
 }
