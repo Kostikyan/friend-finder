@@ -17,7 +17,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -56,20 +55,20 @@ public class PostServiceImpl implements PostService {
                 .postDatetime(new Date())
                 .description(requestDto.getDescription())
                 .build());
-        ResponseEntity.ok(postRepository.save(post));
+        postRepository.save(post);
     }
 
     @Override
-    public List<Post> getAllPostFriends(CurrentUser currentUser) {
+    public List<PostResponseDto> getAllPostFriends(CurrentUser currentUser) {
         List<User> friendsByUserId = friendRequestService.findFriendsByUserId(currentUser.getUser().getId());
         List<Integer> friendsIds = friendsByUserId
                 .stream()
                 .map(User::getId)
                 .toList();
 
-        List<Post> postList = new ArrayList<>();
+        List<PostResponseDto> postList = new ArrayList<>();
         for (Integer friendsId : friendsIds) {
-            postList.addAll(postRepository.findByUserId(friendsId));
+            postList.addAll(postMapper.mapResp(postRepository.findByUserId(friendsId)));
         }
 
         return postList;
@@ -89,8 +88,6 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void deletePostId(int id, CurrentUser currentUser) {
-        if (currentUser.getUser().getId() == id) {
-            postRepository.deleteById(id);
-        }
+        postRepository.deleteById(id);
     }
 }

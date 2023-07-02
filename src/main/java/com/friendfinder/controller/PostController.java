@@ -62,11 +62,11 @@ public class PostController {
     }
 
     @PostMapping("/add")
-    public String postAdd(@ModelAttribute PostRequestDto post,
+    public String postAdd(@ModelAttribute PostRequestDto requestDto,
                           @AuthenticationPrincipal CurrentUser currentUser,
                           @RequestParam("image") MultipartFile image,
                           @RequestParam("video") MultipartFile video) {
-         postService.postSave(post, currentUser, image, video);
+         postService.postSave(requestDto, currentUser, image, video);
         return "redirect:/posts";
     }
 
