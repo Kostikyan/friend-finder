@@ -1,9 +1,9 @@
 package com.friendfinder.controller;
 
 import com.friendfinder.dto.postDto.PostRequestDto;
+import com.friendfinder.dto.postLikeDto.PostLikeDto;
 import com.friendfinder.entity.Comment;
 import com.friendfinder.entity.Post;
-import com.friendfinder.entity.PostLike;
 import com.friendfinder.entity.User;
 import com.friendfinder.entity.types.LikeStatus;
 import com.friendfinder.security.CurrentUser;
@@ -71,20 +71,20 @@ public class PostController {
     }
 
     @PostMapping("/reaction/like/{postId}")
-    public String addLike(@ModelAttribute PostLike postLike,
+    public String addLike(@ModelAttribute PostLikeDto postLikeDto,
                           @AuthenticationPrincipal CurrentUser currentUser,
                           @PathVariable(name = "postId") Post post) {
-        postLike.setLikeStatus(LikeStatus.LIKE);
-        likeAndDislikeService.saveReaction(postLike, currentUser, post);
+        postLikeDto.setLikeStatus(LikeStatus.LIKE);
+        likeAndDislikeService.saveReaction(postLikeDto, currentUser, post);
         return "redirect:/posts";
     }
 
     @PostMapping("/reaction/dislike/{postId}")
-    public String addDislike(@ModelAttribute PostLike postLike,
+    public String addDislike(@ModelAttribute PostLikeDto postLikeDto,
                              @AuthenticationPrincipal CurrentUser currentUser,
                              @PathVariable(name = "postId") Post post) {
-        postLike.setLikeStatus(LikeStatus.DISLIKE);
-        likeAndDislikeService.saveReaction(postLike, currentUser, post);
+        postLikeDto.setLikeStatus(LikeStatus.DISLIKE);
+        likeAndDislikeService.saveReaction(postLikeDto, currentUser, post);
         return "redirect:/posts";
     }
 
