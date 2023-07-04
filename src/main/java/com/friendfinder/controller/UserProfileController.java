@@ -46,7 +46,7 @@ public class UserProfileController {
     }
 
     @PostMapping("/add")
-    public String postAdd(@RequestBody PostRequestDto post,
+    public String postAdd(@ModelAttribute PostRequestDto post,
                           @AuthenticationPrincipal CurrentUser currentUser,
                           @RequestParam("image") MultipartFile image,
                           @RequestParam("video") MultipartFile video) {
