@@ -24,8 +24,6 @@ public class FriendRequestController {
                 .receiver(receiver)
                 .status(FriendStatus.PENDING)
                 .build());
-        mailService.sendMail(receiver.getEmail(), "You have a new friend request", "Hi, " + receiver.getName() +
-                ". You have an friend request from " + sender.getName() + " " + sender.getSurname());
         return "redirect:/posts";
     }
 
@@ -34,8 +32,6 @@ public class FriendRequestController {
                                 @RequestParam("receiver") User receiver) {
         FriendRequest bySenderIdAndReceiverId = friendRequestService.findBySenderIdAndReceiverId(sender.getId(), receiver.getId());
         friendRequestService.changeStatus(bySenderIdAndReceiverId);
-        mailService.sendMail(sender.getEmail(), "Your friend request is accepted", "Hi, " + sender.getName() +
-                ". " + receiver.getName() + " accepted your request.");
         return "redirect:/posts";
     }
 

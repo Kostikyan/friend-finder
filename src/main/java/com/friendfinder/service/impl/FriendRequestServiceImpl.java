@@ -18,12 +18,16 @@ public class FriendRequestServiceImpl implements FriendRequestService {
 
 
     private final FriendRequestRepository friendRequestRepository;
+    private final MailService mailService;
 
     @Override
     public void save(FriendRequest friendRequest) {
         if (findBySenderIdAndReceiverId(friendRequest.getSender().getId(), friendRequest.getReceiver().getId()) == null
                 && findBySenderIdAndReceiverId(friendRequest.getReceiver().getId(), friendRequest.getSender().getId()) == null)
-            friendRequestRepository.save(friendRequest);
+            mailService.sendMail(friendRequest.getReceiver().getEmail(), "You have a new friend request", "Hi, "
+                    + friendRequest.getReceiver().getName() + ". You have an friend request from " +
+                    friendRequest.getSender().getName() + " " + friendRequest.getSender().getSurname());
+        friendRequestRepository.save(friendRequest);
     }
 
     @Override
@@ -41,6 +45,12 @@ public class FriendRequestServiceImpl implements FriendRequestService {
     @Override
     public FriendRequest findBySenderIdAndReceiverId(int senderId, int receiverId) {
         Optional<FriendRequest> bySenderIdAndReceiverId = friendRequestRepository.findBySenderIdAndReceiverId(senderId, receiverId);
+        if (bySenderIdAndReceiverId.isPresent()){
+            FriendRequest friendRequest = bySenderIdAndReceiverId.get();
+            mailService.sendMail(friendRequest.getSender().getEmail(), "Your friend request is accepted",
+                    "Hi, " + friendRequest.getSender().getName() +
+                    ". " + friendRequest.getReceiver().getName() + " accepted your request.");
+        }
         return bySenderIdAndReceiverId.orElse(null);
     }
 
