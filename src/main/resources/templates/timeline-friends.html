@@ -116,7 +116,7 @@
                 <ul class="follow-me list-inline">
                   <li th:text="${friendsCount + ' friends'}"></li>
                   <li th:if="${profile.id != user.id}">
-                    <a th:href="@{'/users/friend/profile/sendRequest?sender=' + ${profile.id} + '&receiver=' +${user.id}}">
+                    <a th:href="@{'/users/friend/profile/send-request?sender=' + ${profile.id} + '&receiver=' +${user.id}}">
                     <button class="btn-primary" >Add Friend</button>
                   </a></li>
                 </ul>
@@ -124,23 +124,6 @@
             </div>
           </div><!--Timeline Menu for Large Screens End-->
 
-          <!--Timeline Menu for Small Screens-->
-          <div class="navbar-mobile hidden-lg hidden-md">
-            <div class="profile-info">
-              <img src="images/users/user-1.jpg" alt="" class="img-responsive profile-photo">
-              <h4>Sarah Cruiz</h4>
-              <p class="text-muted">Creative Director</p>
-            </div>
-            <div class="mobile-menu">
-              <ul class="list-inline">
-                <li><a th:href="@{'/users/profile/' + ${user.id}}">Timeline</a></li>
-                <li><a th:href="@{'/users/about/profile/' + ${user.id}}">About</a></li>
-                <li><a th:href="@{'/users/image/profile/' + ${user.id}}" class="active">Album</a></li>
-                <li><a th:href="@{'/users/friend/profile/' + ${user.id}}" class="active">Friends</a></li>
-              </ul>
-              <button class="btn-primary">Add Friend</button>
-            </div>
-          </div><!--Timeline Menu for Small Screens End-->
 
         </div>
         <div id="page-contents">

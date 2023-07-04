@@ -32,8 +32,7 @@ public class ContactController {
             @RequestParam("name") String name,
             @RequestParam("email") String fromEmail,
             @RequestParam("subject") String subject,
-            @RequestParam("message") String text,
-            ModelMap map
+            @RequestParam("message") String text
     ){
         String toEmail = "finderfriend2023@gmail.com";
         mailService.sendFromMail(toEmail, fromEmail, subject, name ,text);

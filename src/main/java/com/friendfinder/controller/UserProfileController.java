@@ -54,7 +54,7 @@ public class UserProfileController {
         return "redirect:/users/profile/" + currentUser.getUser().getId();
     }
 
-    @GetMapping("/sendRequest")
+    @GetMapping("/send-request")
     public String sendRequest(@RequestParam("sender") User sender,
                               @RequestParam("receiver") User receiver) {
         friendRequestService.save(FriendRequest.builder()

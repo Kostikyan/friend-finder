@@ -19,7 +19,7 @@ public class EducationController {
     public final EducationService educationService;
     public final WorkExperiencesService workExperiencesService;
 
-    @GetMapping()
+    @GetMapping
     public String educationPage(@AuthenticationPrincipal CurrentUser currentUser, ModelMap modelMap) {
         modelMap.addAttribute("user", currentUser.getUser());
         return "edit-profile-work-edu";

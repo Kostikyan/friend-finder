@@ -22,7 +22,7 @@ public class InterestController {
         return "edit-profile-interests";
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public String interestsAdd(@RequestParam("interest") String interest,
                                @AuthenticationPrincipal CurrentUser currentUser) {
         interestsService.interestSave(interest, currentUser);

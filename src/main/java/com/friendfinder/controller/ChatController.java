@@ -4,26 +4,30 @@ import com.friendfinder.entity.Chat;
 import com.friendfinder.entity.Message;
 import com.friendfinder.entity.User;
 import com.friendfinder.security.CurrentUser;
-import com.friendfinder.service.impl.ChatServiceImpl;
-import com.friendfinder.service.impl.MessageServiceImpl;
-import com.friendfinder.service.impl.UserServiceImpl;
+import com.friendfinder.service.ChatService;
+import com.friendfinder.service.FriendRequestService;
+import com.friendfinder.service.MessageService;
+import com.friendfinder.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
-@RequestMapping(value = "/newsfeed", method = RequestMethod.GET)
+@RequestMapping("/newsfeed")
 @RequiredArgsConstructor
 public class ChatController {
 
-    private final UserServiceImpl userService;
-    private final ChatServiceImpl chatService;
-    private final MessageServiceImpl messageService;
+    private final UserService userService;
+    private final ChatService chatService;
+    private final MessageService messageService;
+    private final FriendRequestService friendRequestService;
 
     @GetMapping("/messages")
     public String messagesPage(@AuthenticationPrincipal CurrentUser currentUser, ModelMap modelMap){
@@ -34,12 +38,12 @@ public class ChatController {
         modelMap.addAttribute("chats", new HashSet<>(allChats));
         modelMap.addAttribute("users", userService.userFindAll());
         modelMap.addAttribute("allExceptCurrentUser", userService.findAllExceptCurrentUser(currentUser.getUser().getId()));
-        modelMap.addAttribute("userForAdd", userService.userForAddFriend(currentUser));
+        modelMap.addAttribute("requestSenders", friendRequestService.findSenderByReceiverId(currentUser.getUser().getId()));
 
         return "newsfeed-messages";
     }
 
-    @PostMapping("/chat/create/{id}")
+    @GetMapping("/chat/create/{id}")
     public String createNewChat(@PathVariable("id") int userId, @AuthenticationPrincipal CurrentUser currentUser){
         if(userId == currentUser.getUser().getId()){
             return "redirect:/newsfeed/messages";

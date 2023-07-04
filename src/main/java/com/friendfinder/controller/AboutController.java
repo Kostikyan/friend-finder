@@ -39,7 +39,7 @@ public class AboutController {
         return "timeline-about";
     }
 
-    @GetMapping("/sendRequest")
+    @GetMapping("/send-request")
     public String sendRequest(@RequestParam("sender") User sender,
                               @RequestParam("receiver") User receiver) {
         friendRequestService.save(FriendRequest.builder()
@@ -50,13 +50,13 @@ public class AboutController {
         return "redirect:/users/about/profile/" + receiver.getId();
     }
 
-    @GetMapping("/changePassword")
+    @GetMapping("/change-password")
     public String changePasswordPage(@AuthenticationPrincipal CurrentUser currentUser, ModelMap modelMap) {
         modelMap.addAttribute("user", currentUser.getUser());
         return "edit-profile-password";
     }
 
-    @PostMapping("/changePassword")
+    @PostMapping("/change-password")
     public String changePassword(@RequestParam("oldPass") String oldPass,
                                  @RequestParam("newPass") String newPass,
                                  @RequestParam("confPass") String confPass,
@@ -71,9 +71,9 @@ public class AboutController {
                 return "redirect:/posts";
             }
             modelMap.addAttribute("massage", "Password is not confirmed.");
-            return "redirect:/users/about/profile/changePassword";
+            return "redirect:/users/about/profile/change-password";
         }
         modelMap.addAttribute("massage", "Incorrect password");
-        return "redirect:/users/about/profile/changePassword";
+        return "redirect:/users/about/profile/change-password";
     }
 }

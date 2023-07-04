@@ -77,42 +77,15 @@
                 <div id="chat-block">
                     <div class="title">Chat online</div>
                     <ul class="online-users list-inline">
-                        <li><a href="newsfeed-messages.html" title="Linda Lohan"><img src="/images/users/user-2.jpg"
-                                                                                      alt="user"
-                                                                                      class="img-responsive profile-photo"><span
-                                class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="Sophia Lee"><img src="/images/users/user-3.jpg"
-                                                                                     alt="user"
-                                                                                     class="img-responsive profile-photo"><span
-                                class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="John Doe"><img src="/images/users/user-4.jpg"
-                                                                                   alt="user"
-                                                                                   class="img-responsive profile-photo"><span
-                                class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="Alexis Clark"><img src="/images/users/user-5.jpg"
-                                                                                       alt="user"
-                                                                                       class="img-responsive profile-photo"><span
-                                class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="James Carter"><img src="/images/users/user-6.jpg"
-                                                                                       alt="user"
-                                                                                       class="img-responsive profile-photo"><span
-                                class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="Robert Cook"><img src="/images/users/user-7.jpg"
-                                                                                      alt="user"
-                                                                                      class="img-responsive profile-photo"><span
-                                class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="Richard Bell"><img src="/images/users/user-8.jpg"
-                                                                                       alt="user"
-                                                                                       class="img-responsive profile-photo"><span
-                                class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="Anna Young"><img src="/images/users/user-9.jpg"
-                                                                                     alt="user"
-                                                                                     class="img-responsive profile-photo"><span
-                                class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="Julia Cox"><img src="/images/users/user-10.jpg"
-                                                                                    alt="user"
-                                                                                    class="img-responsive profile-photo"><span
-                                class="online-dot"></span></a></li>
+                        <li th:each="oneUser, iterStat : ${allExceptCurrentUser}" th:if="${iterStat.index <= 8}">
+                            <a th:href="@{'/newsfeed/chat/create/' + ${oneUser.getId()}}" th:title="${oneUser.getName() + ' ' + oneUser.getSurname()}">
+                                <img th:if="${oneUser.getProfilePicture() != null}"
+                                     th:src="@{/getProfilePic(imageName=${oneUser.getProfilePicture()})}" alt="user"
+                                     class="img-responsive profile-photo">
+                                <img th:if="${oneUser.getProfilePicture() == null || oneUser.getProfilePicture().equalsIgnoreCase('null')}"
+                                     src="/images/users/difault.png" alt="user" class="img-responsive profile-photo">
+
+                                <span class="online-dot"></span></a></li>
                     </ul>
                 </div><!--chat block ends-->
             </div>
@@ -165,13 +138,11 @@
                         <div>
                             <h5><a th:href="@{'/users/profile/' + ${us.id}}" th:text="${us.name}+' '+${us.surname}"></a>
                             </h5>
-                            <a th:href="@{'/sendRequest?sender=' + ${user.id} + '&receiver=' +${us.id}}"
+                            <a th:href="@{'/send-request?sender=' + ${user.id} + '&receiver=' +${us.id}}"
                                class="text-green">Add friend</a>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2 static">
                 <div class="suggestions" id="sticky-sidebar1">
                     <h4 class="grey" th:if="${requestSenders.size()>0}">Friend Requests</h4>
                     <div class="follow-user" th:each="sender : ${requestSenders}">
@@ -183,9 +154,9 @@
                         <div>
                             <h5><a th:href="@{'/users/profile/' + ${sender.id}}"
                                    th:text="${sender.name}+' '+${sender.surname}"></a></h5>
-                            <a th:href="@{'/accessRequest?sender=' + ${sender.id} + '&receiver=' +${user.id}}"
+                            <a th:href="@{'/access-request?sender=' + ${sender.id} + '&receiver=' +${user.id}}"
                                class="text-green">Accept</a>
-                            <a th:href="@{'/rejectRequest?sender=' + ${sender.id} + '&receiver=' +${user.id}}"
+                            <a th:href="@{'/reject-request?sender=' + ${sender.id} + '&receiver=' +${user.id}}"
                                class="text-green"> Reject</a>
                         </div>
                     </div>

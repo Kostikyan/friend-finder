@@ -30,7 +30,7 @@ public class PostController {
     private final CommentService commentService;
 
 
-    @GetMapping()
+    @GetMapping
     public String postAddPage(ModelMap modelMap,
                               @AuthenticationPrincipal CurrentUser currentUser,
                               @ModelAttribute Post post) {

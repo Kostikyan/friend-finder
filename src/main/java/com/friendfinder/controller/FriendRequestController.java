@@ -16,7 +16,7 @@ public class FriendRequestController {
     private final FriendRequestService friendRequestService;
     private final MailService mailService;
 
-    @GetMapping("/sendRequest")
+    @GetMapping("/send-request")
     public String sendRequest(@RequestParam("sender") User sender,
                               @RequestParam("receiver") User receiver) {
         friendRequestService.save(FriendRequest.builder()
@@ -24,22 +24,18 @@ public class FriendRequestController {
                 .receiver(receiver)
                 .status(FriendStatus.PENDING)
                 .build());
-        mailService.sendMail(receiver.getEmail(), "You have a new friend request", "Hi, " + receiver.getName() +
-                ". You have an friend request from " + sender.getName() + " " + sender.getSurname());
         return "redirect:/posts";
     }
 
-    @GetMapping("accessRequest")
+    @GetMapping("/access-request")
     public String accessRequest(@RequestParam("sender") User sender,
                                 @RequestParam("receiver") User receiver) {
         FriendRequest bySenderIdAndReceiverId = friendRequestService.findBySenderIdAndReceiverId(sender.getId(), receiver.getId());
         friendRequestService.changeStatus(bySenderIdAndReceiverId);
-        mailService.sendMail(sender.getEmail(), "Your friend request is accepted", "Hi, " + sender.getName() +
-                ". " + receiver.getName() + " accepted your request.");
         return "redirect:/posts";
     }
 
-    @GetMapping("rejectRequest")
+    @GetMapping("/reject-request")
     public String rejectRequest(@RequestParam("sender") User sender,
                                 @RequestParam("receiver") User receiver) {
         FriendRequest bySenderIdAndReceiverId = friendRequestService.findBySenderIdAndReceiverId(sender.getId(), receiver.getId());
