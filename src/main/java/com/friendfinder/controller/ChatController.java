@@ -36,7 +36,7 @@ public class ChatController {
 
         modelMap.addAttribute("user", currentUser.getUser());
         modelMap.addAttribute("chats", new HashSet<>(allChats));
-        modelMap.addAttribute("users", userService.userFindAll());
+        modelMap.addAttribute("users", userService.userForAddFriend(currentUser));
         modelMap.addAttribute("allExceptCurrentUser", userService.findAllExceptCurrentUser(currentUser.getUser().getId()));
         modelMap.addAttribute("requestSenders", friendRequestService.findSenderByReceiverId(currentUser.getUser().getId()));
 

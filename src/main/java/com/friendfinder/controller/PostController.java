@@ -1,6 +1,7 @@
 package com.friendfinder.controller;
 
 import com.friendfinder.dto.postDto.PostRequestDto;
+import com.friendfinder.dto.postDto.PostResponseDto;
 import com.friendfinder.dto.postLikeDto.PostLikeDto;
 import com.friendfinder.entity.Comment;
 import com.friendfinder.entity.Post;
@@ -46,8 +47,8 @@ public class PostController {
         Page<Post> page = postService.postFindPage(currentPage);
         long totalItems = page.getTotalElements();
         int totalPages = page.getTotalPages();
-
         List<Post> content = page.getContent();
+
         List<User> requestSenders = friendRequestService.findSenderByReceiverId(currentUser.getUser().getId());
 
         modelMap.addAttribute("currentPage", currentPage);
@@ -66,7 +67,7 @@ public class PostController {
                           @AuthenticationPrincipal CurrentUser currentUser,
                           @RequestParam("image") MultipartFile image,
                           @RequestParam("video") MultipartFile video) {
-         postService.postSave(requestDto, currentUser, image, video);
+        postService.postSave(requestDto, currentUser, image, video);
         return "redirect:/posts";
     }
 
