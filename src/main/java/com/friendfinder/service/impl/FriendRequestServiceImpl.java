@@ -15,6 +15,8 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class FriendRequestServiceImpl implements FriendRequestService {
+
+
     private final FriendRequestRepository friendRequestRepository;
 
     @Override

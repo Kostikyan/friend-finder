@@ -24,7 +24,7 @@ public class TimelineController {
     }
 
     @GetMapping("/edit-basic")
-    public String editBasicPage(@AuthenticationPrincipal CurrentUser currentUser, ModelMap modelMap) {
+    public String openEditBasicPage(@AuthenticationPrincipal CurrentUser currentUser, ModelMap modelMap) {
         User user = currentUser.getUser();
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("countries", timelineService.findAllCountries());

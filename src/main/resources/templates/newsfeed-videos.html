@@ -232,13 +232,11 @@
                          th:src="@{/getProfilePic(imageName=${us.getProfilePicture()})}" alt="" class="profile-photo-sm pull-left">
                     <div>
                       <h5><a th:href="@{'/users/profile/' + ${us.id}}" th:text="${us.name}+' '+${us.surname}"></a></h5>
-                      <a th:href="@{'/sendRequest?sender=' + ${user.id} + '&receiver=' +${us.id}}"
+                      <a th:href="@{'/send-request?sender=' + ${user.id} + '&receiver=' +${us.id}}"
                          class="text-green">Add friend</a>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-2 static">
                 <div class="suggestions" id="sticky-sidebar1">
                   <h4 class="grey" th:if="${requestSenders.size()>0}">Friend Requests</h4>
                   <div class="follow-user" th:each="sender : ${requestSenders}">
@@ -248,9 +246,9 @@
                          th:src="@{/getProfilePic(imageName=${sender.getProfilePicture()})}" alt="" class="profile-photo-sm pull-left">
                     <div>
                       <h5><a th:href="@{'/users/profile/' + ${sender.id}}" th:text="${sender.name}+' '+${sender.surname}"></a></h5>
-                      <a th:href="@{'/accessRequest?sender=' + ${sender.id} + '&receiver=' +${user.id}}"
+                      <a th:href="@{'/access-request?sender=' + ${sender.id} + '&receiver=' +${user.id}}"
                          class="text-green">Accept</a>
-                      <a th:href="@{'/rejectRequest?sender=' + ${sender.id} + '&receiver=' +${user.id}}"
+                      <a th:href="@{'/reject-request?sender=' + ${sender.id} + '&receiver=' +${user.id}}"
                          class="text-green"> Reject</a>
                     </div>
                   </div>

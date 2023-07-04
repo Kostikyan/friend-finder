@@ -76,10 +76,10 @@
                 <ul class="nav-news-feed" th:include="fragment/newsfeed-pages-fragment::newsfeed-pages"></ul>
                 <!--news-feed links ends-->
                 <div id="chat-block">
-                    <div class="title">Chat online</div>
+                    <div class="title"><a th:href="@{/newsfeed/messages}" style="color: white">Chat online</a></div>
                     <ul class="online-users list-inline">
                         <li th:each="oneUser, iterStat : ${allExceptCurrentUser}" th:if="${iterStat.index <= 8}">
-                            <a th:href="@{'/newsfeed/chat/create/' + ${oneUser.getId()}}" th:title="${oneUser.getName() + ' ' + oneUser.getSurname()}">
+                            <a th:href="@{/newsfeed/chat/create/{id}(id=${oneUser.getId()})}" th:title="${oneUser.getName() + ' ' + oneUser.getSurname()}">
                                 <img th:if="${oneUser.getProfilePicture() != null}"
                                      th:src="@{/getProfilePic(imageName=${oneUser.getProfilePicture()})}" alt="user"
                                      class="img-responsive profile-photo">
@@ -257,13 +257,11 @@
                         <div>
                             <h5><a th:href="@{'/users/profile/' + ${us.id}}" th:text="${us.name}+' '+${us.surname}"></a>
                             </h5>
-                            <a th:href="@{'/sendRequest?sender=' + ${user.id} + '&receiver=' +${us.id}}"
+                            <a th:href="@{'/send-request?sender=' + ${user.id} + '&receiver=' +${us.id}}"
                                class="text-green">Add friend</a>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2 static">
                 <div class="suggestions" id="sticky-sidebar1">
                     <h4 class="grey" th:if="${requestSenders.size()>0}">Friend Requests</h4>
                     <div class="follow-user" th:each="sender : ${requestSenders}">
@@ -275,9 +273,9 @@
                         <div>
                             <h5><a th:href="@{'/users/profile/' + ${sender.id}}"
                                    th:text="${sender.name}+' '+${sender.surname}"></a></h5>
-                            <a th:href="@{'/accessRequest?sender=' + ${sender.id} + '&receiver=' +${user.id}}"
+                            <a th:href="@{'/access-request?sender=' + ${sender.id} + '&receiver=' +${user.id}}"
                                class="text-green">Accept</a>
-                            <a th:href="@{'/rejectRequest?sender=' + ${sender.id} + '&receiver=' +${user.id}}"
+                            <a th:href="@{'/reject-request?sender=' + ${sender.id} + '&receiver=' +${user.id}}"
                                class="text-green"> Reject</a>
                         </div>
                     </div>

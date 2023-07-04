@@ -6,7 +6,6 @@ import com.friendfinder.entity.User;
 import com.friendfinder.entity.types.FriendStatus;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.FriendRequestService;
-import com.friendfinder.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -33,7 +32,7 @@ public class UserFriendProfileController {
     }
 
 
-    @GetMapping("/sendRequest")
+    @GetMapping("/send-request")
     public String sendRequest(@RequestParam("sender") User sender,
                               @RequestParam("receiver") User receiver) {
         friendRequestService.save(FriendRequest.builder()

@@ -54,6 +54,7 @@ public class PostServiceImpl implements PostService {
                 .musicFileName(ImageUtil.uploadImage(video, postVideoUploadPath))
                 .postDatetime(new Date())
                 .description(requestDto.getDescription())
+                .user(currentUser.getUser())
                 .build());
         postRepository.save(post);
     }

@@ -12,6 +12,7 @@ import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.LikeAndDislikeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -24,6 +25,7 @@ public class LikeAndDislikeServiceImpl implements LikeAndDislikeService {
     private final PostLikeMapper postLikeMapper;
 
     @Override
+    @Transactional
     public void saveReaction(PostLikeDto postLikeDto, CurrentUser currentUser, Post post) {
         Optional<PostLike> byUserIdAndPostId = postLikeRepository.findByUserIdAndPostId(currentUser.getUser().getId(), post.getId());
         if (byUserIdAndPostId.isEmpty()) {

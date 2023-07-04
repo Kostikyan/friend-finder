@@ -29,7 +29,7 @@ public class SearchController {
         modelMap.addAttribute("requestSenders", friendRequestService.findSenderByReceiverId(currentUser.getUser().getId()));
         modelMap.addAttribute("user", currentUser.getUser());
         modelMap.addAttribute("users",userService.userForAddFriend(currentUser));
-        List<User> resultOfSearch = searchService.searchByKeyword(keyword);
+        List<User> resultOfSearch = searchService.searchByKeyword(keyword); //TODO return optinole եթե բան չգտա
         resultOfSearch.remove(currentUser.getUser());
         modelMap.addAttribute("result", resultOfSearch);
         return "resultOfSearchUsers";

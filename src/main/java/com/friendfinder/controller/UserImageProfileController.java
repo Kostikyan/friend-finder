@@ -38,7 +38,7 @@ public class UserImageProfileController {
         return "timeline-album";
     }
 
-    @GetMapping("/sendRequest")
+    @GetMapping("/send-request")
     public String sendRequest(@RequestParam("sender") User sender,
                               @RequestParam("receiver") User receiver) {
         friendRequestService.save(FriendRequest.builder()
