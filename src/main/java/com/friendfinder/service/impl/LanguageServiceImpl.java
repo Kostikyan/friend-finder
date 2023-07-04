@@ -17,4 +17,9 @@ public class LanguageServiceImpl implements LanguageService {
     public List<Language> findAllByUserId(int userId) {
         return languageRepository.findAllByUserId(userId);
     }
+
+    @Override
+    public void save(Language lang) {
+        languageRepository.save(lang);
+    }
 }
