@@ -10,6 +10,7 @@ import com.friendfinder.repository.UserRepository;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.FriendRequestService;
 import com.friendfinder.service.PostService;
+import com.friendfinder.service.UserActivityService;
 import com.friendfinder.util.ImageUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,6 +34,7 @@ public class PostServiceImpl implements PostService {
     private final UserRepository userRepository;
     private final FriendRequestService friendRequestService;
     private final PostMapper postMapper;
+    private final UserActivityService userActivityService;
 
     @Value("${post.upload.image.path}")
     private String postImageUploadPath;
@@ -49,14 +51,22 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void postSave(PostRequestDto requestDto, CurrentUser currentUser, MultipartFile image, MultipartFile video) {
+        String imgName = ImageUtil.uploadImage(image, postImageUploadPath);
+        String musicFileName = ImageUtil.uploadImage(video, postVideoUploadPath);
         Post post = postMapper.map(PostRequestDto.builder()
-                .imgName(ImageUtil.uploadImage(image, postImageUploadPath))
-                .musicFileName(ImageUtil.uploadImage(video, postVideoUploadPath))
+                .imgName(imgName)
+                .musicFileName(musicFileName)
                 .postDatetime(new Date())
                 .description(requestDto.getDescription())
                 .user(currentUser.getUser())
                 .build());
         postRepository.save(post);
+        if (imgName != null) {
+            userActivityService.save(currentUser.getUser(), "posted a photo");
+        } else {
+            userActivityService.save(currentUser.getUser(), "posted a video");
+        }
+
     }
 
     @Override
