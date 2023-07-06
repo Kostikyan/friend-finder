@@ -489,6 +489,181 @@
         </sql>
 
     </changeSet>
+
+    <changeSet id="addColumnUserType_IsBlocked" author="VaheKostikyan">
+        <addColumn tableName="user">
+            <column name="role"
+                    type="enum('ADMIN', 'USER', 'BLOCKED')">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+        <changeSet id="changeForeignKeysOnDelete" author="VaheKostikyan">
+            <sql>
+
+                alter table chat
+                drop foreign key chat_ibfk_1;
+
+                alter table chat
+                    add constraint chat_ibfk_1
+                        foreign key (current_user_id) references user (id)
+                            on delete cascade;
+
+                alter table chat
+                drop foreign key chat_ibfk_2;
+
+                alter table chat
+                    add constraint chat_ibfk_2
+                        foreign key (another_user_id) references user (id)
+                            on delete cascade;
+
+                alter table commentary
+                drop foreign key commentary_post__fk;
+
+                alter table commentary
+                    add constraint commentary_post__fk
+                        foreign key (post_id) references post (id)
+                            on delete cascade;
+
+                alter table commentary
+                drop foreign key user_commentary__fk;
+
+                alter table commentary
+                    add constraint user_commentary__fk
+                        foreign key (user_id) references user (id)
+                            on delete cascade;
+
+                alter table education
+                drop foreign key education__fk;
+
+                alter table education
+                    add constraint education__fk
+                        foreign key (user_id) references user (id)
+                            on delete cascade;
+
+                alter table friend_request
+                drop foreign key friend_request_receiver__fk;
+
+                alter table friend_request
+                    add constraint friend_request_receiver__fk
+                        foreign key (receiver_id) references user (id)
+                            on delete cascade;
+
+                alter table friend_request
+                drop foreign key friend_request_sender__fk;
+
+                alter table friend_request
+                    add constraint friend_request_sender__fk
+                        foreign key (sender_id) references user (id)
+                            on delete cascade;
+
+                alter table interests
+                drop foreign key user_interests__fk;
+
+                alter table interests
+                    add constraint user_interests__fk
+                        foreign key (user_id) references user (id)
+                            on delete cascade;
+
+                alter table language
+                drop foreign key user_language__fk;
+
+                alter table language
+                    add constraint user_language__fk
+                        foreign key (user_id) references user (id)
+                            on delete cascade;
+
+                alter table message
+                drop foreign key message_ibfk_1;
+
+                alter table message
+                    add constraint message_ibfk_1
+                        foreign key (chat_id) references chat (id)
+                            on delete cascade;
+
+                alter table message
+                drop foreign key message_ibfk_2;
+
+                alter table message
+                    add constraint message_ibfk_2
+                        foreign key (sender_id) references user (id)
+                            on delete cascade;
+
+                alter table message
+                drop foreign key message_ibfk_3;
+
+                alter table message
+                    add constraint message_ibfk_3
+                        foreign key (receiver_id) references user (id)
+                            on delete cascade;
+
+                alter table post
+                drop foreign key user_post__fk;
+
+                alter table post
+                    add constraint user_post__fk
+                        foreign key (user_id) references user (id)
+                            on delete cascade;
+
+                alter table post_like
+                drop foreign key postLike_postLike_fk;
+
+                alter table post_like
+                    add constraint postLike_postLike_fk
+                        foreign key (post_id) references post (id)
+                            on delete cascade;
+
+                alter table post_like
+                drop foreign key post_like_userLike_fk;
+
+                alter table post_like
+                    add constraint post_like_userLike_fk
+                        foreign key (user_id) references user (id)
+                            on delete cascade;
+
+                alter table user
+                drop foreign key user_country__fk;
+
+                alter table user
+                    add constraint user_country__fk
+                        foreign key (country_id) references user_country (id)
+                            on delete cascade;
+
+                alter table user_friends
+                drop foreign key friends__fk;
+
+                alter table user_friends
+                    add constraint friends__fk
+                        foreign key (friend_id) references user (id)
+                            on delete cascade;
+
+                alter table user_friends
+                drop foreign key user__fk;
+
+                alter table user_friends
+                    add constraint user__fk
+                        foreign key (user_id) references user (id)
+                            on delete cascade;
+
+                alter table user_image
+                drop foreign key user_user_image__fk;
+
+                alter table user_image
+                    add constraint user_user_image__fk
+                        foreign key (user_id) references user (id)
+                            on delete cascade;
+
+                alter table work_experiences
+                drop foreign key work_experiences__fk;
+
+                alter table work_experiences
+                    add constraint work_experiences__fk
+                        foreign key (user_id) references user (id)
+                            on delete cascade;
+
+            </sql>
+        </changeSet>
+
     <changeSet id="addActivityTable" author="hhakobyan">
         <createTable tableName="userActivity">
             <column name="id" type="BIGINT" autoIncrement="true">
@@ -524,4 +699,5 @@
         <renameTable  newTableName="user_activity"
                       oldTableName="userActivity"/>
     </changeSet>
+
 </databaseChangeLog>

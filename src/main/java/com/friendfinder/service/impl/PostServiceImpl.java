@@ -90,6 +90,10 @@ public class PostServiceImpl implements PostService {
         return postList;
     }
 
+    @Override
+    public List<Post> findAll() {
+        return postRepository.findAll();
+    }
 
     @Override
     public List<Post> postUserById(int id) {
@@ -103,7 +107,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void deletePostId(int id, CurrentUser currentUser) {
+    public void deletePostId(int id) {
         postRepository.deleteById(id);
     }
 }

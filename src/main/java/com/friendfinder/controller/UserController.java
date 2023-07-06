@@ -3,15 +3,14 @@ package com.friendfinder.controller;
 import com.friendfinder.dto.userDto.UserRegisterRequestDto;
 import com.friendfinder.entity.Country;
 import com.friendfinder.entity.User;
-import com.friendfinder.service.impl.UserServiceImpl;
+import com.friendfinder.security.CurrentUser;
+import com.friendfinder.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +18,7 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 public class UserController {
-    private final UserServiceImpl userService;
+    private final UserService userService;
     @Value("${site.url}")
     String siteUrl;
 
@@ -42,10 +41,10 @@ public class UserController {
                              @RequestParam String token) {
         Optional<User> byEmail = userService.findByEmail(email);
         if (byEmail.isEmpty()) {
-            return "redirect:/google.com";
+            return "redirect:/";
         }
         if (byEmail.get().isEnabled()) {
-            return "redirect:/yandex.ru";
+            return "redirect:/";
         }
         if (byEmail.get().getToken().equals(token)) {
             User user = byEmail.get();
@@ -54,5 +53,13 @@ public class UserController {
             userService.save(user);
         }
         return "redirect:/";
+    }
+
+    @RequestMapping
+    public String sendDataToHeader(@AuthenticationPrincipal CurrentUser currentUser,
+                                   ModelMap map
+    ){
+        map.addAttribute("user", currentUser.getUser());
+        return "fragment/header-menu-fragment";
     }
 }
