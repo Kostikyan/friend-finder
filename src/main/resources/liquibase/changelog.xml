@@ -663,4 +663,41 @@
 
             </sql>
         </changeSet>
+
+    <changeSet id="addActivityTable" author="hhakobyan">
+        <createTable tableName="userActivity">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datetime" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+
+
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="userActivity"
+                                 constraintName="fk_activity_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"/>
+    </changeSet>
+
+    <changeSet id="addColumnDate" author="hhakobyan">
+        <addColumn tableName="userActivity">
+            <column afterColumn="type"
+                    name="datetime"
+                    type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <renameTable  newTableName="user_activity"
+                      oldTableName="userActivity"/>
+    </changeSet>
+
 </databaseChangeLog>

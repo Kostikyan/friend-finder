@@ -236,8 +236,6 @@
                          class="text-green">Add friend</a>
                     </div>
                   </div>
-                </div>
-                <div class="suggestions" id="sticky-sidebar1">
                   <h4 class="grey" th:if="${requestSenders.size()>0}">Friend Requests</h4>
                   <div class="follow-user" th:each="sender : ${requestSenders}">
                     <img th:if="${sender.getProfilePicture() == null || sender.getProfilePicture().equalsIgnoreCase('null')}"
