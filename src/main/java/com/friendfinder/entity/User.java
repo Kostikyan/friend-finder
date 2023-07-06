@@ -1,6 +1,7 @@
 package com.friendfinder.entity;
 
 import com.friendfinder.entity.types.UserGender;
+import com.friendfinder.entity.types.UserRole;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -43,6 +44,10 @@ public class User {
     private boolean enabled;
 
     private String token;
+
+    @Enumerated(value = EnumType.STRING)
+    private UserRole role;
+
 
     /**
      * The getter that automatically created @Data didn't work, so

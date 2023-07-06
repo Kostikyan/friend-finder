@@ -17,7 +17,10 @@ public interface PostService {
 
     List<Post> postUserById(int id);
 
-    void deletePostId(int id, CurrentUser currentUser);
+    void deletePostId(int id);
 
     List<PostResponseDto> getAllPostFriends(CurrentUser currentUser);
+
+    List<Post> findAll();
+
 }
