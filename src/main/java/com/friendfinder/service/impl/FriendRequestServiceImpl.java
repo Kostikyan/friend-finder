@@ -5,6 +5,7 @@ import com.friendfinder.entity.User;
 import com.friendfinder.entity.types.FriendStatus;
 import com.friendfinder.repository.FriendRequestRepository;
 import com.friendfinder.service.FriendRequestService;
+import com.friendfinder.service.UserActivityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,11 +24,12 @@ public class FriendRequestServiceImpl implements FriendRequestService {
     @Override
     public void save(FriendRequest friendRequest) {
         if (findBySenderIdAndReceiverId(friendRequest.getSender().getId(), friendRequest.getReceiver().getId()) == null
-                && findBySenderIdAndReceiverId(friendRequest.getReceiver().getId(), friendRequest.getSender().getId()) == null)
-            mailService.sendMail(friendRequest.getReceiver().getEmail(), "You have a new friend request", "Hi, "
-                    + friendRequest.getReceiver().getName() + ". You have an friend request from " +
-                    friendRequest.getSender().getName() + " " + friendRequest.getSender().getSurname());
-        friendRequestRepository.save(friendRequest);
+                && findBySenderIdAndReceiverId(friendRequest.getReceiver().getId(), friendRequest.getSender().getId()) == null) {
+            friendRequestRepository.save(friendRequest);
+        }
+        mailService.sendMail(friendRequest.getReceiver().getEmail(), "You have a new friend request", "Hi, "
+                + friendRequest.getReceiver().getName() + ". You have an friend request from " +
+                friendRequest.getSender().getName() + " " + friendRequest.getSender().getSurname());
     }
 
     @Override
@@ -45,12 +47,6 @@ public class FriendRequestServiceImpl implements FriendRequestService {
     @Override
     public FriendRequest findBySenderIdAndReceiverId(int senderId, int receiverId) {
         Optional<FriendRequest> bySenderIdAndReceiverId = friendRequestRepository.findBySenderIdAndReceiverId(senderId, receiverId);
-        if (bySenderIdAndReceiverId.isPresent()){
-            FriendRequest friendRequest = bySenderIdAndReceiverId.get();
-            mailService.sendMail(friendRequest.getSender().getEmail(), "Your friend request is accepted",
-                    "Hi, " + friendRequest.getSender().getName() +
-                    ". " + friendRequest.getReceiver().getName() + " accepted your request.");
-        }
         return bySenderIdAndReceiverId.orElse(null);
     }
 
@@ -77,6 +73,9 @@ public class FriendRequestServiceImpl implements FriendRequestService {
     @Override
     public void changeStatus(FriendRequest friendRequest) {
         friendRequest.setStatus(FriendStatus.ACCEPTED);
+        mailService.sendMail(friendRequest.getSender().getEmail(), "Your friend request is accepted",
+                "Hi, " + friendRequest.getSender().getName() +
+                        ". " + friendRequest.getReceiver().getName() + " accepted your request.");
         friendRequestRepository.save(friendRequest);
     }
 
