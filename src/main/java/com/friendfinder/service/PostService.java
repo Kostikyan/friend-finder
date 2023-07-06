@@ -1,6 +1,7 @@
 package com.friendfinder.service;
 
 import com.friendfinder.dto.postDto.PostRequestDto;
+import com.friendfinder.dto.postDto.PostResponseDto;
 import com.friendfinder.entity.Post;
 import com.friendfinder.security.CurrentUser;
 import org.springframework.data.domain.Page;
@@ -18,10 +19,8 @@ public interface PostService {
 
     void deletePostId(int id);
 
-    List<PostResponseDto> getAllPostFriends(CurrentUser currentUser);
-
     List<Post> findAll();
 
-    List<Post> getAllPostFriends(CurrentUser currentUser);
+    List<PostResponseDto> getAllPostFriends(CurrentUser currentUser);
 
 }

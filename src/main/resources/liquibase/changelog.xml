@@ -689,6 +689,11 @@
     </changeSet>
 
     <changeSet id="addColumnDate" author="hhakobyan">
+        <dropColumn tableName="userActivity">
+            <column name="datetime">
+
+            </column>
+        </dropColumn>
         <addColumn tableName="userActivity">
             <column afterColumn="type"
                     name="datetime"
