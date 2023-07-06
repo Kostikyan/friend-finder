@@ -1,7 +1,6 @@
 package com.friendfinder.service.impl;
 
 import com.friendfinder.dto.postDto.PostRequestDto;
-import com.friendfinder.dto.postDto.PostResponseDto;
 import com.friendfinder.entity.Post;
 import com.friendfinder.entity.User;
 import com.friendfinder.mapper.PostMapper;
@@ -24,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -41,10 +41,15 @@ public class PostServiceImpl implements PostService {
     private String postVideoUploadPath;
 
     @Override
-    public Page<Post> postFindPage(int pageNumber) {
+    public Page<Post> postFindPage(int pageNumber, CurrentUser currentUser) {
+        List<Post> allPostFriends = getAllPostFriends(currentUser);
+        List<Integer> friendIds = allPostFriends.stream()
+                .map(post -> post.getUser().getId())
+                .collect(Collectors.toList());
         Sort sort = Sort.by(Sort.Order.desc("id"));
         Pageable pageable = PageRequest.of(pageNumber - 1, 5, sort);
-        return postRepository.findAll(pageable);
+
+        return postRepository.findByUserIdIn(friendIds, pageable);
     }
 
     @Override
@@ -60,16 +65,16 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostResponseDto> getAllPostFriends(CurrentUser currentUser) {
+    public List<Post> getAllPostFriends(CurrentUser currentUser) {
         List<User> friendsByUserId = friendRequestService.findFriendsByUserId(currentUser.getUser().getId());
         List<Integer> friendsIds = friendsByUserId
                 .stream()
                 .map(User::getId)
                 .toList();
 
-        List<PostResponseDto> postList = new ArrayList<>();
+        List<Post> postList = new ArrayList<>();
         for (Integer friendsId : friendsIds) {
-            postList.addAll(postMapper.mapResp(postRepository.findByUserId(friendsId)));
+            postList.addAll(postRepository.findByUserId(friendsId));
         }
 
         return postList;

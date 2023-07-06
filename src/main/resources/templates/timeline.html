@@ -192,7 +192,7 @@
 
             <!--Post Date-->
             <div class="post-date hidden-xs hidden-sm">
-              <h5>Sarah</h5>
+              <h5 th:text="${post.user.name}"></h5>
               <p class="text-grey" th:text="${#dates.format(post.postDatetime, 'yyyy/MM/dd')}"></p>
             </div><!--Post Date End-->
 
