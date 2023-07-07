@@ -5,6 +5,7 @@ import com.friendfinder.entity.Post;
 import com.friendfinder.repository.CommentRepository;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.CommentService;
+import com.friendfinder.service.UserActivityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.List;
 public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
+    private final UserActivityService userActivityService;
 
     @Override
     public List<Comment> commentList() {
@@ -30,6 +32,7 @@ public class CommentServiceImpl implements CommentService {
                 .commentaryText(comment.getCommentaryText())
                 .datetime(LocalDateTime.now())
                 .build());
+        userActivityService.save(currentUser.getUser(),"commented on a post");
     }
 
     @Override

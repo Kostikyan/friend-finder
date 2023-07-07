@@ -15,7 +15,7 @@ spring:
   mail:
     host: smtp.gmail.com
     username: finderfriend2023@gmail.com
-    password: fmfvomabgtxtdjbe
+    password: dlvwnndbnoxemfwr
     port: 587
     properties:
       mail:

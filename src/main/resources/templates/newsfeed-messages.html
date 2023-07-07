@@ -203,27 +203,21 @@
                         <img th:if="${us.getProfilePicture() == null || us.getProfilePicture().equalsIgnoreCase('null')}"
                              src="/images/post-images/difault.png" alt="" class="profile-photo-sm pull-left">
                         <img th:if="${us.getProfilePicture() != null}"
-                             th:src="@{/getProfilePic(imageName=${us.getProfilePicture()})}" alt=""
-                             class="profile-photo-sm pull-left">
+                             th:src="@{/getProfilePic(imageName=${us.getProfilePicture()})}" alt="" class="profile-photo-sm pull-left">
                         <div>
-                            <h5><a th:href="@{'/users/profile/' + ${us.id}}" th:text="${us.name}+' '+${us.surname}"></a>
-                            </h5>
+                            <h5><a th:href="@{'/users/profile/' + ${us.id}}" th:text="${us.name}+' '+${us.surname}"></a></h5>
                             <a th:href="@{'/send-request?sender=' + ${user.id} + '&receiver=' +${us.id}}"
                                class="text-green">Add friend</a>
                         </div>
                     </div>
-                </div>
-                <div class="suggestions" id="sticky-sidebar1">
                     <h4 class="grey" th:if="${requestSenders.size()>0}">Friend Requests</h4>
                     <div class="follow-user" th:each="sender : ${requestSenders}">
                         <img th:if="${sender.getProfilePicture() == null || sender.getProfilePicture().equalsIgnoreCase('null')}"
                              src="/images/post-images/difault.png" alt="" class="profile-photo-sm pull-left">
                         <img th:if="${sender.getProfilePicture() != null}"
-                             th:src="@{/getProfilePic(imageName=${sender.getProfilePicture()})}" alt=""
-                             class="profile-photo-sm pull-left">
+                             th:src="@{/getProfilePic(imageName=${sender.getProfilePicture()})}" alt="" class="profile-photo-sm pull-left">
                         <div>
-                            <h5><a th:href="@{'/users/profile/' + ${sender.id}}"
-                                   th:text="${sender.name}+' '+${sender.surname}"></a></h5>
+                            <h5><a th:href="@{'/users/profile/' + ${sender.id}}" th:text="${sender.name}+' '+${sender.surname}"></a></h5>
                             <a th:href="@{'/access-request?sender=' + ${sender.id} + '&receiver=' +${user.id}}"
                                class="text-green">Accept</a>
                             <a th:href="@{'/reject-request?sender=' + ${sender.id} + '&receiver=' +${user.id}}"

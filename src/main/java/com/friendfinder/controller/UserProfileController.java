@@ -68,7 +68,7 @@ public class UserProfileController {
     @GetMapping("/delete")
     public String deletePostById(@RequestParam("id") int id,
                                  @AuthenticationPrincipal CurrentUser currentUser) {
-        postService.deletePostId(id, currentUser);
+        postService.deletePostId(id);
         return "redirect:/users/profile/" + currentUser.getUser().getId();
 
     }

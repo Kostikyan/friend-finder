@@ -1,7 +1,6 @@
 package com.friendfinder.controller;
 
 import com.friendfinder.dto.postDto.PostRequestDto;
-import com.friendfinder.dto.postDto.PostResponseDto;
 import com.friendfinder.dto.postLikeDto.PostLikeDto;
 import com.friendfinder.entity.Comment;
 import com.friendfinder.entity.Post;
@@ -44,7 +43,7 @@ public class PostController {
     @GetMapping("/page/{pageNumber}")
     public String listByPage(ModelMap modelMap, @PathVariable("pageNumber") int currentPage,
                              @AuthenticationPrincipal CurrentUser currentUser) {
-        Page<Post> page = postService.postFindPage(currentPage);
+        Page<Post> page = postService.postFindPage(currentPage, currentUser);
         long totalItems = page.getTotalElements();
         int totalPages = page.getTotalPages();
         List<Post> content = page.getContent();

@@ -11,13 +11,16 @@ import java.util.List;
 
 public interface PostService {
 
-    Page<Post> postFindPage(int pageNumber);
+    Page<Post> postFindPage(int pageNumber, CurrentUser currentUser);
 
     void postSave(PostRequestDto post, CurrentUser currentUser, MultipartFile image, MultipartFile video);
 
     List<Post> postUserById(int id);
 
-    void deletePostId(int id, CurrentUser currentUser);
+    void deletePostId(int id);
+
+    List<Post> findAll();
 
     List<PostResponseDto> getAllPostFriends(CurrentUser currentUser);
+
 }

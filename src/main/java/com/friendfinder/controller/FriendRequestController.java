@@ -4,7 +4,6 @@ import com.friendfinder.entity.FriendRequest;
 import com.friendfinder.entity.User;
 import com.friendfinder.entity.types.FriendStatus;
 import com.friendfinder.service.FriendRequestService;
-import com.friendfinder.service.impl.MailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class FriendRequestController {
     private final FriendRequestService friendRequestService;
-    private final MailService mailService;
 
     @GetMapping("/send-request")
     public String sendRequest(@RequestParam("sender") User sender,
