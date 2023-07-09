@@ -6,6 +6,7 @@ import com.friendfinder.entity.UserImage;
 import com.friendfinder.entity.types.FriendStatus;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.FriendRequestService;
+import com.friendfinder.service.UserActivityService;
 import com.friendfinder.service.UserImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,6 +27,7 @@ public class UserImageProfileController {
 
     private final UserImageService userImageService;
     private final FriendRequestService friendRequestService;
+    private final UserActivityService userActivityService;
 
     @GetMapping("/{userId}")
     public String getUserId(@PathVariable("userId") User user, ModelMap modelMap,
@@ -35,6 +37,7 @@ public class UserImageProfileController {
         modelMap.addAttribute("profile", currentUser.getUser());
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("friendsCount", friendRequestService.findFriendsByUserIdCount(user.getId()));
+        modelMap.addAttribute("userActivity", userActivityService.getAllByUserId(user.getId()));
         return "timeline-album";
     }
 

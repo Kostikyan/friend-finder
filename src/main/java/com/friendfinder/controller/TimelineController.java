@@ -3,6 +3,7 @@ package com.friendfinder.controller;
 import com.friendfinder.entity.User;
 import com.friendfinder.entity.UserImage;
 import com.friendfinder.security.CurrentUser;
+import com.friendfinder.service.UserActivityService;
 import com.friendfinder.service.impl.TimelineServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class TimelineController {
 
     private final TimelineServiceImpl timelineService;
+    private final UserActivityService userActivityService;
 
     @GetMapping()
     public String timelinePage() {
@@ -28,6 +30,7 @@ public class TimelineController {
         User user = currentUser.getUser();
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("countries", timelineService.findAllCountries());
+        modelMap.addAttribute("userActivity", userActivityService.getAllByUserId(user.getId()));
         return "edit-profile-basic";
     }
 

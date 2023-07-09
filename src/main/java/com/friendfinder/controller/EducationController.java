@@ -4,6 +4,7 @@ import com.friendfinder.entity.Education;
 import com.friendfinder.entity.WorkExperiences;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.EducationService;
+import com.friendfinder.service.UserActivityService;
 import com.friendfinder.service.WorkExperiencesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,12 +17,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/profile/work-education")
 public class EducationController {
 
-    public final EducationService educationService;
-    public final WorkExperiencesService workExperiencesService;
+    private final EducationService educationService;
+    private final WorkExperiencesService workExperiencesService;
+    private final UserActivityService userActivityService;
 
     @GetMapping
     public String educationPage(@AuthenticationPrincipal CurrentUser currentUser, ModelMap modelMap) {
         modelMap.addAttribute("user", currentUser.getUser());
+        modelMap.addAttribute("userActivity", userActivityService.getAllByUserId(currentUser.getUser().getId()));
         return "edit-profile-work-edu";
     }
 
