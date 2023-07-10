@@ -3,15 +3,17 @@ package com.friendfinder.controller;
 import com.friendfinder.dto.postLikeDto.PostLikeDto;
 import com.friendfinder.entity.Comment;
 import com.friendfinder.entity.Post;
-import com.friendfinder.entity.User;
 import com.friendfinder.entity.types.LikeStatus;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @Controller
@@ -26,13 +28,26 @@ public class PostImageController {
     private final FriendRequestService friendRequestService;
 
 
-    @GetMapping("/{userId}")
-    public String getUserId(@PathVariable("userId") User user, ModelMap modelMap,
-                            @AuthenticationPrincipal CurrentUser currentUser) {
-        modelMap.addAttribute("userPage", postService.getAllPostFriends(currentUser));
+    @GetMapping
+    public String getPostImageByFriends(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
+        return listByPage(1, modelMap, currentUser);
+
+    }
+
+    @GetMapping("/page/{pageNumber}")
+    public String listByPage(@PathVariable("pageNumber") int currentPage, ModelMap modelMap,
+                             @AuthenticationPrincipal CurrentUser currentUser) {
+        Page<Post> page = postService.postFindPageImage(currentPage, currentUser);
+        List<Post> content = page.getContent();
+        long totalItems = page.getTotalElements();
+        long totalPages = page.getTotalPages();
+
+        modelMap.addAttribute("currentPage", currentPage);
+        modelMap.addAttribute("totalItems", totalItems);
+        modelMap.addAttribute("totalPages", totalPages);
+        modelMap.addAttribute("posts", content);
         modelMap.addAttribute("allExceptCurrentUser", userService.findAllExceptCurrentUser(currentUser.getUser().getId()));
-        modelMap.addAttribute("user", user);
-        modelMap.addAttribute("profile", currentUser.getUser());
+        modelMap.addAttribute("user", currentUser.getUser());
         modelMap.addAttribute("comments", commentService.commentList());
         modelMap.addAttribute("users", userService.userForAddFriend(currentUser));
         modelMap.addAttribute("requestSenders", friendRequestService.findSenderByReceiverId(currentUser.getUser().getId()));

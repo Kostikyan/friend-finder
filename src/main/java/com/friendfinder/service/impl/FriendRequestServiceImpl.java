@@ -5,7 +5,6 @@ import com.friendfinder.entity.User;
 import com.friendfinder.entity.types.FriendStatus;
 import com.friendfinder.repository.FriendRequestRepository;
 import com.friendfinder.service.FriendRequestService;
-import com.friendfinder.service.UserActivityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

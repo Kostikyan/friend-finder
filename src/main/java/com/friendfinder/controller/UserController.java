@@ -4,6 +4,7 @@ import com.friendfinder.dto.userDto.UserRegisterRequestDto;
 import com.friendfinder.entity.Country;
 import com.friendfinder.entity.User;
 import com.friendfinder.security.CurrentUser;
+import com.friendfinder.service.PostService;
 import com.friendfinder.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -55,11 +56,9 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping
-    public String sendDataToHeader(@AuthenticationPrincipal CurrentUser currentUser,
-                                   ModelMap map
-    ){
+    @GetMapping
+    public String sendDataToHeader(@AuthenticationPrincipal CurrentUser currentUser, ModelMap map) {
         map.addAttribute("user", currentUser.getUser());
-        return "fragment/header-menu-fragment";
+            return "fragment/header-menu-fragment";
     }
 }

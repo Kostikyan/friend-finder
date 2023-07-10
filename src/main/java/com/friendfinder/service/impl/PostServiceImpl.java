@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -46,13 +45,40 @@ public class PostServiceImpl implements PostService {
     @Override
     public Page<Post> postFindPage(int pageNumber, CurrentUser currentUser) {
         List<PostResponseDto> allPostFriends = getAllPostFriends(currentUser);
-        List<Integer> friendIds = allPostFriends.stream()
-                .map(post -> post.getUser().getId())
-                .collect(Collectors.toList());
+        List<Integer> friendIds = new ArrayList<>();
+        for (PostResponseDto post : allPostFriends) {
+            friendIds.add(post.getUser().getId());
+        }
         Sort sort = Sort.by(Sort.Order.desc("id"));
         Pageable pageable = PageRequest.of(pageNumber - 1, 5, sort);
 
         return postRepository.findByUserIdIn(friendIds, pageable);
+    }
+
+    @Override
+    public Page<Post> postFindPageVideo(int pageNumber, CurrentUser currentUser) {
+        List<PostResponseDto> allPostFriends = getAllPostFriends(currentUser);
+        List<String> videos = new ArrayList<>();
+        for (PostResponseDto post : allPostFriends) {
+            videos.add(post.getMusicFileName());
+        }
+        Sort sort = Sort.by(Sort.Order.desc("id"));
+        Pageable pageable = PageRequest.of(pageNumber - 1, 10, sort);
+
+        return postRepository.findPostsByMusicFileNameIn(videos, pageable);
+    }
+
+    @Override
+    public Page<Post> postFindPageImage(int pageNumber, CurrentUser currentUser) {
+        List<PostResponseDto> allPostFriends = getAllPostFriends(currentUser);
+        List<String> images = new ArrayList<>();
+        for (PostResponseDto post : allPostFriends) {
+            images.add(post.getImgName());
+        }
+        Sort sort = Sort.by(Sort.Order.desc("id"));
+        Pageable pageable = PageRequest.of(pageNumber - 1, 10, sort);
+
+        return postRepository.findPostsByImgNameIn(images, pageable);
     }
 
     @Override
@@ -75,8 +101,7 @@ public class PostServiceImpl implements PostService {
 
     }
 
-    @Override
-    public List<PostResponseDto> getAllPostFriends(CurrentUser currentUser) {
+    private List<PostResponseDto> getAllPostFriends(CurrentUser currentUser) {
         List<User> friendsByUserId = friendRequestService.findFriendsByUserId(currentUser.getUser().getId());
         List<Integer> friendsIds = friendsByUserId
                 .stream()
