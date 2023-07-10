@@ -96,7 +96,7 @@ public class UserProfileController {
                              @AuthenticationPrincipal CurrentUser currentUser,
                              @PathVariable("postId") Post post) {
         commentService.addComment(comment, currentUser, post);
-        return "redirect:/users/profile/page/" + post.getUser().getId();
+        return "redirect:/users/profile/" + post.getUser().getId();
     }
 
     @GetMapping("/comment/delete")

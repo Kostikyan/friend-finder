@@ -244,10 +244,8 @@
                 </div>
 
 
-                <form class="post-comment" th:action="@{/users/profile/page/comment/{postId}(postId=${post.id})}"
+                <form class="post-comment" th:action="@{/users/profile/comment/{postId}(postId=${post.id})}"
                       method="post">
-                  <form class="post-comment" th:action="@{/posts/comment/{postId}(postId=${post.id})}"
-                        method="post">
                     <img th:if="${user.profilePicture == null || user.profilePicture.equalsIgnoreCase('null')}"
                          src="/images/post-images/difault.png" alt="" class="profile-photo-sm">
                     <img th:if="${user.profilePicture != null}"
@@ -255,7 +253,6 @@
                          class="profile-photo-sm">
                     <input type="text" class="form-control" name="commentaryText"
                            placeholder="Post a comment">
-                  </form>
                 </form>
               </div>
             </div>

@@ -31,9 +31,7 @@ public class PostController {
 
 
     @GetMapping
-    public String postAddPage(ModelMap modelMap,
-                              @AuthenticationPrincipal CurrentUser currentUser,
-                              @ModelAttribute Post post) {
+    public String postAddPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
         List<Comment> comments = commentService.commentList();
         modelMap.addAttribute("comments", comments);
         return listByPage(modelMap, 1, currentUser);

@@ -27,8 +27,8 @@
                     <li><a href="/posts">Newsfeed</a></li>
                     <li><a href="/friends">My friends</a></li>
                     <li><a href="/newsfeed/messages">Chatroom</a></li>
-                    <li><a th:href="@{'/posts/images/' + ${user.id}}">Images</a></li>
-                    <li><a th:href="@{'/posts/video/' + ${user.id}}">Videos</a></li>
+                    <li><a href="/posts/images">Images</a></li>
+                    <li><a href="/posts/video">Videos</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -53,8 +53,8 @@
                     <li><a href="/posts">Newsfeed</a></li>
                     <li><a href="/friends">My friends</a></li>
                     <li><a href="/newsfeed/messages">Chatroom</a></li>
-                    <li><a th:href="@{'/posts/images/' + ${user.id}}">Images</a></li>
-                    <li><a th:href="@{'/posts/video/' + ${user.id}}">Videos</a></li>
+                    <li><a href="/posts/images">Images</a></li>
+                    <li><a href="posts/video">Videos</a></li>
                     <li><a th:href="@{'/users/profile/' + ${user.id}}" >Timeline</a></li>
                     <li><a th:href="@{'/users/about/profile/' + ${user.id}}">Timeline About</a></li>
                     <li><a th:href="@{'/users/image/profile/' + ${user.id}}">Timeline Album</a></li>
