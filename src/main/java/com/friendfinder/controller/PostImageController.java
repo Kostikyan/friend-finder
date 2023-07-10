@@ -60,7 +60,7 @@ public class PostImageController {
                           @PathVariable(name = "postId") Post post) {
         postLikeDto.setLikeStatus(LikeStatus.LIKE);
         likeAndDislikeService.saveReaction(postLikeDto, currentUser, post);
-        return "redirect:/posts/images/" + currentUser.getUser().getId();
+        return "redirect:/posts/images";
     }
 
     @PostMapping("/reaction/dislike/{postId}")
@@ -69,7 +69,7 @@ public class PostImageController {
                              @PathVariable(name = "postId") Post post) {
         postLikeDto.setLikeStatus(LikeStatus.DISLIKE);
         likeAndDislikeService.saveReaction(postLikeDto, currentUser, post);
-        return "redirect:/posts/images/" + currentUser.getUser().getId();
+        return "redirect:/posts/images";
     }
 
     @PostMapping("/comment/{postId}")
@@ -77,6 +77,6 @@ public class PostImageController {
                              @AuthenticationPrincipal CurrentUser currentUser,
                              @PathVariable("postId") Post post) {
         commentService.addComment(comment, currentUser, post);
-        return "redirect:/posts/images/" + currentUser.getUser().getId();
+        return "redirect:/posts/images";
     }
 }

@@ -66,7 +66,7 @@ public class PostVideoController {
                           @PathVariable(name = "postId") Post post) {
         postLikeDto.setLikeStatus(LikeStatus.LIKE);
         likeAndDislikeService.saveReaction(postLikeDto, currentUser, post);
-        return "redirect:/posts/video/" + currentUser.getUser().getId();
+        return "redirect:/posts/video";
     }
 
     @PostMapping("/reaction/dislike/{postId}")
@@ -75,7 +75,7 @@ public class PostVideoController {
                              @PathVariable(name = "postId") Post post) {
         postLikeDto.setLikeStatus(LikeStatus.DISLIKE);
         likeAndDislikeService.saveReaction(postLikeDto, currentUser, post);
-        return "redirect:/posts/video/" + currentUser.getUser().getId();
+        return "redirect:/posts/video";
     }
 
     @PostMapping("/comment/{postId}")
@@ -83,6 +83,6 @@ public class PostVideoController {
                              @AuthenticationPrincipal CurrentUser currentUser,
                              @PathVariable("postId") Post post) {
         commentService.addComment(comment, currentUser, post);
-        return "redirect:/posts/video/" + currentUser.getUser().getId();
+        return "redirect:/posts/video";
     }
 }
