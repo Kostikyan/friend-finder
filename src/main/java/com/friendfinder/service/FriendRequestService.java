@@ -2,10 +2,15 @@ package com.friendfinder.service;
 
 import com.friendfinder.entity.FriendRequest;
 import com.friendfinder.entity.User;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface FriendRequestService {
+
+
+    Page<User> userFriendsPageByUserId(int userId, int pageNumber);
+
     void save(FriendRequest friendRequest);
 
     List<User> findSenderByReceiverId(int receiverId);

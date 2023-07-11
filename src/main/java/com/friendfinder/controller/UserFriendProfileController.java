@@ -2,18 +2,19 @@ package com.friendfinder.controller;
 
 
 import com.friendfinder.entity.FriendRequest;
+import com.friendfinder.entity.Post;
 import com.friendfinder.entity.User;
 import com.friendfinder.entity.types.FriendStatus;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.FriendRequestService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,10 +25,27 @@ public class UserFriendProfileController {
 
     @GetMapping("/{userId}")
     public String friendsPage(@PathVariable("userId") User user, ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        modelMap.addAttribute("friends", friendRequestService.findFriendsByUserId(user.getId()));
+
+        return listByPage(user, 1, modelMap, currentUser);
+    }
+
+    @GetMapping("/{userId}/page/{pageNumber}")
+    public String listByPage(@PathVariable("userId") User user, @PathVariable("pageNumber") int currentPage, ModelMap modelMap,
+                             @ModelAttribute CurrentUser currentUser) {
+        Page<User> page = friendRequestService.userFriendsPageByUserId(user.getId(), currentPage);
+        List<User> content = page.getContent();
+        long totalItems = page.getTotalElements();
+        long totalPages = page.getTotalPages();
+
+        modelMap.addAttribute("currentPage", currentPage);
+        modelMap.addAttribute("totalItems", totalItems);
+        modelMap.addAttribute("totalPages", totalPages);
+        modelMap.addAttribute("friends", content);
+
         modelMap.addAttribute("profile", currentUser.getUser());
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("friendsCount", friendRequestService.findFriendsByUserIdCount(user.getId()));
+
         return "timeline-friends";
     }
 

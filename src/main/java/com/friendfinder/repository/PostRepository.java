@@ -14,4 +14,6 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     Page<Post> findByUserIdIn(List<Integer> userIds, Pageable pageable);
     Page<Post> findPostsByMusicFileNameIn(List<String> musicFileName, Pageable pageable);
     Page<Post> findPostsByImgNameIn(List<String> imgName, Pageable pageable);
+
+    Page<Post> findPostsByUserIdIn(List<Integer> userId, Pageable pageable);
 }

@@ -3,7 +3,6 @@ package com.friendfinder.controller;
 import com.friendfinder.dto.postLikeDto.PostLikeDto;
 import com.friendfinder.entity.Comment;
 import com.friendfinder.entity.Post;
-import com.friendfinder.entity.User;
 import com.friendfinder.entity.types.LikeStatus;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.*;
@@ -14,9 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 
 @Controller
@@ -56,7 +53,6 @@ public class PostVideoController {
         modelMap.addAttribute("allExceptCurrentUser", userService.findAllExceptCurrentUser(currentUser.getUser().getId()));
         modelMap.addAttribute("requestSenders", friendRequestService.findSenderByReceiverId(currentUser.getUser().getId()));
 
-
         return "newsfeed-videos";
     }
 
@@ -66,7 +62,7 @@ public class PostVideoController {
                           @PathVariable(name = "postId") Post post) {
         postLikeDto.setLikeStatus(LikeStatus.LIKE);
         likeAndDislikeService.saveReaction(postLikeDto, currentUser, post);
-        return "redirect:/posts/video/" + currentUser.getUser().getId();
+        return "redirect:/posts/video";
     }
 
     @PostMapping("/reaction/dislike/{postId}")
@@ -75,7 +71,7 @@ public class PostVideoController {
                              @PathVariable(name = "postId") Post post) {
         postLikeDto.setLikeStatus(LikeStatus.DISLIKE);
         likeAndDislikeService.saveReaction(postLikeDto, currentUser, post);
-        return "redirect:/posts/video/" + currentUser.getUser().getId();
+        return "redirect:/posts/video";
     }
 
     @PostMapping("/comment/{postId}")
@@ -83,6 +79,6 @@ public class PostVideoController {
                              @AuthenticationPrincipal CurrentUser currentUser,
                              @PathVariable("postId") Post post) {
         commentService.addComment(comment, currentUser, post);
-        return "redirect:/posts/video/" + currentUser.getUser().getId();
+        return "redirect:/posts/video";
     }
 }

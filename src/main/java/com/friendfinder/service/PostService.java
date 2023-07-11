@@ -14,6 +14,8 @@ public interface PostService {
     Page<Post> postFindPageVideo(int pageNumber, CurrentUser currentUser);
     Page<Post> postFindPageImage(int pageNumber, CurrentUser currentUser);
 
+    Page<Post> postPageByUserId(int userId, int pageNumber);
+
     void postSave(PostRequestDto post, CurrentUser currentUser, MultipartFile image, MultipartFile video);
 
     List<Post> postUserById(int id);

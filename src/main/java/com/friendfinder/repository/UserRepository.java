@@ -1,6 +1,8 @@
 package com.friendfinder.repository;
 
 import com.friendfinder.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,5 +22,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     void updateUserPasswordById(@Param("password") String password, @Param("id") int id);
 
     Optional<List<User>> findByNameContainingIgnoreCaseOrSurnameContainingIgnoreCase(String name, String surname);
+
+    Page<User> findUsersByIdIn(List<Integer> friendsId, Pageable pageable);
 
 }

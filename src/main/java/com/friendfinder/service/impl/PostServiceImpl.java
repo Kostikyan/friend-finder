@@ -82,6 +82,18 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public Page<Post> postPageByUserId(int userId, int pageNumber) {
+        List<Post> posts = postUserById(userId);
+        List<Integer> postId = new ArrayList<>();
+        for (Post post : posts) {
+            postId.add(post.getUser().getId());
+        }
+        Sort sort = Sort.by(Sort.Order.desc("id"));
+        Pageable pageable = PageRequest.of(pageNumber - 1, 5, sort);
+        return postRepository.findPostsByUserIdIn(postId, pageable);
+    }
+
+    @Override
     public void postSave(PostRequestDto requestDto, CurrentUser currentUser, MultipartFile image, MultipartFile video) {
         String imgName = ImageUtil.uploadImage(image, postImageUploadPath);
         String musicFileName = ImageUtil.uploadImage(video, postVideoUploadPath);
@@ -98,7 +110,6 @@ public class PostServiceImpl implements PostService {
         } else {
             userActivityService.save(currentUser.getUser(), "posted a video");
         }
-
     }
 
     private List<PostResponseDto> getAllPostFriends(CurrentUser currentUser) {
