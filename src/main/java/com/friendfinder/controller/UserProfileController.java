@@ -9,10 +9,7 @@ import com.friendfinder.entity.User;
 import com.friendfinder.entity.types.FriendStatus;
 import com.friendfinder.entity.types.LikeStatus;
 import com.friendfinder.security.CurrentUser;
-import com.friendfinder.service.CommentService;
-import com.friendfinder.service.FriendRequestService;
-import com.friendfinder.service.LikeAndDislikeService;
-import com.friendfinder.service.PostService;
+import com.friendfinder.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -32,6 +29,7 @@ public class UserProfileController {
     private final CommentService commentService;
     private final LikeAndDislikeService likeAndDislikeService;
     private final FriendRequestService friendRequestService;
+    private final UserActivityService userActivityService;
 
     @GetMapping("/{userId}")
     public String getUserId(@PathVariable("userId") User user, ModelMap modelMap,
@@ -56,7 +54,7 @@ public class UserProfileController {
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("comments", commentService.commentList());
         modelMap.addAttribute("friendsCount", friendRequestService.findFriendsByUserIdCount(user.getId()));
-
+        modelMap.addAttribute("userActivity", userActivityService.getAllByUserId(user.getId()));
         return "timeline";
     }
 

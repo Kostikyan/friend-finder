@@ -7,6 +7,7 @@ import com.friendfinder.entity.User;
 import com.friendfinder.entity.types.FriendStatus;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.FriendRequestService;
+import com.friendfinder.service.UserActivityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,6 +23,7 @@ import java.util.List;
 public class UserFriendProfileController {
 
     private final FriendRequestService friendRequestService;
+    private final UserActivityService userActivityService;
 
     @GetMapping("/{userId}")
     public String friendsPage(@PathVariable("userId") User user, ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
@@ -45,7 +47,7 @@ public class UserFriendProfileController {
         modelMap.addAttribute("profile", currentUser.getUser());
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("friendsCount", friendRequestService.findFriendsByUserIdCount(user.getId()));
-
+        modelMap.addAttribute("userActivity", userActivityService.getAllByUserId(user.getId()));
         return "timeline-friends";
     }
 

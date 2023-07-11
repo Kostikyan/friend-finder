@@ -23,6 +23,7 @@ public class AboutController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final FriendRequestService friendRequestService;
+    private final UserActivityService userActivityService;
 
     @GetMapping("/{userId}")
     public String workExperiences(@PathVariable("userId") User user, ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
@@ -36,6 +37,7 @@ public class AboutController {
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("languages", languageList);
         modelMap.addAttribute("friendsCount", friendRequestService.findFriendsByUserIdCount(user.getId()));
+        modelMap.addAttribute("userActivity", userActivityService.getAllByUserId(user.getId()));
         return "timeline-about";
     }
 
