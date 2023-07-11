@@ -1,6 +1,7 @@
 package com.friendfinder.controller;
 
 import com.friendfinder.entity.FriendRequest;
+import com.friendfinder.entity.Post;
 import com.friendfinder.entity.User;
 import com.friendfinder.entity.UserImage;
 import com.friendfinder.entity.types.FriendStatus;
@@ -9,13 +10,11 @@ import com.friendfinder.service.FriendRequestService;
 import com.friendfinder.service.UserActivityService;
 import com.friendfinder.service.UserImageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,8 +31,23 @@ public class UserImageProfileController {
     @GetMapping("/{userId}")
     public String getUserId(@PathVariable("userId") User user, ModelMap modelMap,
                             @AuthenticationPrincipal CurrentUser currentUser) {
-        List<UserImage> userImageById = userImageService.getUserImageById(user.getId());
-        modelMap.addAttribute("userPage", userImageById);
+        return listByPage(user, 1, modelMap, currentUser);
+    }
+
+
+    @GetMapping("/{userId}/page/{pageNumber}")
+    public String listByPage(@PathVariable("userId") User user, @PathVariable("pageNumber") int currentPage, ModelMap modelMap,
+                             @ModelAttribute CurrentUser currentUser) {
+        Page<UserImage> page = userImageService.userImagePageByUserId(user.getId(), currentPage);
+        List<UserImage> content = page.getContent();
+        long totalItems = page.getTotalElements();
+        long totalPages = page.getTotalPages();
+
+        modelMap.addAttribute("currentPage", currentPage);
+        modelMap.addAttribute("totalItems", totalItems);
+        modelMap.addAttribute("totalPages", totalPages);
+        modelMap.addAttribute("userPage", content);
+
         modelMap.addAttribute("profile", currentUser.getUser());
         modelMap.addAttribute("user", user);
         modelMap.addAttribute("friendsCount", friendRequestService.findFriendsByUserIdCount(user.getId()));

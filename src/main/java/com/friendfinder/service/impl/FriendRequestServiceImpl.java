@@ -4,8 +4,13 @@ import com.friendfinder.entity.FriendRequest;
 import com.friendfinder.entity.User;
 import com.friendfinder.entity.types.FriendStatus;
 import com.friendfinder.repository.FriendRequestRepository;
+import com.friendfinder.repository.UserRepository;
 import com.friendfinder.service.FriendRequestService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,6 +23,7 @@ public class FriendRequestServiceImpl implements FriendRequestService {
 
 
     private final FriendRequestRepository friendRequestRepository;
+    private final UserRepository userRepository;
     private final MailService mailService;
 
     @Override
@@ -52,6 +58,18 @@ public class FriendRequestServiceImpl implements FriendRequestService {
     @Override
     public void delete(FriendRequest friendRequest) {
         friendRequestRepository.delete(friendRequest);
+    }
+
+    @Override
+    public Page<User> userFriendsPageByUserId(int userId, int pageNumber) {
+        List<User> friendsByUserId = findFriendsByUserId(userId);
+        List<Integer> friendsId = new ArrayList<>();
+        for (User user : friendsByUserId) {
+            friendsId.add(user.getId());
+        }
+        Sort sort = Sort.by(Sort.Order.desc("id"));
+        Pageable pageable = PageRequest.of(pageNumber - 1, 12, sort);
+        return userRepository.findUsersByIdIn(friendsId, pageable);
     }
 
     @Override

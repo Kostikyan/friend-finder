@@ -11,6 +11,7 @@ import com.friendfinder.entity.types.LikeStatus;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -33,12 +34,25 @@ public class UserProfileController {
     @GetMapping("/{userId}")
     public String getUserId(@PathVariable("userId") User user, ModelMap modelMap,
                             @AuthenticationPrincipal CurrentUser currentUser) {
-        List<Post> attributeValue = postService.postUserById(user.getId());
-        List<Comment> comments = commentService.commentList();
-        modelMap.addAttribute("userPage", attributeValue);
-        modelMap.addAttribute("user", user);
+        return listByPage(user, 1, modelMap, currentUser);
+    }
+
+    @GetMapping("/{userId}/page/{pageNumber}")
+    public String listByPage(@PathVariable("userId") User user, @PathVariable("pageNumber") int currentPage, ModelMap modelMap,
+                             @ModelAttribute CurrentUser currentUser) {
+        Page<Post> page = postService.postPageByUserId(user.getId(), currentPage);
+        List<Post> content = page.getContent();
+        long totalItems = page.getTotalElements();
+        long totalPages = page.getTotalPages();
+
+        modelMap.addAttribute("currentPage", currentPage);
+        modelMap.addAttribute("totalItems", totalItems);
+        modelMap.addAttribute("totalPages", totalPages);
+        modelMap.addAttribute("userPage", content);
+
         modelMap.addAttribute("profile", currentUser.getUser());
-        modelMap.addAttribute("comments", comments);
+        modelMap.addAttribute("user", user);
+        modelMap.addAttribute("comments", commentService.commentList());
         modelMap.addAttribute("friendsCount", friendRequestService.findFriendsByUserIdCount(user.getId()));
         modelMap.addAttribute("userActivity", userActivityService.getAllByUserId(user.getId()));
         return "timeline";
@@ -102,6 +116,6 @@ public class UserProfileController {
     @GetMapping("/comment/delete")
     public String removeComment(@RequestParam("id") int id, @AuthenticationPrincipal CurrentUser currentUser) {
         commentService.deleteComment(id);
-        return "redirect:/users/profile/" +currentUser.getUser().getId();
+        return "redirect:/users/profile/" + currentUser.getUser().getId();
     }
 }
