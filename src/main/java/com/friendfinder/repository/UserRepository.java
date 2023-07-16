@@ -21,7 +21,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value = "update `friend_finder`.`user` set `password` = :password where `id` = :id", nativeQuery = true)
     void updateUserPasswordById(@Param("password") String password, @Param("id") int id);
 
-    Optional<List<User>> findByNameContainingIgnoreCaseOrSurnameContainingIgnoreCase(String name, String surname);
+    Page<User> findByNameContainingIgnoreCaseOrSurnameContainingIgnoreCase(String name, String surname, Pageable pageable);
 
     Page<User> findUsersByIdIn(List<Integer> friendsId, Pageable pageable);
 

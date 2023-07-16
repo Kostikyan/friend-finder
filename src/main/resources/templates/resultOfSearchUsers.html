@@ -122,6 +122,67 @@
                         </div>
                     </div>
                 </div>
+                <nav aria-label="...">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item ">
+                            <a class="page-link" th:if="${currentPage > 1}" th:href="@{/search/friend/page/1}">First</a>
+                        </li>
+                        <li class="page-item ">
+                            <a class="page-link" th:if="${currentPage > 1}"
+                               th:href="@{'/search/friend/' + ${currentPage - 1}}">Previous</a>
+                        </li>
+                        <th:block th:if="${totalPages <= 8}">
+                            <li class="page-item" aria-current="page"
+                                th:if="${totalPages > 0}"
+                                th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">
+                                <a class="page-link"
+                                   th:href="@{'/search/friend/' + ${pageNumber}}"
+                                   th:text="${pageNumber}"
+                                   th:class="${pageNumber==currentPage} ? active"
+                                ></a>
+                            </li>
+                        </th:block>
+
+                        <th:block th:if="${totalPages > 8}">
+                            <th:block th:if="${currentPage <= 5 || currentPage > totalPages - 3}">
+                                <li class="page-item" aria-current="page"
+                                    th:each="pageNumber : ${#numbers.sequence(1, 5)}">
+                                    <a class="page-link"
+                                       th:href="@{'/search/friend/' + ${pageNumber}}"
+                                       th:text="${pageNumber}"
+                                       th:class="${pageNumber==currentPage} ? active"
+                                    ></a>
+
+                                </li>
+
+                                <li class="page-item">
+                                    <a class="page-link" th:href="@{'/search/friend/' + 6}"
+                                       th:class="${pageNumber==currentPage}">...</a>
+                                </li>
+
+                                <li class="page-item" aria-current="page"
+                                    th:each="pageNumber : ${#numbers.sequence(totalPages - 3, totalPages)}">
+                                    <a class="page-link"
+                                       th:href="@{'/search/friend/' + ${pageNumber}}"
+                                       th:text="${pageNumber}"
+                                       th:class="${pageNumber==currentPage} ? active"
+                                    ></a>
+                                </li>
+
+                            </th:block>
+
+                        </th:block>
+
+                        <li class="page-item">
+                            <a class="page-link" th:if="${currentPage < totalPages}"
+                               th:href="@{'/search/friend/' + ${currentPage + 1}}">Next</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:if="${currentPage < totalPages}"
+                               th:href="@{'/search/friend/' + ${totalPages}} ">Last</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
 
             <!-- Newsfeed Common Side Bar Right

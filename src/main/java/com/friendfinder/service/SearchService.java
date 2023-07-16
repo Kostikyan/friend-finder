@@ -2,9 +2,10 @@ package com.friendfinder.service;
 
 import com.friendfinder.entity.User;
 import com.friendfinder.security.CurrentUser;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.web.servlet.function.ServerResponse;
 
 public interface SearchService {
-    List<User> searchByKeyword(String keyword, CurrentUser currentUser);
+    Page<User> searchByKeyword(String keyword, CurrentUser currentUser, int currentPage);
+
 }
