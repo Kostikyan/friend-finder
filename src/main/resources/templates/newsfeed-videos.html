@@ -103,7 +103,7 @@
                             <div class="media-grid" th:if="${post.musicFileName != null}">
                                 <div class="img-wrapper" data-toggle="modal"
                                      th:data-target="'.' + ${#strings.replace(post.musicFileName, '.','')}">
-                                    <video controls="" th:src="@{/getImage(imageName=${post.musicFileName})}">
+                                    <video controls="" th:src="@{/getVideo(videoName=${post.musicFileName})}">
                                         <source src="/videos/3.mp4" type="video/mp4">
                                     </video>
                                 </div>
@@ -152,7 +152,7 @@
                                             <div class="post-content">
                                                 <div class="video-wrapper">
                                                     <video controls=""
-                                                           th:src="@{/getImage(imageName=${post.musicFileName})}">
+                                                           th:src="@{/getVideo(videoName=${post.musicFileName})}">
                                                         <source src="/videos/3.mp4" type="video/mp4">
                                                     </video>
                                                 </div>
@@ -215,7 +215,8 @@
                                                                        th:text="${comment.user.name}"> </a> <i
                                                                         th:text="${comment.commentaryText}"></i><br></p>
                                                             </div>
-                                                            <samp th:text="${#temporals.format(comment.datetime, 'dd-MM-yyyy HH:mm')}"></samp>
+                                                            <samp th:text="${#temporals.format(comment.datetime, 'dd-MM-yyyy HH:mm')}"></samp><br>
+                                                            <a th:if="${user.id == comment.user.id}" th:href="@{/posts/video/comment/delete(id=${comment.id})}">Delete comment</a>
                                                         </div>
                                                         <div class="post-comment">
                                                             <form class="post-comment"

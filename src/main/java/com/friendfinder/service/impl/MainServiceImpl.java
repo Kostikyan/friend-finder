@@ -3,7 +3,10 @@ package com.friendfinder.service.impl;
 import com.friendfinder.entity.Country;
 import com.friendfinder.repository.CountryRepository;
 import com.friendfinder.service.MainService;
+import com.friendfinder.util.ImageUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MainServiceImpl implements MainService {
 
     @Value("${post.upload.image.path}")
@@ -38,38 +42,22 @@ public class MainServiceImpl implements MainService {
     }
 
     @Override
-    public @ResponseBody byte[] getImage(String imageName) throws IOException {
-        File fileImageByDownload = new File(imageUploadPath + imageName);
-        if (fileImageByDownload.exists()) {
-            FileInputStream fis = new FileInputStream(fileImageByDownload);
-            return IOUtils.toByteArray(fis);
-        } else {
-            File fileVideoByDownload = new File(videoUploadPath + imageName);
-            if (fileVideoByDownload.exists()) {
-                FileInputStream fis = new FileInputStream(fileVideoByDownload);
-                return IOUtils.toByteArray(fis);
-            }
-        }
-        return null;
+    public @ResponseBody byte[] getImage(String imageName) {
+        return ImageUtil.getBytes(imageName, imageUploadPath);
     }
 
     @Override
-    public @ResponseBody byte[] getProfilePic(String imageName) throws IOException {
-        File file = new File(userProfilePicPath + imageName);
-        if (file.exists()) {
-            FileInputStream fis = new FileInputStream(file);
-            return IOUtils.toByteArray(fis);
-        }
-        return null;
+    public @ResponseBody byte[] getVideo(String imageName) {
+        return ImageUtil.getBytes(imageName, videoUploadPath);
     }
 
     @Override
-    public @ResponseBody byte[] getBgProfilePic(String imageName) throws IOException {
-        File file = new File(userBgProfilePicPath + imageName);
-        if (file.exists()) {
-            FileInputStream fis = new FileInputStream(file);
-            return IOUtils.toByteArray(fis);
-        }
-        return null;
+    public @ResponseBody byte[] getProfilePic(String imageName) {
+        return ImageUtil.getBytes(imageName, userProfilePicPath);
+    }
+
+    @Override
+    public @ResponseBody byte[] getBgProfilePic(String imageName) {
+        return ImageUtil.getBytes(imageName, userBgProfilePicPath);
     }
 }

@@ -3,7 +3,6 @@ package com.friendfinder.controller;
 import com.friendfinder.dto.commentDto.CommentRequestDto;
 import com.friendfinder.dto.postDto.PostRequestDto;
 import com.friendfinder.dto.postLikeDto.PostLikeDto;
-import com.friendfinder.entity.Comment;
 import com.friendfinder.entity.FriendRequest;
 import com.friendfinder.entity.Post;
 import com.friendfinder.entity.User;

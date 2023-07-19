@@ -212,7 +212,8 @@
                                                                        th:text="${comment.user.name}"> </a> <i
                                                                         th:text="${comment.commentaryText}"></i><br></p>
                                                             </div>
-                                                            <samp th:text="${#temporals.format(comment.datetime, 'dd-MM-yyyy HH:mm')}"></samp>
+                                                            <samp th:text="${#temporals.format(comment.datetime, 'dd-MM-yyyy HH:mm')}"></samp><br>
+                                                            <a th:if="${user.id == comment.user.id}" th:href="@{/posts/images/comment/delete(id=${comment.id})}">Delete comment</a>
                                                         </div>
                                                         <div class="post-comment">
                                                             <form class="post-comment"
