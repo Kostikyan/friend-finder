@@ -1,7 +1,7 @@
 package com.friendfinder.controller;
 
+import com.friendfinder.dto.commentDto.CommentRequestDto;
 import com.friendfinder.dto.postLikeDto.PostLikeDto;
-import com.friendfinder.entity.Comment;
 import com.friendfinder.entity.Post;
 import com.friendfinder.entity.types.LikeStatus;
 import com.friendfinder.security.CurrentUser;
@@ -75,10 +75,16 @@ public class PostVideoController {
     }
 
     @PostMapping("/comment/{postId}")
-    public String addComment(@ModelAttribute Comment comment,
+    public String addComment(@ModelAttribute CommentRequestDto comment,
                              @AuthenticationPrincipal CurrentUser currentUser,
                              @PathVariable("postId") Post post) {
         commentService.addComment(comment, currentUser, post);
+        return "redirect:/posts/video";
+    }
+
+    @GetMapping("/comment/delete")
+    public String removeComment(@RequestParam("id") int id) {
+        commentService.deleteComment(id);
         return "redirect:/posts/video";
     }
 }

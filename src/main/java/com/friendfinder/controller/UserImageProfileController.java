@@ -1,7 +1,6 @@
 package com.friendfinder.controller;
 
 import com.friendfinder.entity.FriendRequest;
-import com.friendfinder.entity.Post;
 import com.friendfinder.entity.User;
 import com.friendfinder.entity.UserImage;
 import com.friendfinder.entity.types.FriendStatus;

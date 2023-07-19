@@ -11,11 +11,14 @@ public interface MainService {
     List<Country> findAllCountries();
 
     @ResponseBody
-    byte[] getImage(String imageName) throws IOException;
+    byte[] getImage(String imageName);
 
     @ResponseBody
-    byte[] getProfilePic(String imageName) throws IOException;
+    byte[] getVideo(String imageName);
 
     @ResponseBody
-    byte[] getBgProfilePic(String imageName) throws IOException;
+    byte[] getProfilePic(String imageName);
+
+    @ResponseBody
+    byte[] getBgProfilePic(String imageName);
 }
