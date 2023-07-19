@@ -24,4 +24,6 @@ public interface FriendRequestService {
     void changeStatus(FriendRequest friendRequest);
 
     int findFriendsByUserIdCount(int id);
+
+    void delete(User sender, User receiver);
 }

@@ -52,14 +52,7 @@ public class FriendController {
     @GetMapping("/delete")
     public String deleteFromFriends(@RequestParam("sender") User sender,
                                     @RequestParam("receiver") User receiver) {
-        FriendRequest bySenderIdAndReceiverId = friendRequestService.findBySenderIdAndReceiverId(sender.getId(), receiver.getId());
-        FriendRequest byReceiverIdAndSenderId = friendRequestService.findBySenderIdAndReceiverId(receiver.getId(), sender.getId());
-        if (bySenderIdAndReceiverId != null) {
-            friendRequestService.delete(bySenderIdAndReceiverId);
-        }
-        if (byReceiverIdAndSenderId != null) {
-            friendRequestService.delete(byReceiverIdAndSenderId);
-        }
+        friendRequestService.delete(sender, receiver);
         return "redirect:/friends";
     }
 }

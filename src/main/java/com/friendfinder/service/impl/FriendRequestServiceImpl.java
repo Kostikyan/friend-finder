@@ -102,4 +102,16 @@ public class FriendRequestServiceImpl implements FriendRequestService {
         return friendsByUserId.size();
     }
 
+    @Override
+    public void delete(User sender, User receiver) {
+        FriendRequest bySenderIdAndReceiverId = findBySenderIdAndReceiverId(sender.getId(), receiver.getId());
+        FriendRequest byReceiverIdAndSenderId = findBySenderIdAndReceiverId(receiver.getId(), sender.getId());
+        if (bySenderIdAndReceiverId != null) {
+            delete(bySenderIdAndReceiverId);
+        }
+        if (byReceiverIdAndSenderId != null) {
+            delete(byReceiverIdAndSenderId);
+        }
+    }
+
 }
