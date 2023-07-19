@@ -80,4 +80,10 @@ public class PostImageController {
         commentService.addComment(comment, currentUser, post);
         return "redirect:/posts/images";
     }
+
+    @GetMapping("/comment/delete")
+    public String removeComment(@RequestParam("id") int id) {
+        commentService.deleteComment(id);
+        return "redirect:/posts/images";
+    }
 }

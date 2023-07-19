@@ -198,7 +198,7 @@
 
             <img th:if="${post.imgName != null}" th:src="@{/getImage(imageName=${post.imgName})}"  alt="post-image" class="img-responsive post-image">
             <div class="video-wrapper" th:if="${post.musicFileName != null}">
-              <video class="post-video" controls=""> <source th:src="@{/getImage(imageName=${post.musicFileName})}" type="video/mp4"> </video>
+              <video class="post-video" controls=""> <source th:src="@{/getVideo(videoName=${post.musicFileName})}" type="video/mp4"> </video>
             </div>
             <div  class="post-container">
               <img th:if="${user.profilePicture == null || user.profilePicture.equalsIgnoreCase('null')}"
@@ -207,8 +207,8 @@
                    alt="user" class="profile-photo-md pull-left">
               <div class="post-detail">
                 <div class="user-info">
-                  <h5 th:text="${user.name}"><a href="/posts" class="profile-link"></a> <span class="following">following</span></h5>
-                  <h6 class="text-muted" th:text="${user.surname}"></h6>
+                  <h5 th:text="${user.name} + ' ' + ${user.surname}"><a href="#" class="profile-link"></a> <span class="following">following</span></h5>
+                  <h6 class="text-muted" th:if="${user.id == profile.id}"><a th:href="@{/users/profile/delete(id=${post.id})}">Delete record</a></h6>
                 </div>
                 <div class="reaction">
                   <form class="btn text-green" th:action="@{/users/profile/reaction/like/{postId}(postId=${post.id})}"
@@ -240,7 +240,8 @@
                     <p><a th:href="@{'/users/profile/' + ${comment.user.id}}" class="profile-link" th:text="${comment.user.name}"> </a> <i
                             th:text="${comment.commentaryText}"></i><br></p>
                   </div>
-                  <samp th:text="${#temporals.format(comment.datetime, 'dd-MM-yyyy HH:mm')}"></samp>
+                  <samp th:text="${#temporals.format(comment.datetime, 'dd-MM-yyyy HH:mm')}"></samp><br>
+                  <a th:if="${user.id == profile.id || profile.id == comment.user.id}" th:href="@{/users/profile/comment/delete(id=${comment.id})}">Delete comment</a>
                 </div>
 
 

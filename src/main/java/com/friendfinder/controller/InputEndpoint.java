@@ -1,6 +1,7 @@
 package com.friendfinder.controller;
 
 import com.friendfinder.security.CurrentUser;
+import com.friendfinder.service.MainService;
 import com.friendfinder.service.impl.MainServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -17,7 +18,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class InputEndpoint {
 
-    public final MainServiceImpl mainService;
+    public final MainService mainService;
 
     @GetMapping("/")
     public String mainPage(ModelMap modelMap,
@@ -34,19 +35,25 @@ public class InputEndpoint {
 
     @GetMapping(value = "/getImage",
             produces = MediaType.IMAGE_JPEG_VALUE)
-    public @ResponseBody byte[] getImage(@RequestParam("imageName") String imageName) throws IOException {
+    public @ResponseBody byte[] getImage(@RequestParam("imageName") String imageName){
         return mainService.getImage(imageName);
+    }
+
+    @GetMapping(value = "/getVideo",
+            produces = MediaType.IMAGE_JPEG_VALUE)
+    public @ResponseBody byte[] getVideo(@RequestParam("videoName") String videoName){
+        return mainService.getVideo(videoName);
     }
 
     @GetMapping(value = "/getProfilePic",
             produces = MediaType.IMAGE_JPEG_VALUE)
-    public @ResponseBody byte[] getProfilePic(@RequestParam("imageName") String imageName) throws IOException {
+    public @ResponseBody byte[] getProfilePic(@RequestParam("imageName") String imageName){
         return mainService.getProfilePic(imageName);
     }
 
     @GetMapping(value = "/getBgProfilePic",
             produces = MediaType.IMAGE_JPEG_VALUE)
-    public @ResponseBody byte[] getBgProfilePic(@RequestParam("imageName") String imageName) throws IOException {
+    public @ResponseBody byte[] getBgProfilePic(@RequestParam("imageName") String imageName){
         return mainService.getBgProfilePic(imageName);
     }
 
