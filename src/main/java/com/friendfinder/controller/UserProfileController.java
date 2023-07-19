@@ -1,5 +1,6 @@
 package com.friendfinder.controller;
 
+import com.friendfinder.dto.commentDto.CommentRequestDto;
 import com.friendfinder.dto.postDto.PostRequestDto;
 import com.friendfinder.dto.postLikeDto.PostLikeDto;
 import com.friendfinder.entity.Comment;
@@ -106,7 +107,7 @@ public class UserProfileController {
 
 
     @PostMapping("/comment/{postId}")
-    public String addComment(@ModelAttribute Comment comment,
+    public String addComment(@ModelAttribute CommentRequestDto comment,
                              @AuthenticationPrincipal CurrentUser currentUser,
                              @PathVariable("postId") Post post) {
         commentService.addComment(comment, currentUser, post);
