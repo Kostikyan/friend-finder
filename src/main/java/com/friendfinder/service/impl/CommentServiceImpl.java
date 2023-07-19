@@ -1,7 +1,9 @@
 package com.friendfinder.service.impl;
 
+import com.friendfinder.dto.commentDto.CommentRequestDto;
 import com.friendfinder.entity.Comment;
 import com.friendfinder.entity.Post;
+import com.friendfinder.mapper.CommentMapper;
 import com.friendfinder.repository.CommentRepository;
 import com.friendfinder.security.CurrentUser;
 import com.friendfinder.service.CommentService;
@@ -18,6 +20,7 @@ public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
     private final UserActivityService userActivityService;
+    private final CommentMapper commentMapper;
 
     @Override
     public List<Comment> commentList() {
@@ -25,13 +28,14 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void addComment(Comment comment, CurrentUser currentUser, Post post) {
-        commentRepository.save(Comment.builder()
+    public void addComment(CommentRequestDto comment, CurrentUser currentUser, Post post) {
+        Comment commentSave = commentMapper.map(CommentRequestDto.builder()
                 .user(currentUser.getUser())
                 .post(post)
                 .commentaryText(comment.getCommentaryText())
                 .datetime(LocalDateTime.now())
                 .build());
+        commentRepository.save(commentSave);
         userActivityService.save(currentUser.getUser(),"commented on a post");
     }
 

@@ -219,7 +219,7 @@
                                                         </div>
                                                         <div class="post-comment">
                                                             <form class="post-comment"
-                                                                  th:action="@{/posts/images/comment/{postId}(postId=${post.id})}"
+                                                                  th:action="@{/posts/video/comment/{postId}(postId=${post.id})}"
                                                                   method="post">
                                                                 <img th:if="${user.profilePicture == null || user.profilePicture.equalsIgnoreCase('null')}"
                                                                      src="/images/post-images/difault.png" alt=""
