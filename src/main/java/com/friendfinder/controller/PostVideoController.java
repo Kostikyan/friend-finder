@@ -81,4 +81,10 @@ public class PostVideoController {
         commentService.addComment(comment, currentUser, post);
         return "redirect:/posts/video";
     }
+
+    @GetMapping("/comment/delete")
+    public String removeComment(@RequestParam("id") int id) {
+        commentService.deleteComment(id);
+        return "redirect:/posts/video";
+    }
 }

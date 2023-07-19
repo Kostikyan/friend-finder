@@ -4,14 +4,16 @@ import com.friendfinder.dto.userDto.UserRegisterRequestDto;
 import com.friendfinder.entity.Country;
 import com.friendfinder.entity.User;
 import com.friendfinder.security.CurrentUser;
-import com.friendfinder.service.PostService;
 import com.friendfinder.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
