@@ -1,0 +1,658 @@
+2023-07-24 22:43:40,756 INFO o.s.b.StartupInfoLogger [restartedMain] Starting FriendFinderApplication using Java 19.0.2 with PID 14560 (D:\project\friends-finder\target\classes started by David in D:\project\friends-finder)
+2023-07-24 22:43:40,758 DEBUG o.s.b.StartupInfoLogger [restartedMain] Running with Spring Boot v3.1.1, Spring v6.0.10
+2023-07-24 22:43:40,760 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-24 22:43:40,887 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-24 22:43:40,887 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-24 22:43:43,154 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-24 22:43:43,288 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 123 ms. Found 14 JPA repository interfaces.
+2023-07-24 22:43:44,270 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2023-07-24 22:43:44,282 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2023-07-24 22:43:44,286 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2023-07-24 22:43:44,286 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.10]
+2023-07-24 22:43:44,395 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-07-24 22:43:44,395 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 3506 ms
+2023-07-24 22:43:44,689 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-07-24 22:43:45,408 INFO c.z.h.p.HikariPool [restartedMain] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@b4be3f
+2023-07-24 22:43:45,412 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-07-24 22:43:46,255 INFO l.l.c.JavaLogger [restartedMain] Reading from friend_finder.DATABASECHANGELOG
+2023-07-24 22:43:46,267 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:43:46,380 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:43:46,384 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:43:46,419 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:43:46,426 INFO l.l.c.JavaLogger [restartedMain] Successfully acquired change log lock
+2023-07-24 22:43:46,528 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:43:46,535 INFO l.l.c.JavaLogger [restartedMain] Reading from friend_finder.DATABASECHANGELOG
+2023-07-24 22:43:46,538 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:43:46,547 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:43:46,610 ERROR l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::changNameColumCompany::dkirakosyan encountered an exception.
+2023-07-24 22:43:46,611 INFO l.l.c.JavaLogger [restartedMain] Update command encountered an exception.
+2023-07-24 22:43:46,615 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:43:46,617 INFO l.l.c.JavaLogger [restartedMain] Successfully released change log lock
+2023-07-24 22:43:46,621 WARN o.s.c.s.AbstractApplicationContext [restartedMain] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.MigrationFailedException: Migration failed for changeset liquibase/changelog.xml::changNameColumCompany::dkirakosyan:
+     Reason: liquibase.exception.DatabaseException: Duplicate column name 'company' [Failed SQL: (1060) ALTER TABLE friend_finder.work_experiences ADD company VARCHAR(255) NOT NULL AFTER id]
+2023-07-24 22:43:46,621 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Shutdown initiated...
+2023-07-24 22:43:46,633 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Shutdown completed.
+2023-07-24 22:43:46,635 INFO o.a.j.l.DirectJDKLog [restartedMain] Stopping service [Tomcat]
+2023-07-24 22:43:46,653 INFO o.s.b.a.l.ConditionEvaluationReportLogger [restartedMain] 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2023-07-24 22:43:46,677 ERROR o.s.b.SpringApplication [restartedMain] Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.MigrationFailedException: Migration failed for changeset liquibase/changelog.xml::changNameColumCompany::dkirakosyan:
+     Reason: liquibase.exception.DatabaseException: Duplicate column name 'company' [Failed SQL: (1060) ALTER TABLE friend_finder.work_experiences ADD company VARCHAR(255) NOT NULL AFTER id]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1770)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:931)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:436)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
+	at com.friendfinder.FriendFinderApplication.main(FriendFinderApplication.java:14)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset liquibase/changelog.xml::changNameColumCompany::dkirakosyan:
+     Reason: liquibase.exception.DatabaseException: Duplicate column name 'company' [Failed SQL: (1060) ALTER TABLE friend_finder.work_experiences ADD company VARCHAR(255) NOT NULL AFTER id]
+	at liquibase.changelog.ChangeLogIterator.run(ChangeLogIterator.java:136)
+	at liquibase.Liquibase.lambda$null$0(Liquibase.java:297)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Scope.child(Scope.java:256)
+	at liquibase.Liquibase.lambda$update$1(Liquibase.java:295)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Liquibase.runInScope(Liquibase.java:2639)
+	at liquibase.Liquibase.update(Liquibase.java:236)
+	at liquibase.Liquibase.update(Liquibase.java:221)
+	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:329)
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:284)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1816)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
+	... 21 common frames omitted
+Caused by: liquibase.exception.MigrationFailedException: Migration failed for changeset liquibase/changelog.xml::changNameColumCompany::dkirakosyan:
+     Reason: liquibase.exception.DatabaseException: Duplicate column name 'company' [Failed SQL: (1060) ALTER TABLE friend_finder.work_experiences ADD company VARCHAR(255) NOT NULL AFTER id]
+	at liquibase.changelog.ChangeSet.execute(ChangeSet.java:744)
+	at liquibase.changelog.visitor.UpdateVisitor.visit(UpdateVisitor.java:59)
+	at liquibase.changelog.ChangeLogIterator$2.lambda$null$0(ChangeLogIterator.java:124)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.changelog.ChangeLogIterator$2.lambda$run$1(ChangeLogIterator.java:124)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Scope.child(Scope.java:256)
+	at liquibase.changelog.ChangeLogIterator$2.run(ChangeLogIterator.java:105)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Scope.child(Scope.java:256)
+	at liquibase.Scope.child(Scope.java:260)
+	at liquibase.changelog.ChangeLogIterator.run(ChangeLogIterator.java:75)
+	... 39 common frames omitted
+Caused by: liquibase.exception.DatabaseException: Duplicate column name 'company' [Failed SQL: (1060) ALTER TABLE friend_finder.work_experiences ADD company VARCHAR(255) NOT NULL AFTER id]
+	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:445)
+	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:77)
+	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:160)
+	at liquibase.database.AbstractJdbcDatabase.execute(AbstractJdbcDatabase.java:1270)
+	at liquibase.database.AbstractJdbcDatabase.executeStatements(AbstractJdbcDatabase.java:1252)
+	at liquibase.changelog.ChangeSet.execute(ChangeSet.java:702)
+	... 59 common frames omitted
+Caused by: java.sql.SQLSyntaxErrorException: Duplicate column name 'company'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:763)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:648)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:441)
+	... 64 common frames omitted
+2023-07-24 22:44:55,443 INFO o.s.b.StartupInfoLogger [restartedMain] Starting FriendFinderApplication using Java 19.0.2 with PID 12912 (D:\project\friends-finder\target\classes started by David in D:\project\friends-finder)
+2023-07-24 22:44:55,447 DEBUG o.s.b.StartupInfoLogger [restartedMain] Running with Spring Boot v3.1.1, Spring v6.0.10
+2023-07-24 22:44:55,447 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-24 22:44:55,516 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-24 22:44:55,517 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-24 22:44:56,642 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-24 22:44:56,780 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 129 ms. Found 14 JPA repository interfaces.
+2023-07-24 22:44:57,605 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2023-07-24 22:44:57,613 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2023-07-24 22:44:57,615 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2023-07-24 22:44:57,616 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.10]
+2023-07-24 22:44:57,680 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-07-24 22:44:57,680 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 2162 ms
+2023-07-24 22:44:57,835 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-07-24 22:44:58,257 INFO c.z.h.p.HikariPool [restartedMain] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@10a0b3a7
+2023-07-24 22:44:58,259 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-07-24 22:44:59,029 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:44:59,038 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:44:59,044 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:44:59,050 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:44:59,055 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:44:59,057 INFO l.l.c.JavaLogger [restartedMain] Successfully acquired change log lock
+2023-07-24 22:44:59,085 INFO l.l.c.JavaLogger [restartedMain] Creating database history table with name: friend_finder.DATABASECHANGELOG
+2023-07-24 22:44:59,109 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:44:59,113 INFO l.l.c.JavaLogger [restartedMain] Reading from friend_finder.DATABASECHANGELOG
+2023-07-24 22:44:59,117 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:44:59,124 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:44:59,530 INFO l.l.c.JavaLogger [restartedMain] Custom SQL executed
+2023-07-24 22:44:59,532 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::createDB::hhakobyan ran successfully in 350ms
+2023-07-24 22:44:59,536 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:44:59,538 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:44:59,568 INFO l.l.c.JavaLogger [restartedMain] Custom SQL executed
+2023-07-24 22:44:59,571 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addCountries::hhakobyanh ran successfully in 29ms
+2023-07-24 22:44:59,573 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:44:59,595 INFO l.l.c.JavaLogger [restartedMain] Custom SQL executed
+2023-07-24 22:44:59,595 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::test::hhakoyan ran successfully in 18ms
+2023-07-24 22:44:59,598 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:44:59,612 INFO l.l.c.JavaLogger [restartedMain] Table test dropped
+2023-07-24 22:44:59,613 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::dropTestTable::hhakobyan ran successfully in 11ms
+2023-07-24 22:44:59,617 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:44:59,658 INFO l.l.c.JavaLogger [restartedMain] Columns date_time(datetime) added to commentary
+2023-07-24 22:44:59,659 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addDateTimeInCommentaryTable::hhakobyan ran successfully in 38ms
+2023-07-24 22:44:59,662 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:44:59,683 INFO l.l.c.JavaLogger [restartedMain] Columns company(varchar(255)) added to work_experiences
+2023-07-24 22:44:59,698 INFO l.l.c.JavaLogger [restartedMain] Columns we_name dropped from work_experiences
+2023-07-24 22:44:59,700 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::changNameColumCompany::dkirakosyan ran successfully in 34ms
+2023-07-24 22:44:59,706 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:44:59,761 INFO l.l.c.JavaLogger [restartedMain] Columns enabled(boolean) added to user
+2023-07-24 22:44:59,762 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addColumnUserEnabled::hhakobyan ran successfully in 52ms
+2023-07-24 22:44:59,767 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:44:59,883 INFO l.l.c.JavaLogger [restartedMain] Columns token(varchar(255)) added to user
+2023-07-24 22:44:59,885 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addColumnUserToken::hhakobyan ran successfully in 113ms
+2023-07-24 22:44:59,888 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:44:59,971 INFO l.l.c.JavaLogger [restartedMain] Custom SQL executed
+2023-07-24 22:44:59,973 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::message::VaheKostikyan ran successfully in 80ms
+2023-07-24 22:44:59,976 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:45:00,097 INFO l.l.c.JavaLogger [restartedMain] Columns role(enum('ADMIN', 'USER', 'BLOCKED')) added to user
+2023-07-24 22:45:00,097 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addColumnUserType_IsBlocked::VaheKostikyan ran successfully in 117ms
+2023-07-24 22:45:00,106 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:45:01,315 INFO l.l.c.JavaLogger [restartedMain] Custom SQL executed
+2023-07-24 22:45:01,317 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::changeForeignKeysOnDelete::VaheKostikyan ran successfully in 1205ms
+2023-07-24 22:45:01,318 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:45:01,337 INFO l.l.c.JavaLogger [restartedMain] Table userActivity created
+2023-07-24 22:45:01,367 INFO l.l.c.JavaLogger [restartedMain] Foreign key constraint added to userActivity (user_id)
+2023-07-24 22:45:01,368 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addActivityTable::hhakobyan ran successfully in 47ms
+2023-07-24 22:45:01,371 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:45:01,387 INFO l.l.c.JavaLogger [restartedMain] Columns datetime dropped from userActivity
+2023-07-24 22:45:01,398 INFO l.l.c.JavaLogger [restartedMain] Columns datetime(TIMESTAMP) added to userActivity
+2023-07-24 22:45:01,414 INFO l.l.c.JavaLogger [restartedMain] Table userActivity renamed to user_activity
+2023-07-24 22:45:01,415 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addColumnDate::hhakobyan ran successfully in 39ms
+2023-07-24 22:45:01,417 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:45:01,420 INFO l.l.c.JavaLogger [restartedMain] Update command completed successfully.
+2023-07-24 22:45:01,422 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 22:45:01,425 INFO l.l.c.JavaLogger [restartedMain] Successfully released change log lock
+2023-07-24 22:45:01,549 INFO o.h.j.i.u.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-24 22:45:01,693 INFO o.h.Version [restartedMain] HHH000412: Hibernate ORM core version 6.2.5.Final
+2023-07-24 22:45:01,695 INFO o.h.c.Environment [restartedMain] HHH000406: Using bytecode reflection optimizer
+2023-07-24 22:45:01,927 INFO o.h.b.i.BytecodeProviderInitiator [restartedMain] HHH000021: Bytecode provider name : bytebuddy
+2023-07-24 22:45:02,117 INFO o.s.o.j.p.SpringPersistenceUnitInfo [restartedMain] No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-07-24 22:45:02,542 INFO o.h.b.i.BytecodeProviderInitiator [restartedMain] HHH000021: Bytecode provider name : bytebuddy
+2023-07-24 22:45:03,587 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-24 22:45:03,591 INFO o.s.o.j.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-24 22:45:03,927 INFO o.s.d.j.r.q.QueryEnhancerFactory [restartedMain] Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-07-24 22:45:04,660 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-24 22:45:04,802 INFO o.s.b.a.w.s.WelcomePageHandlerMapping [restartedMain] Adding welcome page template: index
+2023-07-24 22:45:05,070 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@475db532, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@58bcc4d0, org.springframework.security.web.context.SecurityContextHolderFilter@5b2b2302, org.springframework.security.web.header.HeaderWriterFilter@f3cf91, org.springframework.security.web.authentication.logout.LogoutFilter@f8ab80a, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@54902040, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1c481d31, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@55fca3d1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@d7b7da7, org.springframework.security.web.access.ExceptionTranslationFilter@6e202f21, org.springframework.security.web.access.intercept.AuthorizationFilter@842f78e]
+2023-07-24 22:45:05,491 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2023-07-24 22:45:05,517 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2023-07-24 22:45:05,538 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-24 22:45:05,553 INFO o.s.b.StartupInfoLogger [restartedMain] Started FriendFinderApplication in 11.057 seconds (process running for 12.353)
+2023-07-24 23:16:25,625 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-24 23:16:25,681 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-07-24 23:16:25,691 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2023-07-24 23:16:53,290 INFO o.s.b.StartupInfoLogger [restartedMain] Starting WebApplication using Java 19.0.2 with PID 9492 (D:\project\friend-finder\web\target\classes started by David in D:\project\friend-finder)
+2023-07-24 23:16:53,293 DEBUG o.s.b.StartupInfoLogger [restartedMain] Running with Spring Boot v3.1.1, Spring v6.0.10
+2023-07-24 23:16:53,293 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-24 23:16:53,368 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-24 23:16:53,369 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-24 23:16:54,540 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-24 23:16:54,625 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 76 ms. Found 14 JPA repository interfaces.
+2023-07-24 23:16:55,455 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2023-07-24 23:16:55,464 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2023-07-24 23:16:55,465 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2023-07-24 23:16:55,466 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.10]
+2023-07-24 23:16:55,526 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-07-24 23:16:55,526 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 2156 ms
+2023-07-24 23:16:55,662 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-07-24 23:16:56,029 INFO c.z.h.p.HikariPool [restartedMain] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@49e919d6
+2023-07-24 23:16:56,031 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-07-24 23:16:56,523 INFO l.l.c.JavaLogger [restartedMain] Reading from friend_finder.DATABASECHANGELOG
+2023-07-24 23:16:56,532 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:16:56,594 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:16:56,597 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:16:56,622 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:16:56,626 INFO l.l.c.JavaLogger [restartedMain] Successfully acquired change log lock
+2023-07-24 23:16:56,686 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:16:56,689 INFO l.l.c.JavaLogger [restartedMain] Reading from friend_finder.DATABASECHANGELOG
+2023-07-24 23:16:56,691 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:16:56,697 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:16:56,734 ERROR l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::changNameColumCompanies::dkirakosyan encountered an exception.
+2023-07-24 23:16:56,735 INFO l.l.c.JavaLogger [restartedMain] Update command encountered an exception.
+2023-07-24 23:16:56,739 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:16:56,741 INFO l.l.c.JavaLogger [restartedMain] Successfully released change log lock
+2023-07-24 23:16:56,744 WARN o.s.c.s.AbstractApplicationContext [restartedMain] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.MigrationFailedException: Migration failed for changeset liquibase/changelog.xml::changNameColumCompanies::dkirakosyan:
+     Reason: liquibase.exception.DatabaseException: Duplicate column name 'company' [Failed SQL: (1060) ALTER TABLE friend_finder.work_experiences ADD company VARCHAR(255) NOT NULL AFTER id]
+2023-07-24 23:16:56,744 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Shutdown initiated...
+2023-07-24 23:16:56,752 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Shutdown completed.
+2023-07-24 23:16:56,755 INFO o.a.j.l.DirectJDKLog [restartedMain] Stopping service [Tomcat]
+2023-07-24 23:16:56,775 INFO o.s.b.a.l.ConditionEvaluationReportLogger [restartedMain] 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2023-07-24 23:16:56,801 ERROR o.s.b.SpringApplication [restartedMain] Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.MigrationFailedException: Migration failed for changeset liquibase/changelog.xml::changNameColumCompanies::dkirakosyan:
+     Reason: liquibase.exception.DatabaseException: Duplicate column name 'company' [Failed SQL: (1060) ALTER TABLE friend_finder.work_experiences ADD company VARCHAR(255) NOT NULL AFTER id]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1770)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:931)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:436)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
+	at com.friendfinder.web.WebApplication.main(WebApplication.java:20)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset liquibase/changelog.xml::changNameColumCompanies::dkirakosyan:
+     Reason: liquibase.exception.DatabaseException: Duplicate column name 'company' [Failed SQL: (1060) ALTER TABLE friend_finder.work_experiences ADD company VARCHAR(255) NOT NULL AFTER id]
+	at liquibase.changelog.ChangeLogIterator.run(ChangeLogIterator.java:136)
+	at liquibase.Liquibase.lambda$null$0(Liquibase.java:297)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Scope.child(Scope.java:256)
+	at liquibase.Liquibase.lambda$update$1(Liquibase.java:295)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Liquibase.runInScope(Liquibase.java:2639)
+	at liquibase.Liquibase.update(Liquibase.java:236)
+	at liquibase.Liquibase.update(Liquibase.java:221)
+	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:329)
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:284)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1816)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
+	... 21 common frames omitted
+Caused by: liquibase.exception.MigrationFailedException: Migration failed for changeset liquibase/changelog.xml::changNameColumCompanies::dkirakosyan:
+     Reason: liquibase.exception.DatabaseException: Duplicate column name 'company' [Failed SQL: (1060) ALTER TABLE friend_finder.work_experiences ADD company VARCHAR(255) NOT NULL AFTER id]
+	at liquibase.changelog.ChangeSet.execute(ChangeSet.java:744)
+	at liquibase.changelog.visitor.UpdateVisitor.visit(UpdateVisitor.java:59)
+	at liquibase.changelog.ChangeLogIterator$2.lambda$null$0(ChangeLogIterator.java:124)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.changelog.ChangeLogIterator$2.lambda$run$1(ChangeLogIterator.java:124)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Scope.child(Scope.java:256)
+	at liquibase.changelog.ChangeLogIterator$2.run(ChangeLogIterator.java:105)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Scope.child(Scope.java:256)
+	at liquibase.Scope.child(Scope.java:260)
+	at liquibase.changelog.ChangeLogIterator.run(ChangeLogIterator.java:75)
+	... 39 common frames omitted
+Caused by: liquibase.exception.DatabaseException: Duplicate column name 'company' [Failed SQL: (1060) ALTER TABLE friend_finder.work_experiences ADD company VARCHAR(255) NOT NULL AFTER id]
+	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:445)
+	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:77)
+	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:160)
+	at liquibase.database.AbstractJdbcDatabase.execute(AbstractJdbcDatabase.java:1270)
+	at liquibase.database.AbstractJdbcDatabase.executeStatements(AbstractJdbcDatabase.java:1252)
+	at liquibase.changelog.ChangeSet.execute(ChangeSet.java:702)
+	... 59 common frames omitted
+Caused by: java.sql.SQLSyntaxErrorException: Duplicate column name 'company'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:763)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:648)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:441)
+	... 64 common frames omitted
+2023-07-24 23:17:36,809 INFO o.s.b.StartupInfoLogger [restartedMain] Starting WebApplication using Java 19.0.2 with PID 2884 (D:\project\friend-finder\web\target\classes started by David in D:\project\friend-finder)
+2023-07-24 23:17:36,812 DEBUG o.s.b.StartupInfoLogger [restartedMain] Running with Spring Boot v3.1.1, Spring v6.0.10
+2023-07-24 23:17:36,814 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-24 23:17:36,915 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-24 23:17:36,916 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-24 23:17:37,697 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-24 23:17:37,802 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 95 ms. Found 14 JPA repository interfaces.
+2023-07-24 23:17:38,715 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2023-07-24 23:17:38,725 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2023-07-24 23:17:38,727 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2023-07-24 23:17:38,727 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.10]
+2023-07-24 23:17:38,791 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-07-24 23:17:38,791 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1872 ms
+2023-07-24 23:17:38,928 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-07-24 23:17:39,289 INFO c.z.h.p.HikariPool [restartedMain] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6ca7c9b
+2023-07-24 23:17:39,292 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-07-24 23:17:39,975 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:39,984 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:39,991 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:39,997 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:40,000 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:40,003 INFO l.l.c.JavaLogger [restartedMain] Successfully acquired change log lock
+2023-07-24 23:17:40,029 INFO l.l.c.JavaLogger [restartedMain] Creating database history table with name: friend_finder.DATABASECHANGELOG
+2023-07-24 23:17:40,049 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:40,052 INFO l.l.c.JavaLogger [restartedMain] Reading from friend_finder.DATABASECHANGELOG
+2023-07-24 23:17:40,055 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:40,062 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:40,428 INFO l.l.c.JavaLogger [restartedMain] Custom SQL executed
+2023-07-24 23:17:40,429 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::createDB::hhakobyan ran successfully in 306ms
+2023-07-24 23:17:40,432 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:40,435 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:40,461 INFO l.l.c.JavaLogger [restartedMain] Custom SQL executed
+2023-07-24 23:17:40,465 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addCountries::hhakobyanh ran successfully in 26ms
+2023-07-24 23:17:40,468 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:40,486 INFO l.l.c.JavaLogger [restartedMain] Custom SQL executed
+2023-07-24 23:17:40,487 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::test::hhakoyan ran successfully in 16ms
+2023-07-24 23:17:40,491 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:40,505 INFO l.l.c.JavaLogger [restartedMain] Table test dropped
+2023-07-24 23:17:40,506 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::dropTestTable::hhakobyan ran successfully in 12ms
+2023-07-24 23:17:40,510 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:40,549 INFO l.l.c.JavaLogger [restartedMain] Columns date_time(datetime) added to commentary
+2023-07-24 23:17:40,550 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addDateTimeInCommentaryTable::hhakobyan ran successfully in 37ms
+2023-07-24 23:17:40,553 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:40,570 INFO l.l.c.JavaLogger [restartedMain] Columns company(varchar(255)) added to work_experiences
+2023-07-24 23:17:40,582 INFO l.l.c.JavaLogger [restartedMain] Columns we_name dropped from work_experiences
+2023-07-24 23:17:40,584 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::changNameColumCompanies::dkirakosyan ran successfully in 26ms
+2023-07-24 23:17:40,586 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:40,642 INFO l.l.c.JavaLogger [restartedMain] Columns enabled(boolean) added to user
+2023-07-24 23:17:40,644 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addColumnUserEnabled::hhakobyan ran successfully in 53ms
+2023-07-24 23:17:40,649 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:40,709 INFO l.l.c.JavaLogger [restartedMain] Columns token(varchar(255)) added to user
+2023-07-24 23:17:40,710 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addColumnUserToken::hhakobyan ran successfully in 57ms
+2023-07-24 23:17:40,715 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:40,781 INFO l.l.c.JavaLogger [restartedMain] Custom SQL executed
+2023-07-24 23:17:40,783 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::message::VaheKostikyan ran successfully in 63ms
+2023-07-24 23:17:40,785 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:40,839 INFO l.l.c.JavaLogger [restartedMain] Columns role(enum('ADMIN', 'USER', 'BLOCKED')) added to user
+2023-07-24 23:17:40,840 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addColumnUserType_IsBlocked::VaheKostikyan ran successfully in 52ms
+2023-07-24 23:17:40,843 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:41,963 INFO l.l.c.JavaLogger [restartedMain] Custom SQL executed
+2023-07-24 23:17:41,965 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::changeForeignKeysOnDelete::VaheKostikyan ran successfully in 1120ms
+2023-07-24 23:17:41,966 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:41,986 INFO l.l.c.JavaLogger [restartedMain] Table userActivity created
+2023-07-24 23:17:42,019 INFO l.l.c.JavaLogger [restartedMain] Foreign key constraint added to userActivity (user_id)
+2023-07-24 23:17:42,020 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addActivityTable::hhakobyan ran successfully in 50ms
+2023-07-24 23:17:42,024 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:42,037 INFO l.l.c.JavaLogger [restartedMain] Columns datetime dropped from userActivity
+2023-07-24 23:17:42,047 INFO l.l.c.JavaLogger [restartedMain] Columns datetime(TIMESTAMP) added to userActivity
+2023-07-24 23:17:42,059 INFO l.l.c.JavaLogger [restartedMain] Table userActivity renamed to user_activity
+2023-07-24 23:17:42,060 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addColumnDate::hhakobyan ran successfully in 33ms
+2023-07-24 23:17:42,062 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:42,065 INFO l.l.c.JavaLogger [restartedMain] Update command completed successfully.
+2023-07-24 23:17:42,068 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:17:42,070 INFO l.l.c.JavaLogger [restartedMain] Successfully released change log lock
+2023-07-24 23:17:42,198 INFO o.h.j.i.u.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-24 23:17:42,309 INFO o.h.Version [restartedMain] HHH000412: Hibernate ORM core version 6.2.5.Final
+2023-07-24 23:17:42,313 INFO o.h.c.Environment [restartedMain] HHH000406: Using bytecode reflection optimizer
+2023-07-24 23:17:42,552 INFO o.h.b.i.BytecodeProviderInitiator [restartedMain] HHH000021: Bytecode provider name : bytebuddy
+2023-07-24 23:17:42,773 INFO o.s.o.j.p.SpringPersistenceUnitInfo [restartedMain] No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-07-24 23:17:43,402 INFO o.h.b.i.BytecodeProviderInitiator [restartedMain] HHH000021: Bytecode provider name : bytebuddy
+2023-07-24 23:17:44,663 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-24 23:17:44,667 INFO o.s.o.j.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-24 23:17:44,973 INFO o.s.d.j.r.q.QueryEnhancerFactory [restartedMain] Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-07-24 23:17:45,659 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-24 23:17:45,776 INFO o.s.b.a.w.s.WelcomePageHandlerMapping [restartedMain] Adding welcome page template: index
+2023-07-24 23:17:45,997 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4cadb794, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4201d630, org.springframework.security.web.context.SecurityContextHolderFilter@d5eb185, org.springframework.security.web.header.HeaderWriterFilter@98f90a2, org.springframework.security.web.authentication.logout.LogoutFilter@3a97f48b, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7b09bb7d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7885397d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@44f2c024, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@74655f5e, org.springframework.security.web.access.ExceptionTranslationFilter@62e19bdf, org.springframework.security.web.access.intercept.AuthorizationFilter@631026b]
+2023-07-24 23:17:46,335 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2023-07-24 23:17:46,363 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2023-07-24 23:17:46,385 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-24 23:17:46,397 INFO o.s.b.StartupInfoLogger [restartedMain] Started WebApplication in 10.563 seconds (process running for 11.75)
+2023-07-24 23:29:17,428 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-24 23:29:17,432 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-07-24 23:29:17,440 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2023-07-24 23:32:19,551 INFO o.s.b.StartupInfoLogger [restartedMain] Starting FriendFinderApplication using Java 19.0.2 with PID 14240 (D:\java2023\friend-finder\target\classes started by David in D:\java2023\friend-finder)
+2023-07-24 23:32:19,553 DEBUG o.s.b.StartupInfoLogger [restartedMain] Running with Spring Boot v3.1.1, Spring v6.0.10
+2023-07-24 23:32:19,554 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-24 23:32:19,597 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-24 23:32:19,598 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-24 23:32:20,910 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-24 23:32:21,005 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 88 ms. Found 14 JPA repository interfaces.
+2023-07-24 23:32:21,589 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2023-07-24 23:32:21,596 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2023-07-24 23:32:21,598 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2023-07-24 23:32:21,599 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.10]
+2023-07-24 23:32:21,650 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-07-24 23:32:21,650 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 2052 ms
+2023-07-24 23:32:21,716 WARN o.a.j.l.DirectJDKLog [restartedMain] Cannot deserialize session attribute [SPRING_SECURITY_CONTEXT] for session [8FA851A5DC7BCF3D3B93D37C842B23D0]
+2023-07-24 23:32:21,812 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-07-24 23:32:22,202 INFO c.z.h.p.HikariPool [restartedMain] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@d991cec
+2023-07-24 23:32:22,204 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-07-24 23:32:22,651 INFO l.l.c.JavaLogger [restartedMain] Reading from friend_finder.DATABASECHANGELOG
+2023-07-24 23:32:22,658 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:32:22,720 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:32:22,722 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:32:22,738 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:32:22,744 INFO l.l.c.JavaLogger [restartedMain] Successfully acquired change log lock
+2023-07-24 23:32:22,788 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:32:22,791 INFO l.l.c.JavaLogger [restartedMain] Reading from friend_finder.DATABASECHANGELOG
+2023-07-24 23:32:22,793 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:32:22,797 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:32:22,830 ERROR l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::changNameColumCompany::dkirakosyan encountered an exception.
+2023-07-24 23:32:22,831 INFO l.l.c.JavaLogger [restartedMain] Update command encountered an exception.
+2023-07-24 23:32:22,833 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:32:22,835 INFO l.l.c.JavaLogger [restartedMain] Successfully released change log lock
+2023-07-24 23:32:22,837 WARN o.s.c.s.AbstractApplicationContext [restartedMain] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.MigrationFailedException: Migration failed for changeset liquibase/changelog.xml::changNameColumCompany::dkirakosyan:
+     Reason: liquibase.exception.DatabaseException: Duplicate column name 'company' [Failed SQL: (1060) ALTER TABLE friend_finder.work_experiences ADD company VARCHAR(255) NOT NULL AFTER id]
+2023-07-24 23:32:22,837 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Shutdown initiated...
+2023-07-24 23:32:22,844 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Shutdown completed.
+2023-07-24 23:32:22,846 INFO o.a.j.l.DirectJDKLog [restartedMain] Stopping service [Tomcat]
+2023-07-24 23:32:22,858 INFO o.s.b.a.l.ConditionEvaluationReportLogger [restartedMain] 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2023-07-24 23:32:22,881 ERROR o.s.b.SpringApplication [restartedMain] Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.MigrationFailedException: Migration failed for changeset liquibase/changelog.xml::changNameColumCompany::dkirakosyan:
+     Reason: liquibase.exception.DatabaseException: Duplicate column name 'company' [Failed SQL: (1060) ALTER TABLE friend_finder.work_experiences ADD company VARCHAR(255) NOT NULL AFTER id]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1770)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:931)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:436)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
+	at com.friendfinder.FriendFinderApplication.main(FriendFinderApplication.java:14)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset liquibase/changelog.xml::changNameColumCompany::dkirakosyan:
+     Reason: liquibase.exception.DatabaseException: Duplicate column name 'company' [Failed SQL: (1060) ALTER TABLE friend_finder.work_experiences ADD company VARCHAR(255) NOT NULL AFTER id]
+	at liquibase.changelog.ChangeLogIterator.run(ChangeLogIterator.java:136)
+	at liquibase.Liquibase.lambda$null$0(Liquibase.java:297)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Scope.child(Scope.java:256)
+	at liquibase.Liquibase.lambda$update$1(Liquibase.java:295)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Liquibase.runInScope(Liquibase.java:2639)
+	at liquibase.Liquibase.update(Liquibase.java:236)
+	at liquibase.Liquibase.update(Liquibase.java:221)
+	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:329)
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:284)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1816)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
+	... 21 common frames omitted
+Caused by: liquibase.exception.MigrationFailedException: Migration failed for changeset liquibase/changelog.xml::changNameColumCompany::dkirakosyan:
+     Reason: liquibase.exception.DatabaseException: Duplicate column name 'company' [Failed SQL: (1060) ALTER TABLE friend_finder.work_experiences ADD company VARCHAR(255) NOT NULL AFTER id]
+	at liquibase.changelog.ChangeSet.execute(ChangeSet.java:744)
+	at liquibase.changelog.visitor.UpdateVisitor.visit(UpdateVisitor.java:59)
+	at liquibase.changelog.ChangeLogIterator$2.lambda$null$0(ChangeLogIterator.java:124)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.changelog.ChangeLogIterator$2.lambda$run$1(ChangeLogIterator.java:124)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Scope.child(Scope.java:256)
+	at liquibase.changelog.ChangeLogIterator$2.run(ChangeLogIterator.java:105)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Scope.child(Scope.java:256)
+	at liquibase.Scope.child(Scope.java:260)
+	at liquibase.changelog.ChangeLogIterator.run(ChangeLogIterator.java:75)
+	... 39 common frames omitted
+Caused by: liquibase.exception.DatabaseException: Duplicate column name 'company' [Failed SQL: (1060) ALTER TABLE friend_finder.work_experiences ADD company VARCHAR(255) NOT NULL AFTER id]
+	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:445)
+	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:77)
+	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:160)
+	at liquibase.database.AbstractJdbcDatabase.execute(AbstractJdbcDatabase.java:1270)
+	at liquibase.database.AbstractJdbcDatabase.executeStatements(AbstractJdbcDatabase.java:1252)
+	at liquibase.changelog.ChangeSet.execute(ChangeSet.java:702)
+	... 59 common frames omitted
+Caused by: java.sql.SQLSyntaxErrorException: Duplicate column name 'company'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:763)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:648)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:441)
+	... 64 common frames omitted
+2023-07-24 23:33:12,845 INFO o.s.b.StartupInfoLogger [restartedMain] Starting FriendFinderApplication using Java 19.0.2 with PID 7600 (D:\java2023\friend-finder\target\classes started by David in D:\java2023\friend-finder)
+2023-07-24 23:33:12,846 DEBUG o.s.b.StartupInfoLogger [restartedMain] Running with Spring Boot v3.1.1, Spring v6.0.10
+2023-07-24 23:33:12,847 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-24 23:33:12,901 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-24 23:33:12,901 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-24 23:33:13,518 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-24 23:33:13,604 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 80 ms. Found 14 JPA repository interfaces.
+2023-07-24 23:33:14,137 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2023-07-24 23:33:14,143 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2023-07-24 23:33:14,147 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2023-07-24 23:33:14,147 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.10]
+2023-07-24 23:33:14,193 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-07-24 23:33:14,194 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1292 ms
+2023-07-24 23:33:14,322 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-07-24 23:33:14,581 INFO c.z.h.p.HikariPool [restartedMain] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7f06dab3
+2023-07-24 23:33:14,583 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-07-24 23:33:15,088 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:15,096 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:15,100 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:15,104 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:15,107 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:15,109 INFO l.l.c.JavaLogger [restartedMain] Successfully acquired change log lock
+2023-07-24 23:33:15,130 INFO l.l.c.JavaLogger [restartedMain] Creating database history table with name: friend_finder.DATABASECHANGELOG
+2023-07-24 23:33:15,146 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:15,149 INFO l.l.c.JavaLogger [restartedMain] Reading from friend_finder.DATABASECHANGELOG
+2023-07-24 23:33:15,151 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:15,155 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:15,433 INFO l.l.c.JavaLogger [restartedMain] Custom SQL executed
+2023-07-24 23:33:15,435 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::createDB::hhakobyan ran successfully in 244ms
+2023-07-24 23:33:15,438 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:15,440 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:15,462 INFO l.l.c.JavaLogger [restartedMain] Custom SQL executed
+2023-07-24 23:33:15,467 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addCountries::hhakobyanh ran successfully in 23ms
+2023-07-24 23:33:15,469 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:15,490 INFO l.l.c.JavaLogger [restartedMain] Custom SQL executed
+2023-07-24 23:33:15,491 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::test::hhakoyan ran successfully in 19ms
+2023-07-24 23:33:15,493 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:15,509 INFO l.l.c.JavaLogger [restartedMain] Table test dropped
+2023-07-24 23:33:15,511 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::dropTestTable::hhakobyan ran successfully in 14ms
+2023-07-24 23:33:15,514 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:15,563 INFO l.l.c.JavaLogger [restartedMain] Columns date_time(datetime) added to commentary
+2023-07-24 23:33:15,563 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addDateTimeInCommentaryTable::hhakobyan ran successfully in 46ms
+2023-07-24 23:33:15,568 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:15,583 INFO l.l.c.JavaLogger [restartedMain] Columns company(varchar(255)) added to work_experiences
+2023-07-24 23:33:15,597 INFO l.l.c.JavaLogger [restartedMain] Columns we_name dropped from work_experiences
+2023-07-24 23:33:15,598 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::changNameColumCompany::dkirakosyan ran successfully in 25ms
+2023-07-24 23:33:15,601 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:15,644 INFO l.l.c.JavaLogger [restartedMain] Columns enabled(boolean) added to user
+2023-07-24 23:33:15,645 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addColumnUserEnabled::hhakobyan ran successfully in 41ms
+2023-07-24 23:33:15,649 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:15,689 INFO l.l.c.JavaLogger [restartedMain] Columns token(varchar(255)) added to user
+2023-07-24 23:33:15,690 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addColumnUserToken::hhakobyan ran successfully in 38ms
+2023-07-24 23:33:15,693 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:15,743 INFO l.l.c.JavaLogger [restartedMain] Custom SQL executed
+2023-07-24 23:33:15,744 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::message::VaheKostikyan ran successfully in 48ms
+2023-07-24 23:33:15,747 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:15,791 INFO l.l.c.JavaLogger [restartedMain] Columns role(enum('ADMIN', 'USER', 'BLOCKED')) added to user
+2023-07-24 23:33:15,791 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addColumnUserType_IsBlocked::VaheKostikyan ran successfully in 41ms
+2023-07-24 23:33:15,794 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:16,583 INFO l.l.c.JavaLogger [restartedMain] Custom SQL executed
+2023-07-24 23:33:16,584 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::changeForeignKeysOnDelete::VaheKostikyan ran successfully in 789ms
+2023-07-24 23:33:16,586 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:16,600 INFO l.l.c.JavaLogger [restartedMain] Table userActivity created
+2023-07-24 23:33:16,624 INFO l.l.c.JavaLogger [restartedMain] Foreign key constraint added to userActivity (user_id)
+2023-07-24 23:33:16,625 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addActivityTable::hhakobyan ran successfully in 37ms
+2023-07-24 23:33:16,627 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:16,637 INFO l.l.c.JavaLogger [restartedMain] Columns datetime dropped from userActivity
+2023-07-24 23:33:16,644 INFO l.l.c.JavaLogger [restartedMain] Columns datetime(TIMESTAMP) added to userActivity
+2023-07-24 23:33:16,656 INFO l.l.c.JavaLogger [restartedMain] Table userActivity renamed to user_activity
+2023-07-24 23:33:16,656 INFO l.l.c.JavaLogger [restartedMain] ChangeSet liquibase/changelog.xml::addColumnDate::hhakobyan ran successfully in 27ms
+2023-07-24 23:33:16,658 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:16,661 INFO l.l.c.JavaLogger [restartedMain] Update command completed successfully.
+2023-07-24 23:33:16,663 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-24 23:33:16,666 INFO l.l.c.JavaLogger [restartedMain] Successfully released change log lock
+2023-07-24 23:33:16,760 INFO o.h.j.i.u.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-24 23:33:16,831 INFO o.h.Version [restartedMain] HHH000412: Hibernate ORM core version 6.2.5.Final
+2023-07-24 23:33:16,833 INFO o.h.c.Environment [restartedMain] HHH000406: Using bytecode reflection optimizer
+2023-07-24 23:33:16,979 INFO o.h.b.i.BytecodeProviderInitiator [restartedMain] HHH000021: Bytecode provider name : bytebuddy
+2023-07-24 23:33:17,112 INFO o.s.o.j.p.SpringPersistenceUnitInfo [restartedMain] No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-07-24 23:33:17,390 INFO o.h.b.i.BytecodeProviderInitiator [restartedMain] HHH000021: Bytecode provider name : bytebuddy
+2023-07-24 23:33:18,123 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-24 23:33:18,126 INFO o.s.o.j.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-24 23:33:18,361 INFO o.s.d.j.r.q.QueryEnhancerFactory [restartedMain] Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-07-24 23:33:18,837 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-24 23:33:18,930 INFO o.s.b.a.w.s.WelcomePageHandlerMapping [restartedMain] Adding welcome page template: index
+2023-07-24 23:33:19,094 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@29fe2a42, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6ab4e1b0, org.springframework.security.web.context.SecurityContextHolderFilter@6a3b430b, org.springframework.security.web.header.HeaderWriterFilter@261db28c, org.springframework.security.web.authentication.logout.LogoutFilter@54902040, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@79826266, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2b814f6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@f3cd917, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@cf3fd2, org.springframework.security.web.access.ExceptionTranslationFilter@9818645, org.springframework.security.web.access.intercept.AuthorizationFilter@6b35178a]
+2023-07-24 23:33:19,341 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2023-07-24 23:33:19,360 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2023-07-24 23:33:19,376 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-24 23:33:19,385 INFO o.s.b.StartupInfoLogger [restartedMain] Started FriendFinderApplication in 7.156 seconds (process running for 7.977)
+2023-07-24 23:37:00,712 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-24 23:37:00,731 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-07-24 23:37:00,748 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
