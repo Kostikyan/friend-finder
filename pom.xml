@@ -11,12 +11,6 @@
     <groupId>com</groupId>
     <artifactId>friend-finder</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <modules>
-        <module>common</module>
-        <module>web</module>
-        <module>rest</module>
-    </modules>
     <name>friend-finder</name>
     <description>friend-finder</description>
 
