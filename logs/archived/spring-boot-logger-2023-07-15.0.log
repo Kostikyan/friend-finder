@@ -1,0 +1,90 @@
+2023-07-15 19:48:22,142 INFO o.s.b.StartupInfoLogger [restartedMain] Starting FriendFinderApplication using Java 19.0.2 with PID 10496 (D:\java2023\friend-finder\target\classes started by David in D:\java2023\friend-finder)
+2023-07-15 19:48:22,150 DEBUG o.s.b.StartupInfoLogger [restartedMain] Running with Spring Boot v3.1.1, Spring v6.0.10
+2023-07-15 19:48:22,152 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-15 19:48:22,331 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-15 19:48:22,344 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-15 19:48:24,914 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-15 19:48:25,059 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 133 ms. Found 14 JPA repository interfaces.
+2023-07-15 19:48:25,982 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2023-07-15 19:48:25,993 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2023-07-15 19:48:25,995 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2023-07-15 19:48:25,997 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.10]
+2023-07-15 19:48:26,071 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-07-15 19:48:26,073 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 3723 ms
+2023-07-15 19:48:26,216 WARN o.a.j.l.DirectJDKLog [restartedMain] Cannot deserialize session attribute [SPRING_SECURITY_CONTEXT] for session [B5DF9A4BCF8016CF79167EFA7BD239A7]
+2023-07-15 19:48:26,415 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-07-15 19:48:27,028 INFO c.z.h.p.HikariPool [restartedMain] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@56a1d16d
+2023-07-15 19:48:27,030 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-07-15 19:48:27,892 INFO l.l.c.JavaLogger [restartedMain] Reading from friend_finder.DATABASECHANGELOG
+2023-07-15 19:48:27,902 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-15 19:48:28,060 INFO o.h.j.i.u.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-15 19:48:28,184 INFO o.h.Version [restartedMain] HHH000412: Hibernate ORM core version 6.2.5.Final
+2023-07-15 19:48:28,190 INFO o.h.c.Environment [restartedMain] HHH000406: Using bytecode reflection optimizer
+2023-07-15 19:48:28,425 INFO o.h.b.i.BytecodeProviderInitiator [restartedMain] HHH000021: Bytecode provider name : bytebuddy
+2023-07-15 19:48:28,631 INFO o.s.o.j.p.SpringPersistenceUnitInfo [restartedMain] No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-07-15 19:48:29,111 INFO o.h.b.i.BytecodeProviderInitiator [restartedMain] HHH000021: Bytecode provider name : bytebuddy
+2023-07-15 19:48:30,242 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-15 19:48:30,247 INFO o.s.o.j.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-15 19:48:30,609 INFO o.s.d.j.r.q.QueryEnhancerFactory [restartedMain] Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-07-15 19:48:32,048 WARN o.s.c.s.AbstractApplicationContext [restartedMain] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'chatController' defined in file [D:\java2023\friend-finder\target\classes\com\friendfinder\controller\ChatController.class]: Unsatisfied dependency expressed through constructor parameter 1: No qualifying bean of type 'com.friendfinder.service.ChatService' available: expected single matching bean but found 2: chatServiceImpl,chatServiceImplTwo
+2023-07-15 19:48:32,049 INFO o.s.o.j.AbstractEntityManagerFactoryBean [restartedMain] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-15 19:48:32,063 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Shutdown initiated...
+2023-07-15 19:48:32,086 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Shutdown completed.
+2023-07-15 19:48:32,097 INFO o.a.j.l.DirectJDKLog [restartedMain] Stopping service [Tomcat]
+2023-07-15 19:48:32,136 INFO o.s.b.a.l.ConditionEvaluationReportLogger [restartedMain] 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2023-07-15 19:48:32,241 ERROR o.s.b.d.LoggingFailureAnalysisReporter [restartedMain] 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 1 of constructor in com.friendfinder.controller.ChatController required a single bean, but 2 were found:
+	- chatServiceImpl: defined in file [D:\java2023\friend-finder\target\classes\com\friendfinder\service\impl\ChatServiceImpl.class]
+	- chatServiceImplTwo: defined in file [D:\java2023\friend-finder\target\classes\com\friendfinder\service\impl\ChatServiceImplTwo.class]
+
+
+Action:
+
+Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed
+
+2023-07-15 19:51:59,196 INFO o.s.b.StartupInfoLogger [restartedMain] Starting FriendFinderApplication using Java 19.0.2 with PID 1948 (D:\java2023\friend-finder\target\classes started by David in D:\java2023\friend-finder)
+2023-07-15 19:51:59,198 DEBUG o.s.b.StartupInfoLogger [restartedMain] Running with Spring Boot v3.1.1, Spring v6.0.10
+2023-07-15 19:51:59,200 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-07-15 19:51:59,276 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-15 19:51:59,276 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-15 19:52:00,486 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-15 19:52:00,661 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 156 ms. Found 14 JPA repository interfaces.
+2023-07-15 19:52:01,570 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2023-07-15 19:52:01,582 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2023-07-15 19:52:01,585 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2023-07-15 19:52:01,585 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.10]
+2023-07-15 19:52:01,655 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-07-15 19:52:01,655 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 2378 ms
+2023-07-15 19:52:01,912 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-07-15 19:52:02,360 INFO c.z.h.p.HikariPool [restartedMain] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@28b4d5d4
+2023-07-15 19:52:02,363 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-07-15 19:52:03,507 INFO l.l.c.JavaLogger [restartedMain] Reading from friend_finder.DATABASECHANGELOG
+2023-07-15 19:52:03,519 INFO l.l.c.JavaLogger [restartedMain] Changelog query completed.
+2023-07-15 19:52:03,743 INFO o.h.j.i.u.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-15 19:52:03,857 INFO o.h.Version [restartedMain] HHH000412: Hibernate ORM core version 6.2.5.Final
+2023-07-15 19:52:03,860 INFO o.h.c.Environment [restartedMain] HHH000406: Using bytecode reflection optimizer
+2023-07-15 19:52:04,162 INFO o.h.b.i.BytecodeProviderInitiator [restartedMain] HHH000021: Bytecode provider name : bytebuddy
+2023-07-15 19:52:04,347 INFO o.s.o.j.p.SpringPersistenceUnitInfo [restartedMain] No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-07-15 19:52:04,811 INFO o.h.b.i.BytecodeProviderInitiator [restartedMain] HHH000021: Bytecode provider name : bytebuddy
+2023-07-15 19:52:05,993 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-15 19:52:05,998 INFO o.s.o.j.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-15 19:52:06,395 INFO o.s.d.j.r.q.QueryEnhancerFactory [restartedMain] Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-07-15 19:52:09,017 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-15 19:52:09,371 INFO o.s.b.a.w.s.WelcomePageHandlerMapping [restartedMain] Adding welcome page template: index
+2023-07-15 19:52:09,850 INFO o.s.s.w.DefaultSecurityFilterChain [restartedMain] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5c0d9353, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@26acc32f, org.springframework.security.web.context.SecurityContextHolderFilter@254061e2, org.springframework.security.web.header.HeaderWriterFilter@6de15fbb, org.springframework.security.web.authentication.logout.LogoutFilter@2a53014f, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@526ec0f6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1378e322, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@37ebc10c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2e1ce7c, org.springframework.security.web.access.ExceptionTranslationFilter@43cab7a8, org.springframework.security.web.access.intercept.AuthorizationFilter@1d1ce8fd]
+2023-07-15 19:52:10,614 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2023-07-15 19:52:10,659 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2023-07-15 19:52:10,719 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-15 19:52:10,742 INFO o.s.b.StartupInfoLogger [restartedMain] Started FriendFinderApplication in 12.544 seconds (process running for 14.329)
+2023-07-15 23:06:23,122 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-15 23:06:23,202 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-07-15 23:06:23,213 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
